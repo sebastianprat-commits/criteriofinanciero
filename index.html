@@ -646,6 +646,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       <a href="#analisis">Análisis</a>
       <a href="#videos">Formación</a>
       <a href="mailto:sebastian.prat@gmail.com">Contacto</a><a href="/glosario/" style="color:inherit;text-decoration:none">Glosario</a>
+      <a href="/repositorio/" style="color:inherit;text-decoration:none">Repositorio</a>
       <a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a>
     </div>
   </div>
@@ -1022,6 +1023,19 @@ function heroYN(el,v){
     try { localStorage.setItem("consentimiento", "0"); } catch (e) {}
     caja.style.display = "none";
   };
+})();
+</script>
+
+<script>
+(function(){
+  try {
+    var inf = new URLSearchParams(location.search).get('informe');
+    if (!inf) return;
+    var ctx = document.querySelector('textarea[name="contexto"]');
+    if (ctx && !ctx.value.trim()) ctx.value = 'Solicito el informe del repositorio: ' + inf + '.';
+    var destino = document.getElementById('pedido');
+    if (destino) setTimeout(function(){ destino.scrollIntoView({behavior:'smooth'}); }, 700);
+  } catch (e) {}
 })();
 </script>
 </body>

@@ -1,0 +1,14 @@
+[
+ {
+  "nombre": "Indra Sistemas, S.A.",
+  "ticker": "IDR.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-11",
+  "dias": 0,
+  "precio_accion": "59,68",
+  "valor_dcf": "44,35",
+  "precio_informe": 89,
+  "etiqueta": "Reciente",
+  "slug": "IDR_MC_20261111"
+ }
+]
