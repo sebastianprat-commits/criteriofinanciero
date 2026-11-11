@@ -52,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.9
 
 /* HERO */
 .hero{min-height:100vh;background:url('/assets/img/fondo-mercado.png') center/cover no-repeat,var(--navy);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 0 0;overflow:hidden;position:relative}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%, rgba(201,150,58,0.06) 0%, transparent 70%)}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 70% 50%, rgba(201,150,58,0.06) 0%, transparent 70%)}
 .hero-left{padding:0 3rem 0 calc((100vw - 1100px)/2 + 2rem);max-width:calc(550px + (100vw - 1100px)/2)}
 .hero-tag{display:inline-block;font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,150,58,0.3);padding:5px 12px;border-radius:3px;margin-bottom:2rem}
 .hero h1{font-family:var(--serif);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--white);line-height:1.12;font-weight:500;margin-bottom:1.5rem}
@@ -284,7 +284,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
     <p class="hero-sub">Antes de hablar de rentabilidades y riesgos, necesito saber <strong>para qué quieres el dinero.</strong> Esa pregunta cambia todo el plan.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="abrirOnboarding()">Descubrir mi perfil →</button>
-      <a href="#analisis" class="btn-ghost">Ver análisis de muestra</a>
+      
     </div>
   </div>
   <div class="hero-right">
@@ -301,7 +301,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
         <button class="yn" onclick="heroYN(this,'buy')">Compraría más</button>
       </div>
       <div id="hero-feedback" style="font-size:.78rem;color:rgba(255,255,255,0.4);height:1.1em;transition:opacity .3s"></div>
-      <div class="hero-note">Proceso completo: 12 minutos · Sin datos personales hasta el final</div>
+      <div class="hero-note">Proceso completo: 3 minutos · Sin datos bancarios ni personales</div>
     </div>
   </div>
 </section>
@@ -344,13 +344,13 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
         <div class="phase-num">01</div>
         <h3>¿Para qué inviertes?</h3>
         <p>Identificamos el objetivo vital que motiva tus decisiones financieras. No el producto — la razón de fondo. Jubilación anticipada, independencia económica, proteger a tu familia, un proyecto concreto.</p>
-        <div class="phase-time">⏱ 5 minutos · Cuestionario conversacional</div>
+        <div class="phase-time">⏱ 1 minuto · Cuestionario conversacional</div>
       </div>
       <div class="phase">
         <div class="phase-num">02</div>
         <h3>Tu situación real</h3>
         <p>Horizonte temporal honesto, capacidad de ahorro sostenida, situación laboral y familar, deudas pendientes, fondo de emergencia. Los datos que cambian el plan antes incluso de hablar de rentabilidades.</p>
-        <div class="phase-time">⏱ 5 minutos · Preguntas sí/no y rangos</div>
+        <div class="phase-time">⏱ 2 minutos · Preguntas y rangos</div>
       </div>
       <div class="phase">
         <div class="phase-num">03</div>
@@ -372,7 +372,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
     <div class="muestra-header">
       <div>
         <h2 style="font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--navy);font-weight:500;margin-bottom:.5rem">Así es un informe PRO Ampliado</h2>
-        <p style="color:var(--muted);max-width:500px">Análisis completo de nivel institucional. Disponible en abierto para que veas exactamente lo que recibes antes de solicitar el tuyo.</p>
+        <p style="color:var(--muted);max-width:500px">Un informe real, generado con el mismo motor que usaré para el tuyo. Disponible en abierto para que veas exactamente lo que recibes antes de pedirlo.</p>
       </div>
       <a href="#pedido" class="btn-primary" style="white-space:nowrap">Solicitar análisis →</a>
     </div>
@@ -386,27 +386,31 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
         <span class="analisis-badge">Muestra gratuita</span>
       </div>
       <div class="analisis-kpis">
-        <div class="kpi"><div class="kpi-label">Precio</div><div class="kpi-val">53.35 €</div></div>
-        <div class="kpi"><div class="kpi-label">Var. 12m</div><div class="kpi-val pos">+97.2%</div></div>
-        <div class="kpi"><div class="kpi-label">Market Cap</div><div class="kpi-val">9.3 Bn€</div></div>
-        <div class="kpi"><div class="kpi-label">DCF valor</div><div class="kpi-val">56.10 €</div></div>
+        <div class="kpi"><div class="kpi-label">Precio</div><div class="kpi-val">59,68 €</div></div>
+        <div class="kpi"><div class="kpi-label">Var. 12m</div><div class="kpi-val pos">+18,18 %</div></div>
+        <div class="kpi"><div class="kpi-label">Capitalización</div><div class="kpi-val">10,43 mil M</div></div>
+        <div class="kpi"><div class="kpi-label">DCF</div><div class="kpi-val">44,35 €</div></div>
       </div>
       <div class="analisis-body">
-        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase">Contenido del informe — Partes A y B (~26 páginas)</p>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase">Contenido del informe (~10 páginas)</p>
         <div class="analisis-secciones">
-          <div class="analisis-sec"><span class="analisis-sec-num">A·01</span>Análisis técnico completo (Bollinger, RSI, Fibonacci)</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">A·02</span>Earnings vs. estimaciones — 4 trimestres</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">A·03</span>Patrones ocultos, short interest y opciones</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">A·04</span>Señal del asesor y objetivos de precio</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">B·01</span>Tesis de inversión y análisis del modelo de negocio</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">B·02</span>Análisis competitivo (Bain Framework) y SWOT</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">B·03</span>Valoración DCF con tabla de sensibilidad</div>
-          <div class="analisis-sec"><span class="analisis-sec-num">B·04</span>17 ratios fundamentales + dividendo + fiscalidad IRPF</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">01</span>Resumen ejecutivo</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">02</span>Dónde cotiza y cómo se negocia</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">03</span>Contexto macroeconómico: tipos, inflación y divisa</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">04</span>Análisis técnico con gráficos de precio, volumen y RSI</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">05</span>Análisis fundamental: márgenes, deuda y crecimiento</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">06</span>Comparativa con tres competidores del sector</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">07</span>Sector y posición competitiva</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">08</span>Noticias relevantes del último mes</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">09</span>Valoración por descuento de flujos y sensibilidad</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">10</span>Riesgos principales</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">11</span>Catalizadores a vigilar</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">12</span>Conclusión</div>
         </div>
         <div class="analisis-cta">
           <div class="analisis-cta-text">
             <strong>Descarga el informe completo de Indra — gratis</strong>
-            Metodología institucional · Datos del cierre del día · Criterio del asesor
+            Metodología institucional · Datos del cierre del día · 12 secciones
           </div>
           <a href="/descargas/informe-muestra-indra.pdf" download class="btn-primary" style="white-space:nowrap">Descargar PDF →</a>
         </div>
@@ -420,24 +424,24 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
   <div class="pedido-inner">
     <div>
       <span class="section-label" style="color:var(--gold);display:block;margin-bottom:1rem">Análisis bajo pedido</span>
-      <h2>El análisis que necesitas, cuando lo necesitas</h2>
-      <p>¿Tienes una empresa en el radar? ¿Estás valorando una posición y quieres análisis de nivel institucional antes de decidir?</p>
-      <p>Solicita el análisis de cualquier empresa cotizada. Recibes los informes A y B completos en 24-48 horas.</p>
+      <h2>¿Tienes una empresa en el radar?</h2>
+      <p><strong>El análisis que necesitas, cuando lo necesitas.</strong> ¿Estás valorando una posición y quieres análisis de nivel institucional antes de decidir?</p>
+      <p>Solicita el análisis de cualquier empresa cotizada. Recibes un informe completo en 24-48 horas.</p>
       <div style="margin-top:2rem">
         <div class="precio-card">
           <div class="precio-header">
-            <div class="precio-nombre">Pack Análisis PRO — A+B</div>
+            <div class="precio-nombre">Análisis completo · 1 empresa</div>
             <div class="precio-val" style="display:flex;align-items:baseline;gap:.6rem;justify-content:flex-end"><span style="font-size:.9rem;color:rgba(255,255,255,.45);text-decoration:line-through">89 €</span><span>66,75 €</span></div>
           </div>
           <div class="precio-body">
-            <div class="precio-item">Informe A: Análisis de Mercado (~13 págs.)</div>
-            <div class="precio-item">Informe B: Análisis Fundamental (~13 págs.)</div>
-            <div class="precio-item">Datos del cierre del día · 11 bloques de análisis</div>
-            <div class="precio-item">Criterio del asesor en cada sección</div>
+            <div class="precio-item">12 secciones: mercado, fundamentales y valoración (~10 páginas)</div>
+            <div class="precio-item">Gráficos de precio, volumen y RSI</div>
+            <div class="precio-item">Comparativa con tres competidores</div>
+            <div class="precio-item">Valoración DCF con sensibilidad y tres escenarios</div>
             <div class="precio-item">Entrega en 24-48 horas · PDF descargable</div>
           </div>
         </div>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">También disponibles por separado: Informe A o B — <strong>36,75 €</strong> cada uno (<s style="color:#A9A292">49 €</s>).</p>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">También puedes comprar análisis ya publicados, <a href="/repositorio/" style="color:#8A6420">desde 21,75 €</a>.</p>
       </div>
     </div>
     <div>
@@ -463,7 +467,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       <div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:18px 20px;
            margin-top:1.4rem;font-size:.88rem;line-height:1.62">
         <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;
-             font-weight:600;margin-bottom:6px">Oferta de lanzamiento · 25 % de descuento</div>
+             font-weight:600;margin-bottom:6px">¡Invierte con criterio! 25 % de descuento en informes profesionales de las acciones que seguimos</div>
         <p style="margin:0 0 .7rem">Un informe cuesta <s style="color:#A9A292">89 €</s>.
         Los primeros clientes pagan <strong>66,75 €</strong>. No hace falta código: se aplica al pedirlo.</p>
         <p style="margin:0 0 .35rem"><strong>Qué recibes</strong></p>
@@ -689,7 +693,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
     <div class="m-step active" id="ms0">
       <span class="m-tag">CriterioFinanciero · Perfil financiero-vital</span>
       <h2 class="m-h">Antes de hablar de inversiones, hablemos de tu vida</h2>
-      <p class="m-p">12 minutos. Sin datos bancarios. El resultado es un perfil concreto con los pasos siguientes para tu situación.</p>
+      <p class="m-p">3 minutos. Sin datos bancarios ni personales hasta el final. El resultado es un perfil concreto con un ejemplo de inversión para tu situación.</p>
       <button class="m-next" style="width:100%" onclick="mGoTo(1)">Empezar →</button>
     </div>
 
@@ -832,7 +836,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       <div id="m-resultado"></div>
       <div class="m-nav" style="margin-top:1.5rem">
         <button class="m-back" onclick="mGoTo(0)">Volver a empezar</button>
-        <button class="m-next" onclick="cerrarOnboarding();document.querySelector('#pedido').scrollIntoView({behavior:'smooth'})">Solicitar análisis →</button>
+        <button class="m-next" onclick="cerrarOnboarding();window.location.href='/repositorio/'">Aprovechar la oferta →</button>
       </div>
     </div>
   </div>
@@ -1012,7 +1016,7 @@ function mCalcPerfil(){
     + '</div>'
     + alertasHTML
     + '<div class="sub-label">Errores típicos de este perfil</div><ul class="perfil-errores">'+erroresHTML+'</ul>'
-    + '<div class="next-steps"><div class="next-steps-label">Pasos recomendados</div>'
+    + '<div class="next-steps"><div class="next-steps-label">Ejemplo de inversión</div>'
     +   '<div class="next-steps-body">'+pasosHTML+'</div></div>'
     + '<div class="sub-label">Recibe tu perfil por email</div>'
     + '<p style="margin:0 0 .7rem;font-size:.86rem;line-height:1.6;color:#2A3446">Te envío el informe de tu perfil '
@@ -1031,7 +1035,7 @@ function mCalcPerfil(){
     + '<div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:16px 18px;'
     + 'margin:1.4rem 0 0;font-size:.86rem;line-height:1.6">'
     + '<div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;'
-    + 'font-weight:600;margin-bottom:4px">Oferta de lanzamiento · 25 % de descuento</div>'
+    + 'font-weight:600;margin-bottom:4px">¡Invierte con criterio! 25 % de descuento en informes profesionales de las acciones que seguimos</div>'
     + '<p style="margin:0 0 .6rem">Un informe cuesta <s style="color:#A9A292">89 €</s>. '
     + 'Los primeros clientes pagan <strong>66,75 €</strong>.</p>'
     + '<p style="margin:0 0 .35rem"><strong>Qué incluye</strong></p>'
