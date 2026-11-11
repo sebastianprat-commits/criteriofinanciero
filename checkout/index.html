@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar compra · CriterioFinanciero</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1628;--gold:#C9963A;--cream:#F7F3EA;--muted:#5A6478}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--navy);
+     font-family:'DM Sans',system-ui,sans-serif;line-height:1.7;font-size:16.5px}
+header.barra{background:var(--navy);padding:18px 24px}
+header.barra a{color:var(--gold);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:22px}
+main{max-width:760px;margin:0 auto;padding:48px 24px 72px}
+h1{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;margin:0 0 22px}
+.resumen{background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:22px 24px;margin-bottom:26px}
+.resumen h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin:0 0 2px}
+.meta{font-size:13px;color:var(--muted);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{background:var(--cream);border-radius:5px;padding:5px 9px;font-size:12.5px;color:#3A4459}
+.precio{display:flex;align-items:baseline;gap:10px;border-top:1px solid #EFE9DA;padding-top:14px}
+.precio .hoy{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600}
+.precio .antes{font-size:16px;color:#A9A292;text-decoration:line-through}
+.baja{background:#ECFDF5;color:#06614A;font-size:12px;font-weight:600;padding:3px 8px;border-radius:4px}
+form{background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:24px}
+label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--muted);margin:0 0 6px}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid #D9DEE6;border-radius:6px;
+      font-family:inherit;font-size:15px;margin-bottom:18px;background:#fff;color:var(--navy)}
+button{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:6px;
+       padding:15px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit}
+small{display:block;font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.55}
+.vacio{background:#fff;border:1px dashed #DCD4C4;border-radius:10px;padding:34px;text-align:center}
+footer{background:var(--navy);color:rgba(255,255,255,.5);padding:26px;font-size:13px;text-align:center}
+footer a{color:rgba(255,255,255,.65);text-decoration:none;margin:0 8px}
+</style>
+</head>
+<body>
+<header class="barra"><a href="/">CriterioFinanciero</a></header>
+<main>
+  <h1>Finalizar compra</h1>
+
+  <div class="resumen" id="resumen">
+    <p style="margin:0;color:var(--muted);font-size:14px">Cargando el informe…</p>
+  </div>
+
+  <div class="vacio" id="error" style="display:none">
+    <p style="margin:0 0 12px">No encuentro ese informe. Puede que el enlace esté incompleto.</p>
+    <a href="/repositorio/" style="color:#8A6420">Ver todos los informes disponibles →</a>
+  </div>
+
+  <form name="compra-informe" method="POST" action="/gracias/" data-netlify="true"
+        netlify-honeypot="bot-field" id="form-compra" style="display:none">
+    <input type="hidden" name="form-name" value="compra-informe">
+    <p hidden><label>No rellenar <input name="bot-field"></label></p>
+    <input type="hidden" name="informe" id="campo-informe">
+    <input type="hidden" name="importe" id="campo-importe">
+    <input type="hidden" name="origen" value="checkout-repositorio">
+
+    <label for="nombre">Tu nombre</label>
+    <input type="text" id="nombre" name="nombre" required placeholder="Nombre y apellidos">
+
+    <label for="email">Tu email</label>
+    <input type="email" id="email" name="email" required placeholder="para enviarte el informe">
+
+    <label for="pago">Cómo prefieres pagar</label>
+    <select id="pago" name="pago">
+      <option>Transferencia bancaria</option>
+      <option>Bizum</option>
+    </select>
+
+    <label for="notas">Algo que deba saber (opcional)</label>
+    <textarea id="notas" name="notas" rows="3" placeholder="¿Para qué lo quieres? ¿Tienes ya posición?"></textarea>
+
+    <button type="submit">Confirmar el pedido</button>
+    <small>
+      Al confirmar te envío por correo los datos de pago. El informe se entrega en 24-48 horas desde
+      el pago, en PDF. Precio con el descuento de lanzamiento ya aplicado.
+      <a href="/aviso-legal/" style="color:inherit">Condiciones</a> ·
+      <a href="/privacidad/" style="color:inherit">Privacidad</a>
+    </small>
+  </form>
+
+  <small style="text-align:center;margin-top:18px">
+    ¿Buscabas otro informe? <a href="/repositorio/" style="color:#8A6420">Ver todos</a> ·
+    ¿Prefieres un análisis nuevo? <a href="/#pedido" style="color:#8A6420">Pedirlo</a>
+  </small>
+</main>
+<footer>
+  <a href="/">Inicio</a><a href="/repositorio/">Informes</a><a href="/glosario/">Glosario</a>
+  <a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/contacto/">Contacto</a>
+</footer>
+
+<script>
+(function () {
+  var ref = new URLSearchParams(location.search).get("ref");
+  var resumen = document.getElementById("resumen");
+  var error = document.getElementById("error");
+  var form = document.getElementById("form-compra");
+
+  function euros(v) {
+    var t = Number(v).toFixed(2).replace(".", ",");
+    return t.endsWith(",00") ? t.slice(0, -3) : t;
+  }
+
+  if (!ref) { resumen.style.display = "none"; error.style.display = "block"; return; }
+
+  fetch("/repositorio/datos.json")
+    .then(function (r) { return r.json(); })
+    .then(function (lista) {
+      var inf = lista.filter(function (i) { return i.slug === ref; })[0];
+      if (!inf) { resumen.style.display = "none"; error.style.display = "block"; return; }
+      var fecha = inf.fecha.split("-").reverse().join("/");
+      var precio = Number(inf.precio_informe);
+      var original = Math.round(precio / 0.75);
+      resumen.innerHTML =
+        '<div class="meta">Estás comprando</div>' +
+        '<h2>' + inf.nombre + '</h2>' +
+        '<div class="meta">' + inf.ticker + ' · ' + inf.mercado + ' · ' + fecha + '</div>' +
+        '<div class="chips">' +
+          (inf.precio_accion ? '<span class="chip">Precio en el informe <b>' + inf.precio_accion + ' €</b></span>' : '') +
+          (inf.valor_dcf ? '<span class="chip">Valor estimado DCF <b>' + inf.valor_dcf + ' €</b></span>' : '') +
+          '<span class="chip">12 secciones · PDF</span>' +
+        '</div>' +
+        '<div class="precio"><span class="hoy">' + euros(precio) + ' €</span>' +
+        '<span class="antes">' + euros(original) + ' €</span>' +
+        '<span class="baja">−25 %</span></div>';
+      document.getElementById("campo-informe").value =
+        inf.nombre + " · " + fecha + " (ref. " + inf.slug + ")";
+      document.getElementById("campo-importe").value = euros(precio) + " EUR";
+      form.style.display = "block";
+    })
+    .catch(function () { resumen.style.display = "none"; error.style.display = "block"; });
+})();
+</script>
+</body>
+</html>

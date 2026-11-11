@@ -115,7 +115,7 @@ def leer_informe(ruta: Path) -> dict | None:
 
 def tarjeta(informe: dict) -> str:
     referencia = f'{informe["nombre"]} · {informe["fecha"].strftime("%d/%m/%Y")}'
-    enlace = "/?informe=" + quote(referencia) + "#pedido"
+    enlace = "/checkout/?ref=" + quote(informe["slug"])
     base = {89: 89, 59: 59, 29: 29}
     original = base.get(round(informe["precio_informe"] / (1 - PROMO_LANZAMIENTO)), 89)
     descuento = ""
@@ -139,7 +139,7 @@ def tarjeta(informe: dict) -> str:
     </div>
     {antes} {descuento}
   </div>
-  <a class="btn" href="{enlace}">Solicitar este informe</a>
+  <a class="btn" href="{enlace}">Comprar este informe</a>
 </article>"""
 
 
@@ -161,7 +161,7 @@ def main() -> None:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repositorio de análisis · CriterioFinanciero</title>
+<title>Informes disponibles · CriterioFinanciero</title>
 <meta name="description" content="Análisis de acciones publicados, con precio decreciente: cuanto más antiguo, más barato. Informes completos de mercado y valoración.">
 <link rel="canonical" href="{SITIO}/repositorio/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,7 +171,7 @@ def main() -> None:
 <body>
 <header class="barra"><a href="/">CriterioFinanciero</a></header>
 <main>
-<h1>Repositorio</h1>
+<h1>Informes disponibles</h1>
 <p class="intro">Todos los análisis publicados. Cada uno conserva su fecha, para que sepas exactamente
 cuándo se escribió y con qué datos.</p>
 <div class="regla">
@@ -184,7 +184,7 @@ cuándo se escribió y con qué datos.</p>
 {contenido}
 </main>
 <footer>
-  <a href="/">Inicio</a><a href="/glosario/">Glosario</a><a href="/aviso-legal/">Aviso legal</a>
+  <a href="/">Inicio</a><a href="/repositorio/">Informes</a><a href="/glosario/">Glosario</a><a href="/aviso-legal/">Aviso legal</a>
   <a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a><a href="/contacto/">Contacto</a>
 </footer>
 </body>
