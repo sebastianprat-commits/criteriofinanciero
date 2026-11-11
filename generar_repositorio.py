@@ -11,6 +11,9 @@ RAIZ = Path(__file__).resolve().parent
 INFORMES = Path(r"C:\AI\Proyectos\Analisis\informes")
 SITIO = "https://criteriofinanciero.org"
 
+# Descuento de lanzamiento sobre el precio del repositorio (0.25 = 25 %). Ponlo a 0 para desactivarlo.
+PROMO_LANZAMIENTO = 0.25
+
 # Escalones de precio: (días máximos, precio, etiqueta)
 ESCALONES = [
     (15, 89, "Reciente"),
@@ -63,12 +66,20 @@ def escalon(dias: int) -> tuple[int, int, str, int]:
     return 29, 29, "Histórico", 0
 
 
-def precio_actual(dias: int) -> tuple[int, str]:
+def precio_actual(dias: int) -> tuple[float, str]:
     if dias <= 15:
-        return 89, "Reciente"
-    if dias <= 60:
-        return 59, "En revisión"
-    return 29, "Histórico"
+        base, etiqueta = 89, "Reciente"
+    elif dias <= 60:
+        base, etiqueta = 59, "En revisión"
+    else:
+        base, etiqueta = 29, "Histórico"
+    precio = round(base * (1 - PROMO_LANZAMIENTO), 2)
+    return precio, etiqueta
+
+
+def euros(valor: float) -> str:
+    texto = f"{valor:.2f}".rstrip("0").rstrip(".")
+    return texto.replace(".", ",") + " €"
 
 
 def leer_informe(ruta: Path) -> dict | None:
@@ -105,11 +116,12 @@ def leer_informe(ruta: Path) -> dict | None:
 def tarjeta(informe: dict) -> str:
     referencia = f'{informe["nombre"]} · {informe["fecha"].strftime("%d/%m/%Y")}'
     enlace = "/?informe=" + quote(referencia) + "#pedido"
+    base = {89: 89, 59: 59, 29: 29}
+    original = base.get(round(informe["precio_informe"] / (1 - PROMO_LANZAMIENTO)), 89)
     descuento = ""
-    if informe["precio_informe"] < 89:
-        ahorro = round((1 - informe["precio_informe"] / 89) * 100)
-        descuento = f'<span class="baja">−{ahorro} %</span>'
-    antes = '<span class="antes">89 €</span>' if informe["precio_informe"] < 89 else ""
+    if PROMO_LANZAMIENTO:
+        descuento = f'<span class="baja">−{round(PROMO_LANZAMIENTO*100)} %</span>'
+    antes = f'<span class="antes">{euros(original)}</span>' if PROMO_LANZAMIENTO else ""
     chips = []
     if informe["precio_accion"]:
         chips.append(f'<span class="chip">Precio en el informe <b>{informe["precio_accion"]} €</b></span>')
@@ -123,7 +135,7 @@ def tarjeta(informe: dict) -> str:
   <div class="precio">
     <div>
       <div class="etiqueta">Precio hoy</div>
-      <span class="hoy">{informe["precio_informe"]} €</span>
+      <span class="hoy">{euros(informe["precio_informe"])}</span>
     </div>
     {antes} {descuento}
   </div>
@@ -165,7 +177,9 @@ cuándo se escribió y con qué datos.</p>
 <div class="regla">
   <strong>El precio baja con el tiempo.</strong> Un análisis pierde valor a medida que el mercado se
   mueve: los recientes cuestan <strong>89 €</strong>, los de entre 15 y 60 días <strong>59 €</strong>
-  y los de más de dos meses <strong>29 €</strong>. La información caduca, y el precio lo refleja.
+  y los de más de dos meses <strong>29 €</strong>. La información caduca, y el precio lo refleja.<br><br>
+  <strong>Oferta de lanzamiento:</strong> los precios que ves ya llevan un <strong>25 % de descuento</strong>.
+  Se aplica al pedirlo, sin código.
 </div>
 {contenido}
 </main>

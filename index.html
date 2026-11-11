@@ -427,7 +427,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
         <div class="precio-card">
           <div class="precio-header">
             <div class="precio-nombre">Pack Análisis PRO — A+B</div>
-            <div class="precio-val">89 €</div>
+            <div class="precio-val" style="display:flex;align-items:baseline;gap:.6rem;justify-content:flex-end"><span style="font-size:.9rem;color:rgba(255,255,255,.45);text-decoration:line-through">89 €</span><span>66,75 €</span></div>
           </div>
           <div class="precio-body">
             <div class="precio-item">Informe A: Análisis de Mercado (~13 págs.)</div>
@@ -437,7 +437,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
             <div class="precio-item">Entrega en 24-48 horas · PDF descargable</div>
           </div>
         </div>
-        <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">También disponibles por separado: Informe A o B — 49 € cada uno.</p>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">También disponibles por separado: Informe A o B — <strong>36,75 €</strong> cada uno (<s style="color:#A9A292">49 €</s>).</p>
       </div>
     </div>
     <div>
@@ -448,22 +448,41 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       <p hidden><label>No rellenar <input name="bot-field"></label></p>
       <div class="form-group"><label>Empresa o ticker</label><input type="text" name="empresa" placeholder="Ej: Inditex, AAPL, BMW.DE" required></div>
       <div class="form-group"><label>Tu email</label><input type="email" name="email" placeholder="para enviarte el informe" required></div>
-            <div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;
-           padding:12px 16px;margin:1.2rem 0 .4rem;font-size:.85rem;line-height:1.55">
-        <strong style="color:#8A6420">Oferta de lanzamiento.</strong>
-        Los primeros clientes pagan <strong>66,75 €</strong> en vez de
-        <s style="color:#A9A292">89 €</s> (25 % menos). Se aplica al pedirlo: no hace falta código.
-      </div>
       <div class="form-group"><label>¿Qué quieres analizar?</label>
         <select name="producto">
-          <option>Pack completo A+B — 89 €</option>
-          <option>Solo Informe A (Mercado) — 49 €</option>
-          <option>Solo Informe B (Fundamental) — 49 €</option>
+          <option>Pack completo A+B — 66,75 € (lanzamiento, antes 89 €)</option>
+          <option>Solo Informe A (Mercado) — 36,75 € (antes 49 €)</option>
+          <option>Solo Informe B (Fundamental) — 36,75 € (antes 49 €)</option>
+          <option>Informe del repositorio — desde 21,75 €</option>
         </select>
       </div>
       <div class="form-group"><label>Contexto (opcional)</label><textarea name="contexto" placeholder="¿Por qué te interesa esta empresa? ¿Tienes ya posición? Cualquier detalle ayuda a personalizar el criterio del asesor."></textarea></div>
       <button class="btn-primary" type="submit" style="width:100%;justify-content:center">Solicitar análisis →</button>
       </form>
+
+      <div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:18px 20px;
+           margin-top:1.4rem;font-size:.88rem;line-height:1.62">
+        <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;
+             font-weight:600;margin-bottom:6px">Oferta de lanzamiento · 25 % de descuento</div>
+        <p style="margin:0 0 .7rem">Un informe cuesta <s style="color:#A9A292">89 €</s>.
+        Los primeros clientes pagan <strong>66,75 €</strong>. No hace falta código: se aplica al pedirlo.</p>
+        <p style="margin:0 0 .35rem"><strong>Qué recibes</strong></p>
+        <ul style="margin:0 0 .7rem;padding-left:18px">
+          <li>Análisis técnico con gráficos de precio, medias, volumen y RSI</li>
+          <li>Análisis fundamental con ratios, márgenes, deuda y crecimiento</li>
+          <li>Comparativa con tres competidores del sector</li>
+          <li>Contexto macro: tipos, inflación y divisa</li>
+          <li>Valoración por descuento de flujos con tabla de sensibilidad y tres escenarios</li>
+          <li>Riesgos, catalizadores y noticias del último mes</li>
+        </ul>
+        <p style="margin:0 0 .7rem"><strong>Entre 8 y 12 horas de trabajo</strong> por el precio de dos horas
+        de cualquier profesional. Y menos que la comisión de una operación mal planteada.</p>
+        <p style="margin:0">Invertir sin entender la empresa es apostar. El informe no te dice qué comprar:
+        te dice qué estás comprando, cuánto vale según sus flujos y en qué punto tu tesis dejaría de tener
+        sentido.</p>
+        <a href="/repositorio/" style="display:inline-block;margin-top:10px;font-size:.85rem;color:#8A6420;
+           text-decoration:underline">Ver los análisis ya publicados →</a>
+      </div>
       <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem;text-align:center">Pago por transferencia o Bizum tras confirmación. Factura incluida.</p>
     </div>
   </div>
@@ -1006,13 +1025,33 @@ function mCalcPerfil(){
     + '<p id="np-estado" style="font-size:.8rem;margin:.5rem 0 0"></p>'
     + '<p style="margin:.2rem 0 0;font-size:.72rem;color:var(--muted)">Al suscribirte aceptas la '
     + '<a href="/privacidad/" style="color:inherit">política de privacidad</a>.</p>'
-    + '<div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:12px 16px;'
-    + 'margin:1.2rem 0 .2rem;font-size:.84rem;line-height:1.55"><strong style="color:#8A6420">Oferta de lanzamiento.'
-    + '</strong> Los primeros clientes pagan <strong>66,75 €</strong> en vez de '
-    + '<s style="color:#A9A292">89 €</s> (25 % menos).</div>'
     + '<p style="margin:1rem 0 0;font-size:.75rem;color:var(--muted);line-height:1.55">Orientación educativa, '
     + 'no un perfil de idoneidad MiFID II ni una recomendación personalizada. La asignación es una referencia '
-    + 'general: cualquier decisión real exige revisar tu situación completa.</p>';
+    + 'general: cualquier decisión real exige revisar tu situación completa.</p>'
+    + '<div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:16px 18px;'
+    + 'margin:1.4rem 0 0;font-size:.86rem;line-height:1.6">'
+    + '<div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;'
+    + 'font-weight:600;margin-bottom:4px">Oferta de lanzamiento · 25 % de descuento</div>'
+    + '<p style="margin:0 0 .6rem">Un informe cuesta <s style="color:#A9A292">89 €</s>. '
+    + 'Los primeros clientes pagan <strong>66,75 €</strong>.</p>'
+    + '<p style="margin:0 0 .35rem"><strong>Qué incluye</strong></p>'
+    + '<ul style="margin:0 0 .7rem;padding-left:18px">'
+    + '<li>Análisis técnico con gráficos: precio, medias, volumen y RSI</li>'
+    + '<li>Análisis fundamental: ratios, márgenes, deuda y crecimiento</li>'
+    + '<li>Comparativa con tres competidores del sector</li>'
+    + '<li>Contexto macro: tipos, inflación y divisa</li>'
+    + '<li>Valoración por descuento de flujos, con sensibilidad y tres escenarios</li>'
+    + '<li>Riesgos, catalizadores y noticias del último mes</li></ul>'
+    + '<p style="margin:0 0 .35rem"><strong>Cuánto trabajo hay detrás</strong></p>'
+    + '<p style="margin:0 0 .7rem">Entre 8 y 12 horas de análisis. A 66,75 €, menos que dos horas de trabajo '
+    + 'de cualquier profesional y menos que la comisión de una operación mal planteada.</p>'
+    + '<p style="margin:0 0 .35rem"><strong>Por qué merece la pena</strong></p>'
+    + '<p style="margin:0">Invertir sin entender la empresa es apostar. El informe no te dice qué comprar: '
+    + 'te dice qué estás comprando, cuánto vale según sus flujos y en qué punto tu tesis dejaría de tener '
+    + 'sentido. Eso no garantiza acertar; evita equivocarte a ciegas.</p>'
+    + '<a href="/repositorio/" style="display:inline-block;margin-top:10px;font-size:.82rem;color:#8A6420;'
+    + 'text-decoration:underline">Elige entre los análisis ya publicados →</a>'
+    + '</div>';
 
   mGoTo(5);
 }
