@@ -78,6 +78,7 @@ AVISO = f"""
 <ul>
   <li><strong>Titular:</strong> {TITULAR}</li>
   <li><strong>NIF:</strong> {NIF}</li>
+  <li><strong>Asociado EFPA España:</strong> nº 35094</li>
   <li><strong>Domicilio:</strong> {DOMICILIO}</li>
   <li><strong>Correo:</strong> {EMAIL}</li>
   <li><strong>Sitio:</strong> criteriofinanciero.org</li>
@@ -86,7 +87,7 @@ AVISO = f"""
 <h2>Actividad</h2>
 <p>Este sitio ofrece contenido informativo sobre finanzas e inversión y, previa solicitud, informes
 de análisis de activos cotizados. El titular actúa como persona física, está titulado como European
-Financial Advisor (EFPA) y <strong>no gestiona dinero de terceros, no capta fondos del público ni
+Financial Advisor (EFPA) y asociado a EFPA España con el número 35094, y <strong>no gestiona dinero de terceros, no capta fondos del público ni
 ejecuta órdenes de compra o venta</strong>.</p>
 
 <h2>Naturaleza del contenido</h2>
