@@ -9,7 +9,7 @@ SITIO = "https://criteriofinanciero.org"
 TITULAR = "Sebastián Prat"
 NIF = "09004397N"
 DOMICILIO = "Avda. Utretch 22, 28514 Nuevo Baztán (Madrid)"
-EMAIL = "hola@criteriofinanciero.org"
+EMAIL = "sebastian.prat@gmail.com"
 ACTUALIZADO = "11 de noviembre de 2026"
 
 ESTILO = """<style>
@@ -206,7 +206,7 @@ GRACIAS = """
 <h1>Recibido</h1>
 <p class="fecha">Gracias por escribir.</p>
 <p><strong>Si has pedido un análisis:</strong> te responderé en menos de 24 horas desde
-<a href="mailto:hola@criteriofinanciero.org">hola@criteriofinanciero.org</a> con la confirmación del
+<a href="mailto:sebastian.prat@gmail.com">sebastian.prat@gmail.com</a> con la confirmación del
 pedido, el importe y los datos para el pago por transferencia o Bizum. El informe se entrega en 24-48
 horas desde el pago.</p>
 <p><strong>Si te has suscrito a la newsletter:</strong> recibirás un correo para confirmar la
