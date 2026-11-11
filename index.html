@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CriterioFinanciero — Asesoría financiera orientada a tus objetivos vitales</title>
+<meta name="description" content="Asesoría financiera independiente en Madrid: planificación por objetivos vitales, análisis de acciones y fondos, e informes con criterio. EFPA, 15 años en banca.">
+<link rel="canonical" href="https://criteriofinanciero.org/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CriterioFinanciero">
+<meta property="og:title" content="CriterioFinanciero — Tu dinero al servicio de tu vida">
+<meta property="og:description" content="Asesoría financiera independiente en Madrid: planificación por objetivos vitales, análisis de acciones y fondos, e informes con criterio. EFPA, 15 años en banca.">
+<meta property="og:url" content="https://criteriofinanciero.org/">
+<meta property="og:image" content="https://criteriofinanciero.org/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A1628">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -382,7 +393,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
         <div class="analisis-cta">
           <div class="analisis-cta-text">
             <strong>Descarga el informe completo de Indra — gratis</strong>
-            Metodología institucional · Datos en tiempo real · Criterio del asesor
+            Metodología institucional · Datos del cierre del día · Criterio del asesor
           </div>
           <a href="#" class="btn-primary" style="white-space:nowrap">Descargar PDF →</a>
         </div>
@@ -408,7 +419,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
           <div class="precio-body">
             <div class="precio-item">Informe A: Análisis de Mercado (~13 págs.)</div>
             <div class="precio-item">Informe B: Análisis Fundamental (~13 págs.)</div>
-            <div class="precio-item">Datos en tiempo real · 11 bloques de análisis IA</div>
+            <div class="precio-item">Datos del cierre del día · 11 bloques de análisis</div>
             <div class="precio-item">Criterio del asesor en cada sección</div>
             <div class="precio-item">Entrega en 24-48 horas · PDF descargable</div>
           </div>
@@ -417,17 +428,23 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       </div>
     </div>
     <div>
-      <div class="form-group"><label>Empresa o ticker</label><input type="text" placeholder="Ej: Inditex, AAPL, BMW.DE"></div>
-      <div class="form-group"><label>Tu email</label><input type="email" placeholder="para enviarte el informe"></div>
+<form name="pedido-analisis" method="POST" action="/gracias/" data-netlify="true"
+            netlify-honeypot="bot-field" style="display:block">
+      <input type="hidden" name="form-name" value="pedido-analisis">
+      <input type="hidden" name="origen" value="web-criteriofinanciero">
+      <p hidden><label>No rellenar <input name="bot-field"></label></p>
+      <div class="form-group"><label>Empresa o ticker</label><input type="text" name="empresa" placeholder="Ej: Inditex, AAPL, BMW.DE" required></div>
+      <div class="form-group"><label>Tu email</label><input type="email" name="email" placeholder="para enviarte el informe" required></div>
       <div class="form-group"><label>¿Qué quieres analizar?</label>
-        <select>
+        <select name="producto">
           <option>Pack completo A+B — 89 €</option>
           <option>Solo Informe A (Mercado) — 49 €</option>
           <option>Solo Informe B (Fundamental) — 49 €</option>
         </select>
       </div>
-      <div class="form-group"><label>Contexto (opcional)</label><textarea placeholder="¿Por qué te interesa esta empresa? ¿Tienes ya posición? Cualquier detalle ayuda a personalizar el criterio del asesor."></textarea></div>
-      <button class="btn-primary" style="width:100%;justify-content:center">Solicitar análisis →</button>
+      <div class="form-group"><label>Contexto (opcional)</label><textarea name="contexto" placeholder="¿Por qué te interesa esta empresa? ¿Tienes ya posición? Cualquier detalle ayuda a personalizar el criterio del asesor."></textarea></div>
+      <button class="btn-primary" type="submit" style="width:100%;justify-content:center">Solicitar análisis →</button>
+      </form>
       <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem;text-align:center">Pago por transferencia o Bizum tras confirmación. Factura incluida.</p>
     </div>
   </div>
@@ -540,10 +557,17 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
     <span class="section-label" style="display:block;text-align:center;margin-bottom:.75rem">Newsletter</span>
     <h2>Una vez a la semana, nada más</h2>
     <p>Un análisis, una idea o un concepto financiero que valga tu tiempo. Sin spam, sin publicidad, sin productos que vender. Solo criterio.</p>
-    <div class="nl-form">
-      <input type="email" placeholder="tu@email.com">
-      <button class="btn-primary">Suscribirse</button>
-    </div>
+    <form class="nl-form" name="newsletter" method="POST" action="/gracias/"
+          data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p hidden><label>No rellenar <input name="bot-field"></label></p>
+      <input type="email" name="email" placeholder="tu@email.com" required aria-label="Tu correo electrónico">
+      <button class="btn-primary" type="submit">Suscribirse</button>
+    </form>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:.6rem">
+      Al suscribirte aceptas la <a href="/privacidad/" style="color:inherit;text-decoration:underline">política de privacidad</a>.
+      Puedes darte de baja cuando quieras.
+    </p>
     <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem">Próximos vídeos: Cómo construir una cartera desde 0 · Análisis de Inditex paso a paso · Qué es el EBITDA · La jubilación que tu banco no te planifica</p>
   </div>
 </section>
@@ -555,7 +579,7 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
       <a href="#proceso">Cómo funciona</a>
       <a href="#analisis">Análisis</a>
       <a href="#videos">Formación</a>
-      <a href="mailto:hola@criteriofinanciero.org">Contacto</a>
+      <a href="mailto:hola@criteriofinanciero.org">Contacto</a><a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a>
     </div>
   </div>
   <div class="footer-legal">
@@ -745,6 +769,59 @@ function heroYN(el,v){
   fb.style.opacity='0.7';
   setTimeout(function(){abrirOnboarding()},800);
 }
+</script>
+
+<style>
+#cc{position:fixed;left:0;right:0;bottom:0;z-index:9999;display:none;gap:14px 22px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;padding:15px 22px;background:#0A1628;color:#F4EFE6;
+    font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+#cc p{margin:0;max-width:680px}
+#cc a{color:inherit;text-decoration:underline}
+#cc .acciones{display:flex;gap:10px;flex-wrap:wrap}
+#cc button{font-family:inherit;font-size:14px;font-weight:500;border-radius:6px;padding:10px 18px;
+           cursor:pointer;border:1px solid rgba(244,239,230,.45);background:transparent;color:inherit}
+#cc button.si{background:#C9963A;border-color:#C9963A;color:#0A1628}
+</style>
+<div id="cc" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <p>Uso cookies propias y de Google Analytics para saber qué contenido se lee. Si aceptas, se cargan;
+     si no, la web funciona igual. <a href="/cookies/">Más información</a>.</p>
+  <div class="acciones">
+    <button id="cc-no" type="button">Solo lo necesario</button>
+    <button id="cc-si" class="si" type="button">Aceptar</button>
+  </div>
+</div>
+<script>
+(function () {
+  var ID = "";
+  function cargar() {
+    if (!ID) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("consent", "default", {ad_storage:"denied",ad_user_data:"denied",
+      ad_personalization:"denied",analytics_storage:"denied"});
+    gtag("js", new Date());
+    gtag("consent", "update", {analytics_storage:"granted"});
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + ID;
+    document.head.appendChild(s);
+    gtag("config", ID, {anonymize_ip: true});
+  }
+  var caja = document.getElementById("cc");
+  if (!ID) { caja.style.display = "none"; return; }
+  var guardado = null;
+  try { guardado = localStorage.getItem("consentimiento"); } catch (e) {}
+  if (guardado === "1") { cargar(); }
+  else if (guardado !== "0") { caja.style.display = "flex"; }
+  document.getElementById("cc-si").onclick = function () {
+    try { localStorage.setItem("consentimiento", "1"); } catch (e) {}
+    caja.style.display = "none"; cargar();
+  };
+  document.getElementById("cc-no").onclick = function () {
+    try { localStorage.setItem("consentimiento", "0"); } catch (e) {}
+    caja.style.display = "none";
+  };
+})();
 </script>
 </body>
 </html>
