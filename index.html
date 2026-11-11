@@ -701,6 +701,46 @@ footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,25
           <button class="m-yn" id="mq_exp_no" onclick="mYN('exp','no')">No</button>
         </div>
       </div>
+      <div class="m-card">
+        <div class="m-card-q">¿En qué tramo de edad estás? <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','18-30',this,'edad')">18-30</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','31-45',this,'edad')">31-45</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','46-55',this,'edad')">46-55</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','56+',this,'edad')">56 o más</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','nc',this,'edad')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Cuál es tu situación laboral?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','ajena',this,'laboral')">Cuenta ajena</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','autonomo',this,'laboral')">Autónomo/a</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','paro',this,'laboral')">Sin empleo ahora</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','jubilado',this,'laboral')">Jubilado/a</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','nc',this,'laboral')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Cuántos años llevas cotizados? <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','menos5',this,'cotizados')">Menos de 5</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','5-15',this,'cotizados')">5-15</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','15-25',this,'cotizados')">15-25</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','25+',this,'cotizados')">Más de 25</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','nc',this,'cotizados')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Qué formación financiera tienes?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','ninguna',this,'formacion')">Ninguna</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','basica',this,'formacion')">Básica: leo y me informo</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','media',this,'formacion')">Media: cursos</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','alta',this,'formacion')">Alta: formación reglada</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','nc',this,'formacion')">Prefiero no contestar</button>
+        </div>
+      </div>
       <div class="m-nav">
         <button class="m-back" onclick="mGoTo(1)">← Atrás</button>
         <button class="m-next" id="mn2" onclick="mGoTo(3)" disabled>Siguiente →</button>
@@ -785,7 +825,17 @@ function mYN(k,v){
   ms[k]=v;
   document.getElementById('mq_'+k+'_si').className='m-yn'+(v==='si'?' yes':'');
   document.getElementById('mq_'+k+'_no').className='m-yn'+(v==='no'?' no':'');
-  if(ms.da&&ms.fe&&ms.dep&&ms.exp) document.getElementById('mn2').disabled=false;
+  chk2();
+}
+function chk2(){
+  var ok = ms.da&&ms.fe&&ms.dep&&ms.exp&&ms.edad&&ms.laboral&&ms.cotizados&&ms.formacion;
+  document.getElementById('mn2').disabled = !ok;
+}
+function mSelDato(k,v,el,g){
+  ms[k]=v;
+  document.querySelectorAll('[data-g="'+g+'"]').forEach(function(b){b.classList.remove('yes')});
+  el.classList.add('yes');
+  chk2();
 }
 function updMH(){ms.horizonte=parseInt(document.getElementById('mhorizonte').value);document.getElementById('mh-val').textContent=ms.horizonte+(ms.horizonte===30?' años+':' años');chk3();}
 function mSelCap(el,v){ms.cap=v;document.querySelectorAll('[id^=mc_]').forEach(function(b){b.className='m-yn'});el.className='m-yn yes';chk3();}
@@ -797,15 +847,29 @@ function mCalcPerfil(){
   if(ms.riesgo==='1') sc+=0; else if(ms.riesgo==='2') sc+=1; else if(ms.riesgo==='3') sc+=2; else sc+=3;
   if(ms.exp==='si') sc+=1;
   if(ms.horizonte>=15) sc+=2; else if(ms.horizonte>=7) sc+=1;
+  if(ms.edad==='18-30') sc+=1; else if(ms.edad==='56+') sc-=1;
+  if(ms.laboral==='autonomo' && ms.fe!=='si') sc-=1;
+  if(ms.cotizados==='25+') sc-=1;
   var alertas=[];
   if(ms.da==='si') alertas.push('Tienes deudas con interés alto. Amortizarlas puede ser la mejor inversión antes de empezar.');
   if(ms.fe==='no') alertas.push('Sin fondo de emergencia, cualquier imprevisto puede obligarte a deshacer posiciones en mal momento.');
+  if(ms.laboral==='autonomo') alertas.push('Con ingresos de autónomo, el colchón debería cubrir 9-12 meses de gastos, no seis.');
+  if(ms.cotizados==='25+' && ms.horizonte>=15) alertas.push('Te queda poco para la jubilación y planteas un horizonte muy largo: revisa si el objetivo y el plazo encajan de verdad.');
+  if(ms.edad==='56+' && ms.riesgo==='4') alertas.push('Con tu edad, una caída fuerte tiene menos tiempo para recuperarse. La tolerancia que declaras y el horizonte no encajan.');
+  if(ms.formacion==='ninguna') alertas.push('Antes de asumir riesgo, conviene dedicar tiempo a entender qué estás contratando. Los primeros pasos de la cartera pueden ir más despacio.');
   var perfil,rv,hrec,pasos,color;
   if(sc<=2){perfil='Conservador';rv='20–30%';hrec='Corto-medio plazo';color='#FEF3C7';pasos='1. Consolidar fondo de emergencia si no está completo.<br>2. Cartera 70-80% renta fija, 20-30% renta variable global.<br>3. Depósitos o bonos de corto plazo para la parte de seguridad.';}
   else if(sc<=4){perfil='Moderado';rv='40–60%';hrec='Medio-largo plazo';color='#ECFDF5';pasos='1. Cartera equilibrada: 50% renta fija, 50% renta variable global.<br>2. Aportaciones periódicas automáticas para eliminar riesgo de timing.<br>3. Revisión anual del peso entre activos según evolución del objetivo.';}
   else{perfil='Dinámico';rv='70–90%';hrec='Largo plazo (10+ años)';color='#EDE9FE';pasos='1. Cartera de crecimiento: 80%+ renta variable global diversificada.<br>2. Análisis individuales de empresas para la parte de stock-picking.<br>3. Aprovechar la ventaja fiscal de los fondos en el reequilibrio.';}
   var objMap={jubilacion:'Jubilación anticipada',familia:'Protección familiar',independencia:'Independencia económica',proyecto:'Proyecto concreto',crecer:'Crecer patrimonio'};
-  document.getElementById('m-perfil-pill').innerHTML='<div class="perfil-pill" style="background:'+color+'">Perfil '+perfil+'</div>';
+  var nc=['edad','laboral','cotizados','formacion'].filter(function(k){return ms[k]==='nc'}).length;
+  var prefijo = nc===0 ? 'Con alta probabilidad,' : (nc<=2 ? 'En principio,' : 'Estimación orientativa:');
+  var respuestas = 8 - nc;
+  document.getElementById('m-perfil-pill').innerHTML=
+    '<div class="perfil-pill" style="background:'+color+'">Perfil estimado: '+perfil+'</div>'
+    +'<p style="margin:.9rem 0 0;font-size:.95rem;line-height:1.6">'+prefijo+' tu perfil es <strong>'+perfil.toLowerCase()
+    +'</strong>, según '+respuestas+' de las 8 preguntas respondidas.</p>'
+    +'<p style="margin:.5rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.5">Orientación educativa, no un perfil de idoneidad MiFID II ni una recomendación personalizada. Para una decisión real hace falta revisar tu situación completa.</p>';
   document.getElementById('m-res-grid').innerHTML='<div class="res-cell"><div class="res-cell-label">Horizonte</div><div class="res-cell-val">'+hrec+'</div></div><div class="res-cell"><div class="res-cell-label">Renta variable</div><div class="res-cell-val">'+rv+'</div></div><div class="res-cell"><div class="res-cell-label">Objetivo</div><div class="res-cell-val">'+(objMap[ms.obj]||'—')+'</div></div>';
   var alHTML='';
   if(alertas.length){alertas.forEach(function(a){alHTML+='<div class="alert-box">'+a+'</div>';});}
