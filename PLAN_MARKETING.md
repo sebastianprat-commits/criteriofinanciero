@@ -45,7 +45,7 @@ Es donde está el dinero, y no requiere cámara ni edición.
 
 **Meta realista**: 4.000 seguidores al año → 40-80 visitas cualificadas al mes.
 
-### 3.2 euroaeuro.org — el motor de tráfico propio
+### 3.2 euroaeuro.eu — el motor de tráfico propio
 
 Ya tiene 91 artículos indexados. Es el activo más valioso y hoy no está conectado.
 
@@ -166,7 +166,7 @@ el precio cuando haya reputación (89 € → 149 €) y en la suscripción recu
 
 ---
 
-# Anexo · Monetización de euroaeuro.org
+# Anexo · Monetización de euroaeuro.eu
 
 euroaeuro tiene dos funciones: **traer tráfico** y **generar ingresos propios**. La primera
 es más valiosa que la segunda, pero conviene saber cuánto da cada vía.
