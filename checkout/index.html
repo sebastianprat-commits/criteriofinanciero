@@ -130,13 +130,14 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none;margin:0 8px}
         '<h2>' + inf.nombre + '</h2>' +
         '<div class="meta">' + inf.ticker + ' · ' + inf.mercado + ' · ' + fecha + '</div>' +
         '<div class="chips">' +
-          (inf.precio_accion ? '<span class="chip">Precio en el informe <b>' + inf.precio_accion + ' €</b></span>' : '') +
-          (inf.valor_dcf ? '<span class="chip">Valor estimado DCF <b>' + inf.valor_dcf + ' €</b></span>' : '') +
+          (inf.precio_accion ? '<span class="chip">Cotización a cierre del ' + fecha + ' <b>' + inf.precio_accion + ' €</b></span>' : '') +
           '<span class="chip">12 secciones · PDF</span>' +
         '</div>' +
         '<div class="precio"><span class="hoy">' + euros(precio) + ' €</span>' +
         '<span class="antes">' + euros(original) + ' €</span>' +
-        '<span class="baja">−25 %</span></div>';
+        '<span class="baja">−25 %</span></div>' +
+        '<div style="font-size:11.5px;color:#8A6420;margin-top:6px">Oferta especial de lanzamiento ' +
+        'hasta el 31/12/2026</div>';
       document.getElementById("campo-informe").value =
         inf.nombre + " · " + fecha + " (ref. " + inf.slug + ")";
       document.getElementById("campo-importe").value = euros(precio) + " EUR";

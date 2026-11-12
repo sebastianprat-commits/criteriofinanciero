@@ -120,19 +120,20 @@ def tarjeta(informe: dict) -> str:
     original = base.get(round(informe["precio_informe"] / (1 - PROMO_LANZAMIENTO)), 89)
     descuento = ""
     if PROMO_LANZAMIENTO:
-        descuento = f'<span class="baja">−{round(PROMO_LANZAMIENTO*100)} %</span>'
+        descuento = (f'<span class="baja">−{round(PROMO_LANZAMIENTO*100)} %</span>'
+                     f'<div style="font-size:11px;color:#8A6420;margin-top:8px;width:100%">'
+                     f'Oferta especial de lanzamiento hasta el 31/12/2026</div>')
     antes = f'<span class="antes">{euros(original)}</span>' if PROMO_LANZAMIENTO else ""
     chips = []
     if informe["precio_accion"]:
-        chips.append(f'<span class="chip">Precio en el informe <b>{informe["precio_accion"]} €</b></span>')
-    if informe["valor_dcf"]:
-        chips.append(f'<span class="chip">Valor estimado DCF <b>{informe["valor_dcf"]} €</b></span>')
+        chips.append(f'<span class="chip">Cotización a cierre del '
+                     f'{informe["fecha"].strftime("%d/%m/%Y")} <b>{informe["precio_accion"]} €</b></span>')
     chips.append(f'<span class="chip">{informe["etiqueta"]}</span>')
     return f"""<article class="ficha">
   <h2>{informe["nombre"]}</h2>
   <div class="meta">{informe["ticker"]} · {informe["mercado"]} · {informe["fecha"].strftime("%d/%m/%Y")}</div>
   <div class="chips">{"".join(chips)}</div>
-  <div class="precio">
+  <div class="precio" style="flex-wrap:wrap">
     <div>
       <div class="etiqueta">Precio hoy</div>
       <span class="hoy">{euros(informe["precio_informe"])}</span>
