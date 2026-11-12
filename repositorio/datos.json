@@ -1,5 +1,17 @@
 [
  {
+  "nombre": "Aena S.M.E., S.A.",
+  "ticker": "AENA.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-12",
+  "dias": 0,
+  "precio_accion": "28,74",
+  "valor_dcf": "19,23",
+  "precio_informe": 66.75,
+  "etiqueta": "Reciente",
+  "slug": "AENA_MC_20261112"
+ },
+ {
   "nombre": "ACS, Actividades de Construcción y Servicios, S.A.",
   "ticker": "ACS.MC",
   "mercado": "Bolsa de Madrid (BME)",
