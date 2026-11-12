@@ -62,3 +62,21 @@ aparecen en MailerLite. El de pedidos sí va a Netlify Forms, para que quede reg
 2. **Correo profesional**: hoy el contacto es `sebastian.prat@gmail.com`. Cuando exista
    `hola@criteriofinanciero.org`, cambiar en `index.html` y en las cuatro páginas legales
    (`generar_paginas.py`, constante `EMAIL`).
+
+
+## Publicar automáticamente (una sola vez)
+
+Hoy la web se publica arrastrando la carpeta. Para que cada commit publique solo:
+
+1. **Crea el repositorio en GitHub** (vacío, sin README ni licencia).
+2. Ejecuta **conectar_github.bat** y pega la URL. Sube el historial completo.
+3. En **Netlify → Site configuration → Build and deploy → Link repository**:
+   - Repositorio: el que acabas de crear.
+   - Rama: master.
+   - Comando de build: *(vacío)*.
+   - Directorio de publicación: /.
+4. A partir de ahí, cada git push despliega en un minuto.
+
+El panel ejecuta ctualizar.py --publicar, que hace commit. Con el repositorio
+conectado, basta añadir el push para que el lunes quede todo publicado sin
+tocar nada.
