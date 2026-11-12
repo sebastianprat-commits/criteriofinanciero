@@ -51,3 +51,16 @@ Eso devuelve el formulario de pedido, el checkout con Bizum, los precios y la of
 - [ ] Confirmar el encaje CNMV: informes genéricos, sin recomendación personalizada.
 - [ ] Bizum de empresa o pasarela de pago, en lugar de la cuenta personal.
 - [ ] Revisar el contrato actual por exclusividad o no concurrencia.
+
+## Pendiente al abrir: quitar la personalización
+
+La CNMV distingue entre análisis genérico y asesoramiento personalizado. Para no cruzar esa
+línea, al reabrir hay que:
+
+- [ ] **Eliminar el campo «contexto»** del formulario de pedido. Preguntar «¿tienes ya posición?»
+      o «¿para qué lo quieres?» convierte el encargo en un servicio a medida.
+- [ ] Mantener solo «empresa o ticker» y «email»: el informante dice **qué analizar**, no
+      **para qué**.
+- [ ] No prometer adaptación al perfil en ningún texto de la web.
+- [ ] Cada informe ya lleva la **nota legal y metodológica** con autor, fecha, metodología,
+      ausencia de recomendación y ausencia de conflicto de interés.

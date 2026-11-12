@@ -97,6 +97,18 @@ cuenta la situación concreta, los objetivos ni la tolerancia al riesgo de ningu
 <p>Los datos utilizados proceden de fuentes públicas y se indican en cada informe junto con su fecha.
 Pueden contener errores o quedar desactualizados. El rendimiento pasado no garantiza resultados futuros.</p>
 
+<h2>Naturaleza de los informes</h2>
+<p>Los informes son <strong>análisis genéricos</strong> de sociedades cotizadas, elaborados con
+información pública y con una metodología que se detalla en cada documento. No son asesoramiento
+financiero personalizado: no tienen en cuenta la situación, los objetivos, el horizonte ni la
+tolerancia al riesgo de quien los compra. Por eso el cliente no recibe una recomendación adaptada
+a su caso, sino un análisis de la empresa que puede usar como considere.</p>
+<p><strong>No se emiten recomendaciones de compra o venta ni precios objetivo.</strong> Las
+valoraciones son estimaciones condicionadas a supuestos explícitos que pueden no cumplirse. El
+informe no es una oferta ni una invitación a operar.</p>
+<p>El titular no mantiene posiciones en los valores analizados, no recibe remuneración de los
+emisores y no tiene conflictos de interés conocidos que afecten al contenido.</p>
+
 <h2>Servicios de pago y derecho de desistimiento</h2>
 <p>Los informes se solicitan a través del formulario del sitio y se abonan por Bizum al +34 686 875 142 tras la confirmación del pedido, con factura. El plazo de entrega indicado es de 24 a 48 horas.</p>
 <p>Al tratarse de un contenido digital personalizado que se ejecuta a petición del cliente, una vez
