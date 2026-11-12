@@ -1,0 +1,5 @@
+﻿__pycache__/
+*.pyc
+*.bak-*
+_head.html
+_roto.html
