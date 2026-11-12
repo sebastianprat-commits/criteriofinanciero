@@ -41,9 +41,15 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none;margin:0 8px}
 <body>
 <header class="barra"><a href="/">CriterioFinanciero</a></header>
 <main>
-  <h1>Finalizar compra</h1>
+  <h1>Todavía no está abierto</h1>
+  <div style="background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:26px 28px;margin-bottom:24px">
+    <p style="margin:0 0 10px;font-size:16px;line-height:1.7">La web está en pruebas y los informes
+    todavía no se pueden comprar.</p>
+    <p style="margin:0;font-size:14px;color:#5A6478">Si quieres que te avise el día del lanzamiento,
+    deja tu correo en la <a href="/#pedido" style="color:#8A6420">página principal</a>.</p>
+  </div>
 
-  <div class="resumen" id="resumen">
+  <div class="resumen" id="resumen" style="display:none">
     <p style="margin:0;color:var(--muted);font-size:14px">Cargando el informe…</p>
   </div>
 
@@ -52,7 +58,7 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none;margin:0 8px}
     <a href="/repositorio/" style="color:#8A6420">Ver todos los informes disponibles →</a>
   </div>
 
-  <form name="compra-informe" method="POST" action="/gracias/" data-netlify="true"
+  <form name="compra-informe" style="display:none" method="POST" action="/gracias/" data-netlify="true"
         netlify-honeypot="bot-field" id="form-compra" style="display:none">
     <input type="hidden" name="form-name" value="compra-informe">
     <p hidden><label>No rellenar <input name="bot-field"></label></p>

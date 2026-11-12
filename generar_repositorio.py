@@ -14,6 +14,9 @@ SITIO = "https://criteriofinanciero.org"
 # Descuento de lanzamiento sobre el precio del repositorio (0.25 = 25 %). Ponlo a 0 para desactivarlo.
 PROMO_LANZAMIENTO = 0.25
 
+# Si está en True, el catálogo no vende: solo avisa del lanzamiento.
+MODO_PRUEBAS = True
+
 # Escalones de precio: (días máximos, precio, etiqueta)
 ESCALONES = [
     (15, 89, "Reciente"),
@@ -133,14 +136,14 @@ def tarjeta(informe: dict) -> str:
   <h2>{informe["nombre"]}</h2>
   <div class="meta">{informe["ticker"]} · {informe["mercado"]} · {informe["fecha"].strftime("%d/%m/%Y")}</div>
   <div class="chips">{"".join(chips)}</div>
-  <div class="precio" style="flex-wrap:wrap">
+  <div class="precio" style="display:none">
     <div>
       <div class="etiqueta">Precio hoy</div>
       <span class="hoy">{euros(informe["precio_informe"])}</span>
     </div>
     {antes} {descuento}
   </div>
-  <a class="btn" href="{enlace}">Comprar este informe</a>
+  <span class="btn" style="background:#E3DCCB;color:#5A6478;cursor:default">Disponible próximamente</span>
 </article>"""
 
 
@@ -176,7 +179,9 @@ def main() -> None:
 <p class="intro">Todos los análisis publicados. Cada uno conserva su fecha, para que sepas exactamente
 cuándo se escribió y con qué datos.</p>
 <div class="regla">
-  <strong>El precio baja con el tiempo.</strong> Un análisis pierde valor a medida que el mercado se
+  <strong>Catálogo en pruebas.</strong> Estos son los informes que habrá disponibles en el lanzamiento.
+  Todavía no se pueden comprar: la web está en fase de preparación.<br><br>
+  <strong>El precio bajará con el tiempo.</strong> Un análisis pierde valor a medida que el mercado se
   mueve: los recientes cuestan <strong>89 €</strong>, los de entre 15 y 60 días <strong>59 €</strong>
   y los de más de dos meses <strong>29 €</strong>. La información caduca, y el precio lo refleja.<br><br>
   <strong>Oferta de lanzamiento hasta el 31 de diciembre:</strong> los precios que ves ya llevan un
