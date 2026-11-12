@@ -162,3 +162,80 @@ el precio cuando haya reputación (89 € → 149 €) y en la suscripción recu
 | Viernes | Respuestas, pedidos, revisión de métricas | 30 min |
 
 **Unas 3 horas por semana.** Compatible con cualquier otra ocupación.
+
+
+---
+
+# Anexo · Monetización de euroaeuro.org
+
+euroaeuro tiene dos funciones: **traer tráfico** y **generar ingresos propios**. La primera
+es más valiosa que la segunda, pero conviene saber cuánto da cada vía.
+
+## 1. AdSense
+
+| Dato | Valor realista |
+|---|---|
+| RPM en finanzas personales en España | 3-8 € por 1.000 páginas vistas |
+| 10.000 visitas/mes | 30-80 € |
+| 30.000 visitas/mes | 90-240 € |
+
+**Requisitos**: contenido original (lo hay), páginas legales (las hay), dominio propio (sí),
+y tráfico orgánico sostenido. La aprobación suele tardar de días a semanas.
+
+**Problema**: un anuncio de un bróker en un artículo que explica que los fondos cobran
+comisiones excesivas destruye la credibilidad. Hay que **bloquear por categoría** los anuncios
+de productos financieros, o aceptar el ruido.
+
+**Veredicto**: útil como suelo de ingresos, nunca como objetivo. Con 15.000 visitas no llega
+para pagar el hosting y el café.
+
+## 2. Afiliados
+
+Es donde está el dinero real, y también el riesgo.
+
+| Tipo | Comisión típica | Cuándo convierte |
+|---|---|---|
+| Brókers (Trade Republic, DEGIRO, MyInvestor) | 20-80 € por alta | Artículos de «cómo empezar» |
+| Robo-advisors (Indexa, Finizens) | 0,5-1 % del patrimonio | Artículos comparativos |
+| Cuentas remuneradas | 10-40 € por alta | Artículos de ahorro |
+| Libros y cursos | 5-20 % | Artículos de formación |
+
+**Con 5 altas al mes de un bróker a 50 € son 250 €.** Eso es más que AdSense con 30.000 visitas.
+
+**El conflicto que hay que resolver antes**: si euroaeuro recomienda un bróker porque paga
+comisión, deja de ser independiente. La única forma honesta es recomendar **solo lo que usarías**
+y decirlo con transparencia en cada artículo («este enlace genera una comisión; si no lo usas,
+el artículo sigue siendo el mismo»).
+
+**Lo que yo no haría**: comparativas de brókers donde el primero es el que mejor paga. Se nota,
+y en finanzas la confianza es el único activo.
+
+## 3. Qué artículo monetiza cada vía
+
+| Tipo de artículo | Monetización |
+|---|---|
+| «Qué es la inflación» | AdSense (tráfico alto, intención baja) |
+| «Cómo salir de deudas» | AdSense + afiliado de préstamos |
+| «Mejores brókers para empezar» | Afiliado (aquí sí) |
+| «Cómo analizar una empresa» | **Enlace a CriterioFinanciero** (conversión a informe) |
+| «Cuánto cuesta un fondo» | Enlace a CriterioFinanciero + AdSense |
+
+## 4. El orden correcto
+
+1. **Primero el enlace a CriterioFinanciero** (ya está en los 91 artículos). Un solo informe
+   vendido son 66,75 €: más que 10.000 visitas con AdSense.
+2. **Después AdSense**, cuando haya 8.000-10.000 visitas al mes. Es dinero pasivo.
+3. **Afiliados solo si** encuentras algo que de verdad recomendarías sin cobrar.
+
+## 5. Objetivo combinado a 12 meses
+
+| Fuente | Ingreso mensual |
+|---|---|
+| Informes CriterioFinanciero | 400-700 € |
+| Newsletter de pago | 200-400 € |
+| AdSense (25.000 visitas) | 100-200 € |
+| Afiliados | 100-300 € |
+| **Total** | **800-1.600 €** |
+
+Suficiente para justificar el proyecto, insuficiente para vivir solo de esto el primer año.
+La palanca real es **subir el precio del informe** cuando haya reputación.

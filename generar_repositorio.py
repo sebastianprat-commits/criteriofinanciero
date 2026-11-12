@@ -178,8 +178,8 @@ cuándo se escribió y con qué datos.</p>
   <strong>El precio baja con el tiempo.</strong> Un análisis pierde valor a medida que el mercado se
   mueve: los recientes cuestan <strong>89 €</strong>, los de entre 15 y 60 días <strong>59 €</strong>
   y los de más de dos meses <strong>29 €</strong>. La información caduca, y el precio lo refleja.<br><br>
-  <strong>Oferta de lanzamiento:</strong> los precios que ves ya llevan un <strong>25 % de descuento</strong>.
-  Se aplica al pedirlo, sin código.
+  <strong>Oferta de lanzamiento hasta el 31 de diciembre:</strong> los precios que ves ya llevan un
+  <strong>25 % de descuento</strong>. Se aplica al pedirlo, sin código.
 </div>
 {contenido}
 </main>

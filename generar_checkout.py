@@ -94,7 +94,7 @@ __ESTILO__
     <button type="submit">Confirmar el pedido</button>
     <small>
       Al confirmar te envío por correo los datos de pago. El informe se entrega en 24-48 horas desde
-      el pago, en PDF. Precio con el descuento de lanzamiento ya aplicado.
+      el pago, en PDF. Precio con el descuento de lanzamiento ya aplicado, válido hasta el 31 de diciembre.
       <a href="/aviso-legal/" style="color:inherit">Condiciones</a> ·
       <a href="/privacidad/" style="color:inherit">Privacidad</a>
     </small>
