@@ -1,5 +1,41 @@
 [
  {
+  "nombre": "Ferrovial N.V.",
+  "ticker": "FER.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-12",
+  "dias": 0,
+  "precio_accion": "54,28",
+  "valor_dcf": "15,19",
+  "precio_informe": 66.75,
+  "etiqueta": "Reciente",
+  "slug": "FER_MC_20261112"
+ },
+ {
+  "nombre": "Telefónica, S.A.",
+  "ticker": "TEF.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-12",
+  "dias": 0,
+  "precio_accion": "3,43",
+  "valor_dcf": "12,56",
+  "precio_informe": 66.75,
+  "etiqueta": "Reciente",
+  "slug": "TEF_MC_20261112"
+ },
+ {
+  "nombre": "Repsol, S.A.",
+  "ticker": "REP.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-12",
+  "dias": 0,
+  "precio_accion": "28,69",
+  "valor_dcf": "53,51",
+  "precio_informe": 66.75,
+  "etiqueta": "Reciente",
+  "slug": "REP_MC_20261112"
+ },
+ {
   "nombre": "Indra Sistemas, S.A.",
   "ticker": "IDR.MC",
   "mercado": "Bolsa de Madrid (BME)",
