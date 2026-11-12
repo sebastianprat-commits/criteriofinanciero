@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CriterioFinanciero — Asesoría financiera orientada a tus objetivos vitales</title>
+<meta name="description" content="Asesoría financiera independiente en Madrid: planificación por objetivos vitales, análisis de acciones y fondos, e informes con criterio. EFPA, 15 años en banca.">
+<link rel="canonical" href="https://criteriofinanciero.org/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CriterioFinanciero">
+<meta property="og:title" content="CriterioFinanciero — Tu dinero al servicio de tu vida">
+<meta property="og:description" content="Asesoría financiera independiente en Madrid: planificación por objetivos vitales, análisis de acciones y fondos, e informes con criterio. EFPA, 15 años en banca.">
+<meta property="og:url" content="https://criteriofinanciero.org/">
+<meta property="og:image" content="https://criteriofinanciero.org/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A1628">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #0A1628;
+  --navy2:  #1D3461;
+  --gold:   #C9963A;
+  --gold2:  #E8B86D;
+  --cream:  #F7F4EE;
+  --cream2: #EDE8DE;
+  --text:   #1A1A2E;
+  --muted:  #6B7280;
+  --green:  #2D7A4F;
+  --red:    #8B2020;
+  --white:  #FFFFFF;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+  --mono:  'DM Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:90px}
+body{font-family:var(--sans);color:var(--text);background:var(--white);font-size:16px;line-height:1.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,150,58,0.2)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--gold);letter-spacing:.02em;text-decoration:none}
+.nav-logo span{color:var(--white);font-weight:400}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--navy)!important;padding:8px 18px;border-radius:4px;font-weight:500!important}
+.nav-cta:hover{background:var(--gold2)!important;color:var(--navy)!important}
+
+/* HERO */
+.hero{min-height:100vh;background:url('/assets/img/fondo-mercado.png') center/cover no-repeat,var(--navy);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 0 0;overflow:hidden;position:relative}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 70% 50%, rgba(201,150,58,0.06) 0%, transparent 70%)}
+.hero-left{padding:0 3rem 0 calc((100vw - 1100px)/2 + 2rem);max-width:calc(550px + (100vw - 1100px)/2)}
+.hero-tag{display:inline-block;font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(201,150,58,0.3);padding:5px 12px;border-radius:3px;margin-bottom:2rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,4vw,3.6rem);color:var(--white);line-height:1.12;font-weight:500;margin-bottom:1.5rem}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{color:rgba(255,255,255,0.6);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem;max-width:440px}
+.hero-sub strong{color:rgba(255,255,255,0.9);font-weight:500}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);padding:14px 28px;border-radius:4px;font-weight:500;font-size:.95rem;text-decoration:none;transition:background .2s,transform .15s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);padding:14px 20px;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;border:none;background:none;cursor:pointer}
+.btn-ghost:hover{color:var(--white);border-bottom-color:rgba(255,255,255,0.3)}
+.hero-btns{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.hero-right{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;padding-right:2rem}
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,150,58,0.2);border-radius:12px;padding:2rem;width:100%;max-width:420px;backdrop-filter:blur(8px)}
+.hero-card-label{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.progress-steps{display:flex;gap:6px;margin-bottom:1.5rem}
+.ps{flex:1;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;transition:background .4s}
+.ps.done{background:var(--gold)}
+.ps.active{background:rgba(201,150,58,0.5)}
+.q-text{font-family:var(--serif);font-size:1.1rem;color:var(--white);margin-bottom:1.2rem;line-height:1.4}
+.yn-row{display:flex;gap:8px;margin-bottom:.75rem}
+.yn{flex:1;padding:10px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:transparent;color:rgba(255,255,255,0.7);font-size:.85rem;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.yn:hover{border-color:var(--gold);color:var(--white)}
+.yn.yes{background:rgba(45,122,79,0.2);border-color:var(--green);color:#6DD98A}
+.yn.no{background:rgba(139,32,32,0.2);border-color:var(--red);color:#F09595}
+.hero-note{font-size:.75rem;color:rgba(255,255,255,0.35);margin-top:1rem;line-height:1.5}
+
+/* DIFFERENTIATOR */
+.diff{background:var(--cream);padding:6rem 2rem}
+.diff-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.diff-label{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.2rem}
+.diff h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.8rem);line-height:1.15;color:var(--navy);margin-bottom:1.5rem;font-weight:500}
+.diff h2 em{font-style:italic;color:var(--gold)}
+.diff p{color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+.contrast-table{border-collapse:collapse;width:100%}
+.contrast-table th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1rem;color:var(--muted)}
+.contrast-table th:last-child{color:var(--navy);background:rgba(201,150,58,0.08);border-radius:6px 6px 0 0}
+.contrast-table td{padding:.75rem 1rem;font-size:.9rem;border-bottom:1px solid var(--cream2);color:var(--muted)}
+.contrast-table td:first-child{font-style:italic}
+.contrast-table td:last-child{color:var(--navy);font-weight:500;background:rgba(201,150,58,0.04)}
+
+/* PROCESS */
+.process{background:var(--navy);padding:6rem 2rem}
+.process-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem;display:block}
+.section-title{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white);margin-bottom:1rem;font-weight:500;line-height:1.2}
+.section-sub{color:rgba(255,255,255,0.5);max-width:560px;line-height:1.7;margin-bottom:3.5rem}
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.phase{border:1px solid rgba(201,150,58,0.15);border-radius:10px;padding:2rem;position:relative;transition:border-color .25s}
+.phase:hover{border-color:rgba(201,150,58,0.35)}
+.phase-num{font-family:var(--serif);font-size:3rem;color:rgba(201,150,58,0.2);line-height:1;margin-bottom:1rem;font-weight:600}
+.phase h3{font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:.75rem;font-weight:500}
+.phase p{color:rgba(255,255,255,0.5);font-size:.9rem;line-height:1.7}
+.phase-time{font-family:var(--mono);font-size:.7rem;color:var(--gold);margin-top:1.2rem;letter-spacing:.06em}
+
+/* ANALISIS MUESTRA */
+.muestra{background:var(--cream);padding:6rem 2rem}
+.muestra-inner{max-width:1100px;margin:0 auto}
+.muestra-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:gap 1rem}
+.analisis-card{background:var(--white);border:1px solid var(--cream2);border-radius:12px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.analisis-header{background:var(--navy);padding:2rem;display:flex;justify-content:space-between;align-items:flex-start}
+.analisis-ticker{font-family:var(--serif);font-size:2.5rem;color:var(--gold);font-weight:600}
+.analisis-name{color:rgba(255,255,255,0.7);font-size:.85rem;margin-top:.25rem}
+.analisis-badge{background:rgba(201,150,58,0.15);border:1px solid rgba(201,150,58,0.3);color:var(--gold);font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+.analisis-kpis{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--cream2)}
+.kpi{padding:1.2rem 1.5rem;border-right:1px solid var(--cream2)}
+.kpi:last-child{border-right:none}
+.kpi-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono);margin-bottom:.3rem}
+.kpi-val{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--navy)}
+.kpi-val.pos{color:var(--green)}
+.analisis-body{padding:2rem}
+.analisis-secciones{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
+.analisis-sec{display:flex;align-items:center;gap:.75rem;padding:.75rem;background:var(--cream);border-radius:6px;font-size:.85rem;color:var(--navy)}
+.analisis-sec-num{font-family:var(--mono);font-size:.7rem;color:var(--gold);min-width:20px}
+.analisis-cta{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;background:var(--navy);border-radius:8px;margin-top:1rem;flex-wrap:wrap;gap:1rem}
+.analisis-cta-text{color:rgba(255,255,255,0.7);font-size:.9rem}
+.analisis-cta-text strong{color:var(--white);display:block;margin-bottom:.2rem}
+
+/* PEDIDO */
+.pedido{background:var(--white);padding:6rem 2rem;border-top:1px solid var(--cream2)}
+.pedido-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.pedido h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--navy);margin-bottom:1rem;font-weight:500;line-height:1.2}
+.pedido p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.precio-card{border:1px solid var(--cream2);border-radius:10px;overflow:hidden}
+.precio-header{background:var(--navy);padding:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.precio-nombre{font-family:var(--serif);font-size:1.1rem;color:var(--white)}
+.precio-val{font-family:var(--serif);font-size:2rem;color:var(--gold);font-weight:600}
+.precio-body{padding:1.5rem}
+.precio-item{display:flex;align-items:center;gap:.75rem;padding:.5rem 0;font-size:.9rem;color:var(--muted);border-bottom:1px solid var(--cream2)}
+.precio-item:last-child{border:none}
+.precio-item::before{content:'✓';color:var(--green);font-weight:700;min-width:16px}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:.8rem;color:var(--navy);font-weight:500;margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em;font-family:var(--mono)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.75rem 1rem;border:1px solid var(--cream2);border-radius:6px;font-family:var(--sans);font-size:.9rem;color:var(--text);background:var(--white);transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold)}
+.form-group textarea{resize:vertical;min-height:90px}
+
+/* VIDEOS */
+.videos{background:var(--cream);padding:6rem 2rem}
+.videos-inner{max-width:1100px;margin:0 auto}
+.videos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.video-card{background:var(--white);border:1px solid var(--cream2);border-radius:10px;overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit}
+.video-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.08)}
+.video-thumb{height:140px;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative}
+.video-cat{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;position:absolute;top:12px;left:12px;background:rgba(201,150,58,0.2);color:var(--gold);border:1px solid rgba(201,150,58,0.3)}
+.video-dur{font-family:var(--mono);font-size:.65rem;color:rgba(255,255,255,0.5);position:absolute;bottom:12px;right:12px}
+.video-play{width:44px;height:44px;border-radius:50%;border:2px solid rgba(201,150,58,0.5);display:flex;align-items:center;justify-content:center}
+.video-play::after{content:'';border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent var(--gold);margin-left:3px}
+.video-body{padding:1.2rem}
+.video-body h4{font-family:var(--serif);font-size:1rem;color:var(--navy);margin-bottom:.5rem;font-weight:500;line-height:1.3}
+.video-body p{font-size:.82rem;color:var(--muted);line-height:1.5}
+
+/* SOBRE MI */
+.sobre{background:var(--navy);padding:6rem 2rem}
+.sobre-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:center}
+.sobre-avatar{width:200px;height:200px;border-radius:50%;background:rgba(201,150,58,0.1);border:2px solid rgba(201,150,58,0.2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:4rem;color:var(--gold)}
+.sobre h2{font-family:var(--serif);font-size:1.8rem;color:var(--white);margin-bottom:1rem;font-weight:500}
+.sobre p{color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:1rem;font-size:.95rem}
+.credenciales{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
+.cred{font-family:var(--mono);font-size:.7rem;color:var(--gold);border:1px solid rgba(201,150,58,0.3);padding:5px 12px;border-radius:3px;letter-spacing:.06em}
+
+/* NEWSLETTER */
+.newsletter{background:var(--cream);padding:5rem 2rem;border-top:1px solid var(--cream2)}
+.newsletter-inner{max-width:600px;margin:0 auto;text-align:center}
+.newsletter h2{font-family:var(--serif);font-size:2rem;color:var(--navy);margin-bottom:.75rem;font-weight:500}
+.newsletter p{color:var(--muted);margin-bottom:2rem;line-height:1.7}
+.nl-form{display:flex;gap:.75rem;max-width:440px;margin:0 auto}
+.nl-form input{flex:1;padding:.85rem 1.2rem;border:1px solid var(--cream2);border-radius:6px;font-family:var(--sans);font-size:.9rem}
+.nl-form input:focus{outline:none;border-color:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:3rem 2rem;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--serif);color:var(--gold);font-size:1rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:rgba(255,255,255,0.35);font-size:.82rem;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,0.7)}
+.footer-legal{color:rgba(255,255,255,0.25);font-size:.75rem;max-width:1100px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);line-height:1.6}
+
+/* ONBOARDING MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.92);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:16px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:2.5rem}
+.modal-close{float:right;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);margin:-0.5rem -0.5rem 0 0;line-height:1}
+.modal-close:hover{color:var(--navy)}
+.m-step{display:none}.m-step.active{display:block}
+.m-tag{font-family:var(--mono);font-size:.68rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:block}
+.m-h{font-family:var(--serif);font-size:1.4rem;color:var(--navy);margin-bottom:.5rem;font-weight:500;line-height:1.3}
+.m-p{color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.2rem}
+.m-pbar{height:3px;background:var(--cream2);border-radius:2px;margin-bottom:1.5rem}
+.m-pfill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s}
+.m-obj{display:block;width:100%;text-align:left;padding:.9rem 1rem;border:1px solid var(--cream2);border-radius:8px;background:transparent;cursor:pointer;font-size:.88rem;color:var(--text);margin-bottom:.6rem;transition:all .2s;font-family:var(--sans);line-height:1.4}
+.m-obj strong{display:block;color:var(--navy);font-weight:500}
+.m-obj span{color:var(--muted);font-size:.8rem}
+.m-obj:hover{border-color:var(--gold);background:rgba(201,150,58,0.04)}
+.m-obj.sel{border-color:var(--navy);background:rgba(10,22,40,0.04)}
+.m-yn-row{display:flex;gap:.6rem;margin-bottom:.75rem;flex-wrap:wrap}
+.m-card{background:var(--cream);border-radius:8px;padding:1rem;margin-bottom:.75rem}
+.m-card-q{font-size:.88rem;font-weight:500;color:var(--navy);margin-bottom:.6rem}
+.m-yn{flex:1;min-width:80px;padding:.65rem;border:1px solid var(--cream2);border-radius:6px;background:var(--white);font-size:.82rem;cursor:pointer;font-family:var(--sans);color:var(--text);transition:all .2s;text-align:center}
+.m-yn:hover{border-color:var(--gold)}
+.m-yn.yes{background:rgba(45,122,79,0.08);border-color:var(--green);color:var(--green)}
+.m-yn.no{background:rgba(139,32,32,0.08);border-color:var(--red);color:var(--red)}
+.m-nav{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.m-back{padding:10px 18px;border:1px solid var(--cream2);border-radius:6px;background:transparent;cursor:pointer;font-size:.85rem;color:var(--muted);font-family:var(--sans)}
+.m-back:hover{border-color:var(--navy);color:var(--navy)}
+.m-next{padding:10px 22px;background:var(--navy);color:var(--white);border:none;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:500;font-family:var(--sans);transition:background .2s}
+.m-next:hover{background:var(--navy2)}
+.m-next:disabled{opacity:.4;cursor:not-allowed}
+.alloc-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;
+  margin:.7rem 0 .55rem;border:1px solid #E3DCCB}
+.alloc-leyenda{display:flex;flex-wrap:wrap;gap:.9rem;font-size:.74rem;color:var(--muted);
+  margin-bottom:1.2rem}
+.alloc-leyenda span{display:flex;align-items:center;gap:.35rem}
+.alloc-punto{width:9px;height:9px;border-radius:2px;display:inline-block}
+.perfil-desc{font-size:.9rem;line-height:1.68;margin:.5rem 0 1.1rem;color:#2A3446}
+.perfil-desc p{margin:0 0 .7rem}
+.sub-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:1.2rem 0 .4rem}
+.perfil-errores{margin:.2rem 0 1rem;padding-left:1.15rem;font-size:.83rem;color:#7A2E2E;line-height:1.6}
+.perfil-errores li{margin-bottom:.4rem}
+.perfil-pill{display:inline-block;padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:500;margin-bottom:1rem;background:var(--cream2);color:var(--navy)}
+.alert-box{background:#FEF3C7;border-left:3px solid #D97706;border-radius:0 6px 6px 0;padding:.75rem 1rem;font-size:.82rem;color:#92400E;margin-bottom:.6rem;line-height:1.5}
+.ok-box{background:#ECFDF5;border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:.75rem 1rem;font-size:.82rem;color:#065F46;margin-bottom:.75rem}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.25rem}
+.res-cell{background:var(--cream);border-radius:6px;padding:.75rem;text-align:center}
+.res-cell-label{font-size:.7rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;margin-bottom:.3rem}
+.res-cell-val{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:600}
+.next-steps{background:var(--navy);border-radius:8px;padding:1rem 1.25rem}
+.next-steps-label{font-family:var(--mono);font-size:.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
+.next-steps-body{font-size:.85rem;color:rgba(255,255,255,0.65);line-height:1.8}
+.range-wrap{margin-bottom:.25rem}
+.range-wrap input[type=range]{width:100%;accent-color:var(--gold)}
+.range-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);font-family:var(--mono)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:70px}
+  .hero-left{padding:3rem 1.5rem;max-width:100%}
+  .hero-right{height:auto;padding:0 1.5rem 3rem}
+  .hero-card{max-width:100%}
+  .diff-inner,.pedido-inner,.sobre-inner{grid-template-columns:1fr;gap:2.5rem}
+  .phases{grid-template-columns:1fr}
+  .videos-grid{grid-template-columns:1fr}
+  .analisis-kpis{grid-template-columns:repeat(2,1fr)}
+  .analisis-secciones{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Criterio<span>Financiero</span></a>
+    <ul class="nav-links">
+      <li><a href="#proceso">Cómo funciona</a></li>
+      <li><a href="#analisis">Análisis</a></li>
+      <li><a href="#videos">Formación</a></li>
+      <li><a href="#sobre">El asesor</a></li>
+      <li><a href="#" onclick="abrirOnboarding()" class="nav-cta">Empezar</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Asesoría financiera independiente · Madrid</span>
+    <h1>Tu dinero debería servir<br>a tu vida, <em>no al revés</em></h1>
+    <p class="hero-sub">Antes de hablar de rentabilidades y riesgos, necesito saber <strong>para qué quieres el dinero.</strong> Esa pregunta cambia todo el plan.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="abrirOnboarding()">Descubrir mi perfil →</button>
+      
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">¿Para qué inviertes? — Vista previa</div>
+      <div class="progress-steps">
+        <div class="ps done"></div><div class="ps done"></div>
+        <div class="ps active"></div><div class="ps"></div>
+      </div>
+      <div class="q-text">¿Tu cartera cae un 20%.<br>¿Qué harías?</div>
+      <div class="yn-row">
+        <button class="yn" onclick="heroYN(this,'sell')">Vendería todo</button>
+        <button class="yn" onclick="heroYN(this,'hold')">No haría nada</button>
+        <button class="yn" onclick="heroYN(this,'buy')">Compraría más</button>
+      </div>
+      <div id="hero-feedback" style="font-size:.78rem;color:rgba(255,255,255,0.4);height:1.1em;transition:opacity .3s"></div>
+      <div class="hero-note">Proceso completo: 3 minutos · Sin datos bancarios ni personales</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIADOR -->
+<section class="diff" id="diferenciador">
+  <div class="diff-inner">
+    <div>
+      <div class="diff-label">El enfoque que cambia el resultado</div>
+      <h2>La mayoría pregunta cuánto quieres ganar.<br>Yo pregunto <em>para qué</em></h2>
+      <p>Un perfil de riesgo estándar te clasifica en conservador, moderado o agresivo. Eso te dice muy poco sobre si tu cartera te va a ayudar a conseguir lo que realmente quieres.</p>
+      <p>Un objetivo vital concreto — jubilarte a los 58, que tus hijos estudien sin deudas, dejar de necesitar tu sueldo — cambia el horizonte, el nivel de riesgo tolerable y la estructura de la cartera.</p>
+      <p>Con ese "para qué" claro, las decisiones de inversión dejan de ser arbitrarias.</p>
+    </div>
+    <div>
+      <table class="contrast-table">
+        <thead>
+          <tr><th>Asesoría tradicional</th><th>CriterioFinanciero</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>«¿Cuánto riesgo tolera?»</td><td>«¿Para qué necesitas este dinero?»</td></tr>
+          <tr><td>Perfil genérico</td><td>Objetivo vital concreto</td></tr>
+          <tr><td>Producto que vende el banco</td><td>Estrategia ligada a tu plan de vida</td></tr>
+          <tr><td>Revisión anual estándar</td><td>Seguimiento activo del objetivo</td></tr>
+          <tr><td>Rentabilidad como fin</td><td>Rentabilidad como herramienta</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="process" id="proceso">
+  <div class="process-inner">
+    <span class="section-label">Cómo funciona</span>
+    <h2 class="section-title">Tres fases, un plan real</h2>
+    <p class="section-sub">Sin formularios de banco, sin clasificaciones abstractas. Un proceso conversacional que termina con un plan concreto alineado con tus objetivos vitales.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-num">01</div>
+        <h3>¿Para qué inviertes?</h3>
+        <p>Identificamos el objetivo vital que motiva tus decisiones financieras. No el producto — la razón de fondo. Jubilación anticipada, independencia económica, proteger a tu familia, un proyecto concreto.</p>
+        <div class="phase-time">⏱ 1 minuto · Cuestionario conversacional</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">02</div>
+        <h3>Tu situación real</h3>
+        <p>Horizonte temporal honesto, capacidad de ahorro sostenida, situación laboral y familar, deudas pendientes, fondo de emergencia. Los datos que cambian el plan antes incluso de hablar de rentabilidades.</p>
+        <div class="phase-time">⏱ 2 minutos · Preguntas y rangos</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">03</div>
+        <h3>Plan y seguimiento</h3>
+        <p>Un perfil financiero-vital completo, una estrategia de inversión alineada con tu objetivo, y revisiones periódicas para ajustar cuando tu vida cambia — porque siempre cambia.</p>
+        <div class="phase-time">⏱ Resultado inmediato · Cita opcional</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;text-align:center">
+      <button class="btn-primary" onclick="abrirOnboarding()">Hacer el proceso ahora →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ANÁLISIS DE MUESTRA -->
+<section class="muestra" id="analisis">
+  <div class="muestra-inner">
+    <span class="section-label">Análisis en abierto</span>
+    <div class="muestra-header">
+      <div>
+        <h2 style="font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--navy);font-weight:500;margin-bottom:.5rem">Así es un informe PRO Ampliado</h2>
+        <p style="color:var(--muted);max-width:500px">Un informe real, generado con el mismo motor que usaré para el tuyo. Disponible en abierto para que veas exactamente lo que recibes antes de pedirlo.</p>
+      </div>
+      <a href="#pedido" class="btn-primary" style="white-space:nowrap">Solicitar análisis →</a>
+    </div>
+
+    <div class="analisis-card">
+      <div class="analisis-header">
+        <div>
+          <div class="analisis-ticker">IDR.MC</div>
+          <div class="analisis-name">Indra Sistemas, S.A. · Technology · Defensa & Sistemas Críticos</div>
+        </div>
+        <span class="analisis-badge">Muestra gratuita</span>
+      </div>
+      <div class="analisis-kpis">
+        <div class="kpi"><div class="kpi-label">Precio</div><div class="kpi-val">59,68 €</div></div>
+        <div class="kpi"><div class="kpi-label">Var. 12m</div><div class="kpi-val pos">+18,18 %</div></div>
+        <div class="kpi"><div class="kpi-label">Capitalización</div><div class="kpi-val">10,43 mil M</div></div>
+        <div class="kpi"><div class="kpi-label">DCF</div><div class="kpi-val">44,35 €</div></div>
+      </div>
+      <div class="analisis-body">
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase">Contenido del informe (~10 páginas)</p>
+        <div class="analisis-secciones">
+          <div class="analisis-sec"><span class="analisis-sec-num">01</span>Resumen ejecutivo</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">02</span>Dónde cotiza y cómo se negocia</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">03</span>Contexto macroeconómico: tipos, inflación y divisa</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">04</span>Análisis técnico con gráficos de precio, volumen y RSI</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">05</span>Análisis fundamental: márgenes, deuda y crecimiento</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">06</span>Comparativa con tres competidores del sector</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">07</span>Sector y posición competitiva</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">08</span>Noticias relevantes del último mes</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">09</span>Valoración por descuento de flujos y sensibilidad</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">10</span>Riesgos principales</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">11</span>Catalizadores a vigilar</div>
+          <div class="analisis-sec"><span class="analisis-sec-num">12</span>Conclusión</div>
+        </div>
+        <div class="analisis-cta">
+          <div class="analisis-cta-text">
+            <strong>Descarga el informe completo de Indra — gratis</strong>
+            Metodología institucional · Datos del cierre del día · 12 secciones
+          </div>
+          <a href="/descargas/informe-muestra-indra.pdf" download class="btn-primary" style="white-space:nowrap">Descargar PDF →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDO -->
+<section class="pedido" id="pedido">
+  <div class="pedido-inner">
+    <div>
+      <span class="section-label" style="color:var(--gold);display:block;margin-bottom:1rem">Análisis bajo pedido</span>
+      <h2>¿Tienes una empresa en el radar?</h2>
+      <p><strong>El análisis que necesitas, cuando lo necesitas.</strong> ¿Estás valorando una posición y quieres análisis de nivel institucional antes de decidir?</p>
+      <p>Solicita el análisis de cualquier empresa cotizada. Recibes un informe completo en 24-48 horas.</p>
+      <div style="margin-top:2rem">
+        <div class="precio-card">
+          <div class="precio-header">
+            <div class="precio-nombre">Análisis completo · 1 empresa</div>
+            <div class="precio-val" style="display:flex;align-items:baseline;gap:.6rem;justify-content:flex-end"><span style="font-size:.9rem;color:rgba(255,255,255,.45);text-decoration:line-through">89 €</span><span>66,75 €</span></div>
+          </div>
+          <div class="precio-body">
+            <div class="precio-item">12 secciones: mercado, fundamentales y valoración (~10 páginas)</div>
+            <div class="precio-item">Gráficos de precio, volumen y RSI</div>
+            <div class="precio-item">Comparativa con tres competidores</div>
+            <div class="precio-item">Valoración DCF con sensibilidad y tres escenarios</div>
+            <div class="precio-item">Entrega en 24-48 horas · PDF descargable</div>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">También puedes comprar análisis ya publicados, <a href="/repositorio/" style="color:#8A6420">desde 21,75 €</a>.</p>
+      </div>
+    </div>
+    <div>
+<form name="pedido-analisis" method="POST" action="/gracias/" data-netlify="true"
+            netlify-honeypot="bot-field" style="display:block">
+      <input type="hidden" name="form-name" value="pedido-analisis">
+      <input type="hidden" name="origen" value="web-criteriofinanciero">
+      <p hidden><label>No rellenar <input name="bot-field"></label></p>
+      <div class="form-group"><label>Empresa o ticker</label><input type="text" name="empresa" placeholder="Ej: Inditex, AAPL, BMW.DE" required></div>
+      <div class="form-group"><label>Tu email</label><input type="email" name="email" placeholder="para enviarte el informe" required></div>
+      <div class="form-group"><label>¿Qué quieres analizar?</label>
+        <select name="producto">
+          <option>Análisis completo de una empresa — 66,75 € (antes 89 €)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Contexto (opcional)</label><textarea name="contexto" placeholder="¿Por qué te interesa esta empresa? ¿Tienes ya posición? Cualquier detalle ayuda a personalizar el criterio del asesor."></textarea></div>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:12.5px;
+             line-height:1.55;color:var(--muted);margin:.2rem 0 1rem">
+          <input type="checkbox" name="desistimiento" value="aceptado" required
+                 style="width:17px;height:17px;margin:2px 0 0;flex:0 0 auto">
+          <span>Sé que el informe es un contenido digital personalizado y que, una vez iniciada su
+          elaboración, no tengo derecho de desistimiento (art. 103.m TRLGDCU). Presto conformidad
+          expresa para que comience.</span>
+        </label>
+      <button class="btn-primary" type="submit" style="width:100%;justify-content:center">Solicitar análisis →</button>
+      </form>
+
+      <div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:18px 20px;
+           margin-top:1.4rem;font-size:.88rem;line-height:1.62">
+        <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;
+             font-weight:600;margin-bottom:6px">¡Invierte con criterio! 25 % de descuento en informes profesionales de las acciones que seguimos, hasta el 31 de diciembre</div>
+        <p style="margin:0 0 .7rem">Un informe cuesta <s style="color:#A9A292">89 €</s>.
+        Los primeros clientes pagan <strong>66,75 €</strong> hasta el 31 de diciembre. No hace falta código: se aplica al pedirlo.</p>
+        <p style="margin:0 0 .35rem"><strong>Qué recibes</strong></p>
+        <ul style="margin:0 0 .7rem;padding-left:18px">
+          <li>Análisis técnico con gráficos de precio, medias, volumen y RSI</li>
+          <li>Análisis fundamental con ratios, márgenes, deuda y crecimiento</li>
+          <li>Comparativa con tres competidores del sector</li>
+          <li>Contexto macro: tipos, inflación y divisa</li>
+          <li>Valoración por descuento de flujos con tabla de sensibilidad y tres escenarios</li>
+          <li>Riesgos, catalizadores y noticias del último mes</li>
+        </ul>
+        <p style="margin:0 0 .7rem"><strong>Entre 8 y 12 horas de trabajo</strong> por el precio de dos horas
+        de cualquier profesional. Y menos que la comisión de una operación mal planteada.</p>
+        <p style="margin:0">Invertir sin entender la empresa es apostar. El informe no te dice qué comprar:
+        te dice qué estás comprando, cuánto vale según sus flujos y en qué punto tu tesis dejaría de tener
+        sentido.</p>
+        <a href="/repositorio/" style="display:inline-block;margin-top:10px;font-size:.85rem;color:#8A6420;
+           text-decoration:underline">Ver los análisis ya publicados →</a>
+      </div>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem;text-align:center">Pago por transferencia o Bizum tras confirmación. Factura incluida.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VÍDEOS -->
+<section class="videos" id="videos">
+  <div class="videos-inner">
+    <span class="section-label">Formación en abierto</span>
+    <h2 style="font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);color:var(--navy);font-weight:500;margin-bottom:.5rem">Entiende antes de invertir</h2>
+    <p style="color:var(--muted);max-width:560px">Vídeos cortos sobre los conceptos que más importan. Sin publicidad, sin productos que vender.</p>
+    <div class="videos-grid">
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Educación</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 9 min</span>
+        </div>
+        <div class="video-body">
+          <h4>Qué es el interés compuesto y por qué cambia todo</h4>
+          <p>El concepto financiero más poderoso para cualquier ahorrador, explicado con claridad.</p>
+        </div>
+      </a>
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Fondos</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 9 min</span>
+        </div>
+        <div class="video-body">
+          <h4>ETF vs. fondo de inversión: cuál elegir y por qué</h4>
+          <p>Fiscalidad, costes y acceso: las diferencias reales que importan para el inversor español.</p>
+        </div>
+      </a>
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Análisis</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 8 min</span>
+        </div>
+        <div class="video-body">
+          <h4>Cómo leer el PER de una empresa en 5 minutos</h4>
+          <p>El ratio más usado en bolsa: qué mide, cuándo es útil y cuándo te puede engañar.</p>
+        </div>
+      </a>
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Psicología</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 6 min</span>
+        </div>
+        <div class="video-body">
+          <h4>Por qué vendes en el peor momento (y cómo evitarlo)</h4>
+          <p>Los sesgos cognitivos que destruyen más rentabilidad que ninguna crisis de mercado.</p>
+        </div>
+      </a>
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Fiscalidad</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 10 min</span>
+        </div>
+        <div class="video-body">
+          <h4>La ventaja fiscal de los fondos que el banco no te explica</h4>
+          <p>Por qué traspasar fondos sin tributar es la herramienta más poderosa del inversor español.</p>
+        </div>
+      </a>
+      <a href="#" class="video-card">
+        <div class="video-thumb">
+          <span class="video-cat">Macro</span>
+          <div class="video-play"></div>
+          <span class="video-dur">⏱ 8 min</span>
+        </div>
+        <div class="video-body">
+          <h4>Tipos de interés y tu cartera: lo que realmente importa</h4>
+          <p>Qué activos ganan y pierden cuando el BCE sube o baja tipos.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section class="sobre" id="sobre">
+  <div class="sobre-inner">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem">
+      <img class="sobre-avatar" src="/assets/img/asesor.jpg" alt="Sebastián Prat, asesor financiero titulado EFPA" style="width:170px;height:170px;border-radius:50%;object-fit:cover;object-position:50% 22%;border:2px solid rgba(201,150,58,.4);display:block">
+      <div class="credenciales">
+        <span class="cred">EFPA 35094</span>
+        <span class="cred">15+ años</span>
+        <span class="cred">Banca privada</span>
+      </div>
+    </div>
+    <div>
+      <h2>Por qué un asesor independiente es diferente</h2>
+      <p>Llevo más de 15 años en banca privada, fondos de inversión y mercados de capitales en Madrid. He visto de cerca cómo los productos del banco raramente están diseñados para el cliente — están diseñados para el margen del banco.</p>
+      <p>CriterioFinanciero nació de esa incomodidad. Soy asesor independiente, titulado EFPA, sin productos que vender ni comisiones que cobrar por recomendar un fondo concreto. Mi única fuente de ingresos es el servicio directo al cliente.</p>
+      <p>El punto de partida siempre es el mismo: ¿para qué necesitas el dinero? Todo lo demás — la cartera, los análisis, la estrategia fiscal — viene después de responder esa pregunta.</p>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+        <button class="btn-primary" onclick="abrirOnboarding()">Empezar el proceso →</button>
+        <a href="mailto:sebastian.prat@gmail.com" class="btn-ghost" style="color:rgba(255,255,255,0.5)">Escribir directamente</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:.75rem">Newsletter</span>
+    <h2>Una vez a la semana, nada más</h2>
+    <p>Un análisis, una idea o un concepto financiero que valga tu tiempo. Sin spam, sin publicidad, sin productos que vender. Solo criterio.</p>
+    <form class="nl-form" id="nl-form" method="post" action="https://assets.mailerlite.com/jsonp/2784740/forms/203841029310252380/subscribe">
+      <input type="email" id="nl-email" name="fields[email]" placeholder="tu@email.com" required
+             aria-label="Tu correo electrónico" autocomplete="email">
+      <button class="btn-primary" type="submit" id="nl-boton">Suscribirse</button>
+    </form>
+    <p id="nl-estado" style="font-size:.85rem;margin-top:.7rem;display:none"></p>
+    <div id="nl-ok" style="display:none;text-align:center;margin-top:.5rem">
+      <p style="font-weight:500;margin:0 0 .35rem">Gracias. Te hemos enviado un correo para confirmar la suscripción.</p>
+      <p style="font-size:.8rem;color:var(--muted);margin:0">Hasta que no lo confirmes no recibirás nada. Revisa spam la primera vez.</p>
+    </div>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:.6rem">
+      Al suscribirte aceptas la <a href="/privacidad/" style="color:inherit;text-decoration:underline">política de privacidad</a>.
+      Puedes darte de baja cuando quieras.
+    </p>
+    <script>
+    (function () {
+      var form = document.getElementById("nl-form");
+      if (!form) return;
+      var email = document.getElementById("nl-email");
+      var boton = document.getElementById("nl-boton");
+      var estado = document.getElementById("nl-estado");
+      var ok = document.getElementById("nl-ok");
+      var textoBoton = boton.textContent;
+
+      function aviso(t) {
+        estado.textContent = t;
+        estado.style.display = "block";
+        boton.disabled = false;
+        boton.textContent = textoBoton;
+      }
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        if (!email.value.trim()) return;
+        boton.disabled = true;
+        boton.textContent = "Enviando…";
+        estado.style.display = "none";
+
+        var datos = new URLSearchParams();
+        datos.set("fields[email]", email.value.trim());
+        datos.set("ml-submit", "1");
+        datos.set("anticsrf", "true");
+
+        fetch(form.action, {
+          method: "POST",
+          body: datos,
+          mode: "cors",
+          headers: { "Accept": "application/json" }
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.success) {
+              form.style.display = "none";
+              ok.style.display = "block";
+            } else {
+              aviso("No hemos podido completar la suscripción. Revisa que el correo esté bien escrito.");
+            }
+          })
+          .catch(function () {
+            aviso("No hemos podido conectar. Inténtalo de nuevo en unos segundos.");
+          });
+      });
+    })();
+    </script>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem">Próximos vídeos: Cómo construir una cartera desde 0 · Análisis de Inditex paso a paso · Qué es el EBITDA · La jubilación que tu banco no te planifica</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">CriterioFinanciero.org</span>
+    <div class="footer-links">
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#analisis">Análisis</a>
+      <a href="#videos">Formación</a>
+      <a href="mailto:sebastian.prat@gmail.com">Contacto</a><a href="/glosario/" style="color:inherit;text-decoration:none">Glosario</a>
+      <a href="/repositorio/" style="color:inherit;text-decoration:none">Informes</a>
+      <a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-legal">
+    CriterioFinanciero.org · Madrid, España · Asesor financiero titulado EFPA.<br>
+    Este sitio tiene carácter exclusivamente informativo. El contenido no constituye asesoramiento de inversión personalizado ni recomendación de compra o venta de ningún instrumento financiero. El rendimiento pasado no garantiza rentabilidades futuras. Invertir conlleva riesgo de pérdida del capital invertido.
+  </div>
+</footer>
+
+<!-- MODAL ONBOARDING -->
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)cerrarOnboarding()">
+  <div class="modal">
+    <button class="modal-close" onclick="cerrarOnboarding()">×</button>
+
+    <div class="m-step active" id="ms0">
+      <span class="m-tag">CriterioFinanciero · Perfil financiero-vital</span>
+      <h2 class="m-h">Antes de hablar de inversiones, hablemos de tu vida</h2>
+      <p class="m-p">3 minutos. Sin datos bancarios ni personales hasta el final. El resultado es un perfil concreto con un ejemplo de inversión para tu situación.</p>
+      <button class="m-next" style="width:100%" onclick="mGoTo(1)">Empezar →</button>
+    </div>
+
+    <div class="m-step" id="ms1">
+      <div class="m-pbar"><div class="m-pfill" style="width:20%"></div></div>
+      <span class="m-tag">Fase 1 de 4 · Objetivo vital</span>
+      <h2 class="m-h">¿Cuál es tu objetivo principal con este dinero?</h2>
+      <button class="m-obj" onclick="mSelObj(this,'jubilacion')"><strong>Libertad financiera para jubilarme cuando quiera</strong><span>No depender de una pensión ni de un jefe</span></button>
+      <button class="m-obj" onclick="mSelObj(this,'familia')"><strong>Proteger y dar oportunidades a mi familia</strong><span>Educación de los hijos, herencia, colchón familiar</span></button>
+      <button class="m-obj" onclick="mSelObj(this,'independencia')"><strong>Dejar de necesitar mi sueldo lo antes posible</strong><span>Independencia económica, vivir de rentas</span></button>
+      <button class="m-obj" onclick="mSelObj(this,'proyecto')"><strong>Financiar un proyecto o sueño concreto</strong><span>Casa, negocio, año sabático, viaje largo</span></button>
+      <button class="m-obj" onclick="mSelObj(this,'crecer')"><strong>Hacer crecer un patrimonio ya existente</strong><span>Ya tengo algo ahorrado y quiero que trabaje mejor</span></button>
+      <div class="m-nav">
+        <button class="m-back" onclick="mGoTo(0)">← Atrás</button>
+        <button class="m-next" id="mn1" onclick="mGoTo(2)" disabled>Siguiente →</button>
+      </div>
+    </div>
+
+    <div class="m-step" id="ms2">
+      <div class="m-pbar"><div class="m-pfill" style="width:45%"></div></div>
+      <span class="m-tag">Fase 2 de 4 · Situación actual</span>
+      <h2 class="m-h">Cuatro preguntas rápidas</h2>
+      <div class="m-card">
+        <div class="m-card-q">¿Tienes deudas con interés superior al 5%?</div>
+        <div class="m-yn-row">
+          <button class="m-yn" id="mq_da_si" onclick="mYN('da','si')">Sí</button>
+          <button class="m-yn" id="mq_da_no" onclick="mYN('da','no')">No</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Tienes fondo de emergencia de 3-6 meses de gastos?</div>
+        <div class="m-yn-row">
+          <button class="m-yn" id="mq_fe_si" onclick="mYN('fe','si')">Sí</button>
+          <button class="m-yn" id="mq_fe_no" onclick="mYN('fe','no')">No</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Alguien depende económicamente de ti?</div>
+        <div class="m-yn-row">
+          <button class="m-yn" id="mq_dep_si" onclick="mYN('dep','si')">Sí</button>
+          <button class="m-yn" id="mq_dep_no" onclick="mYN('dep','no')">No</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Has invertido en bolsa o fondos antes?</div>
+        <div class="m-yn-row">
+          <button class="m-yn" id="mq_exp_si" onclick="mYN('exp','si')">Sí</button>
+          <button class="m-yn" id="mq_exp_no" onclick="mYN('exp','no')">No</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿En qué tramo de edad estás? <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','18-30',this,'edad')">18-30</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','31-45',this,'edad')">31-45</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','46-55',this,'edad')">46-55</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','56+',this,'edad')">56 o más</button>
+          <button class="m-yn" data-g="edad" onclick="mSelDato('edad','nc',this,'edad')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Cuál es tu situación laboral?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','ajena',this,'laboral')">Cuenta ajena</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','autonomo',this,'laboral')">Autónomo/a</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','paro',this,'laboral')">Sin empleo ahora</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','jubilado',this,'laboral')">Jubilado/a</button>
+          <button class="m-yn" data-g="laboral" onclick="mSelDato('laboral','nc',this,'laboral')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Cuántos años llevas cotizados? <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','menos5',this,'cotizados')">Menos de 5</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','5-15',this,'cotizados')">5-15</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','15-25',this,'cotizados')">15-25</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','25+',this,'cotizados')">Más de 25</button>
+          <button class="m-yn" data-g="cotizados" onclick="mSelDato('cotizados','nc',this,'cotizados')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Qué formación financiera tienes?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','ninguna',this,'formacion')">Ninguna</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','basica',this,'formacion')">Básica: leo y me informo</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','media',this,'formacion')">Media: cursos</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','alta',this,'formacion')">Alta: formación reglada</button>
+          <button class="m-yn" data-g="formacion" onclick="mSelDato('formacion','nc',this,'formacion')">Prefiero no contestar</button>
+        </div>
+      </div>
+      <div class="m-nav">
+        <button class="m-back" onclick="mGoTo(1)">← Atrás</button>
+        <button class="m-next" id="mn2" onclick="mGoTo(3)" disabled>Siguiente →</button>
+      </div>
+    </div>
+
+    <div class="m-step" id="ms3">
+      <div class="m-pbar"><div class="m-pfill" style="width:70%"></div></div>
+      <span class="m-tag">Fase 3 de 4 · Horizonte y capacidad</span>
+      <h2 class="m-h">Tiempo y dinero disponible</h2>
+      <div class="m-card">
+        <div class="m-card-q">¿En cuántos años necesitarás este dinero?</div>
+        <div class="range-wrap"><input type="range" min="1" max="30" value="10" step="1" id="mhorizonte" oninput="updMH()"></div>
+        <div class="range-labels"><span>1 año</span><span id="mh-val" style="font-weight:500;color:var(--navy)">10 años</span><span>30+</span></div>
+      </div>
+      <div class="m-card">
+        <div class="m-card-q">¿Cuánto podrías invertir al mes de forma sostenida?</div>
+        <div class="m-yn-row" style="flex-wrap:wrap">
+          <button class="m-yn" id="mc_a" onclick="mSelCap(this,'a')">&lt;200 €</button>
+          <button class="m-yn" id="mc_b" onclick="mSelCap(this,'b')">200–500 €</button>
+          <button class="m-yn" id="mc_c" onclick="mSelCap(this,'c')">500–1.500 €</button>
+          <button class="m-yn" id="mc_d" onclick="mSelCap(this,'d')">&gt;1.500 €</button>
+        </div>
+      </div>
+      <div class="m-nav">
+        <button class="m-back" onclick="mGoTo(2)">← Atrás</button>
+        <button class="m-next" id="mn3" onclick="mGoTo(4)" disabled>Siguiente →</button>
+      </div>
+    </div>
+
+    <div class="m-step" id="ms4">
+      <div class="m-pbar"><div class="m-pfill" style="width:88%"></div></div>
+      <span class="m-tag">Fase 4 de 4 · Tolerancia real al riesgo</span>
+      <h2 class="m-h">La pregunta más difícil de responder con honestidad</h2>
+      <p class="m-p" style="margin-bottom:1rem">Tu cartera cae un 20% en tres meses. ¿Qué harías realmente?</p>
+      <button class="m-obj" onclick="mSelR(this,'1')">Vendería todo. No puedo dormir con esas pérdidas.</button>
+      <button class="m-obj" onclick="mSelR(this,'2')">Vendería una parte para reducir el riesgo.</button>
+      <button class="m-obj" onclick="mSelR(this,'3')">No haría nada. Confío en el largo plazo.</button>
+      <button class="m-obj" onclick="mSelR(this,'4')">Compraría más. Es una oportunidad.</button>
+      <div class="m-nav">
+        <button class="m-back" onclick="mGoTo(3)">← Atrás</button>
+        <button class="m-next" id="mn4" onclick="mCalcPerfil()" disabled>Ver mi perfil →</button>
+      </div>
+    </div>
+
+    <div class="m-step" id="ms5">
+      <div class="m-pbar"><div class="m-pfill" style="width:100%"></div></div>
+      <span class="m-tag">Tu perfil financiero-vital</span>
+      <h2 class="m-h" style="margin-bottom:1.5rem">Resultado</h2>
+      <div id="m-resultado"></div>
+      <div class="m-nav" style="margin-top:1.5rem">
+        <button class="m-back" onclick="mGoTo(0)">Volver a empezar</button>
+        <button class="m-next" onclick="cerrarOnboarding();window.location.href='/repositorio/'">Aprovechar la oferta →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var ms={obj:null,da:null,fe:null,dep:null,exp:null,horizonte:10,cap:null,riesgo:null};
+
+function abrirOnboarding(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden'}
+function cerrarOnboarding(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow=''}
+
+function mGoTo(n){
+  document.querySelectorAll('.m-step').forEach(function(s,i){s.classList.toggle('active',i===n)});
+}
+
+function mSelObj(el,v){
+  ms.obj=v;
+  document.querySelectorAll('#ms1 .m-obj').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel');
+  document.getElementById('mn1').disabled=false;
+}
+function mYN(k,v){
+  ms[k]=v;
+  document.getElementById('mq_'+k+'_si').className='m-yn'+(v==='si'?' yes':'');
+  document.getElementById('mq_'+k+'_no').className='m-yn'+(v==='no'?' no':'');
+  chk2();
+}
+function chk2(){
+  var ok = ms.da&&ms.fe&&ms.dep&&ms.exp&&ms.edad&&ms.laboral&&ms.cotizados&&ms.formacion;
+  document.getElementById('mn2').disabled = !ok;
+}
+function mSelDato(k,v,el,g){
+  ms[k]=v;
+  document.querySelectorAll('[data-g="'+g+'"]').forEach(function(b){b.classList.remove('yes')});
+  el.classList.add('yes');
+  chk2();
+}
+function updMH(){ms.horizonte=parseInt(document.getElementById('mhorizonte').value);document.getElementById('mh-val').textContent=ms.horizonte+(ms.horizonte===30?' años+':' años');chk3();}
+function mSelCap(el,v){ms.cap=v;document.querySelectorAll('[id^=mc_]').forEach(function(b){b.className='m-yn'});el.className='m-yn yes';chk3();}
+function chk3(){if(ms.cap) document.getElementById('mn3').disabled=false;}
+function mSelR(el,v){ms.riesgo=v;document.querySelectorAll('#ms4 .m-obj').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel');document.getElementById('mn4').disabled=false;}
+
+var PERFILES={
+  defensivo:{
+    nombre:'Defensivo',color:'#DBEAFE',rv:'10–20 %',
+    liq:15,rf:65,rvp:15,alt:5,
+    caida:'−8 % a −12 %',horizonte:'1 a 3 años',
+    desc:'Tu prioridad es no perder. No buscas rentabilidad, buscas que el dinero esté disponible y que no se lo coma la inflación. Eso no es cobardía: es coherencia con una situación en la que no puedes permitirte una caída fuerte.<br><br>La cartera tiene que ser aburrida a propósito. Si un producto te promete un 8 % sin riesgo, lo que está haciendo es esconderte el riesgo en otro sitio.',
+    pasos:['Colchón de 12 meses de gastos fuera de la cartera, en cuenta remunerada o depósito.','70-80 % en renta fija de corta duración y depósitos. Nada de bonos a 20 años.','10-20 % en renta variable global solo como protección frente a la inflación a largo plazo.'],
+    errores:['Contratar productos "garantizados" con comisiones del 1,5 % que se comen la rentabilidad.','Confundir seguridad con inmovilidad: si todo está en un depósito a 5 años, el dinero no está disponible.','No revisar nada durante años y descubrir la comisión al final.']
+  },
+  conservador:{
+    nombre:'Conservador',color:'#DCFCE7',rv:'25–40 %',
+    liq:10,rf:55,rvp:30,alt:5,
+    caida:'−12 % a −18 %',horizonte:'3 a 5 años',
+    desc:'Aceptas algo de oscilación a cambio de que el dinero no pierda valor con el tiempo. La palabra clave es "algo": si en un mal año pierdes un 15 % y no duermes, este perfil no es el tuyo, aunque el test diga que sí.<br><br>Tu enemigo no es la bolsa, son las comisiones y la tentación de vender cuando baja.',
+    pasos:['50-60 % en renta fija de calidad y duración media.','30-40 % en renta variable global diversificada, mejor en fondos que en acciones sueltas.','Revisión una vez al año, no una vez al mes.'],
+    errores:['Vender tras una caída del 10 %: convierte una pérdida temporal en definitiva.','Concentrar la parte variable en el banco de siempre o en el IBEX.','Elegir fondos por su rentabilidad del año pasado.']
+  },
+  moderado:{
+    nombre:'Moderado',color:'#FEF3C7',rv:'45–60 %',
+    liq:5,rf:45,rvp:50,alt:0,
+    caida:'−20 % a −28 %',horizonte:'5 a 10 años',
+    desc:'Es el perfil más habitual y el que peor se ejecuta. Sobre el papel es un 50/50; en la práctica, la mayoría lo abandona en la primera caída seria.<br><br>La mitad en renta variable no es un adorno: es el motor de la rentabilidad a largo plazo. La otra mitad existe para que puedas aguantar la primera.',
+    pasos:['Cartera equilibrada 50 % renta fija, 50 % renta variable global.','Aportaciones periódicas automáticas: eliminan el problema de acertar el momento.','Reequilibrio anual: si la bolsa sube mucho, vende parte y vuelve al 50 %.'],
+    errores:['Cambiar de estrategia después de una caída: es el error que más rentabilidad destruye.','Mirar la cartera a diario y operar por impulso.','Sobreponderar España o el sector bancario por cercanía, no por análisis.']
+  },
+  dinamico:{
+    nombre:'Dinámico',color:'#EDE9FE',rv:'65–80 %',
+    liq:5,rf:25,rvp:70,alt:0,
+    caida:'−30 % a −40 %',horizonte:'10 años o más',
+    desc:'Tienes horizonte y estómago. La renta variable es el motor principal y la renta fija solo un lastre que suaviza. Aquí sí tiene sentido mirar empresas concretas.<br><br>Pero "dinámico" no significa "más operaciones". Significa asumir más volatilidad a cambio de más rentabilidad esperada, con una disciplina que la mayoría no tiene.',
+    pasos:['70-80 % en renta variable global, con una parte en análisis propios de empresas.','20-25 % en renta fija como amortiguador, no como fuente de rentabilidad.','Revisión trimestral de la tesis de cada empresa, no del precio.'],
+    errores:['Confundir convicción con terquedad: una tesis rota no se arregla esperando.','Apalancarse o usar productos con derivados implícitos sin entenderlos.','Concentrar la cartera en el sector de moda.']
+  },
+  agresivo:{
+    nombre:'Agresivo',color:'#FEE2E2',rv:'80–95 %',
+    liq:5,rf:10,rvp:85,alt:0,
+    caida:'−40 % a −55 %',horizonte:'15 años o más',
+    desc:'Estás dispuesto a perder casi la mitad de la cartera en un mal año porque el dinero no lo necesitas en décadas. Es una posición legítima, pero exige una condición: que esa tolerancia sea real y no una respuesta valiente a un test.<br><br>El 85 % en bolsa no se sostiene con optimismo, se sostiene con un colchón fuera de la cartera y con la certeza de que no vas a tocar ese dinero.',
+    pasos:['85 % o más en renta variable global, con concentración deliberada en las mejores ideas.','Colchón de gastos completamente separado de la cartera de inversión.','Escribir hoy, por escrito, qué harías si la cartera cae un 45 %.'],
+    errores:['Sobreestimar la tolerancia real: el 90 % de la gente la descubre en la primera crisis.','Operar con frecuencia: el exceso de actividad es el mayor destructor de rentabilidad.','No tener dinero disponible fuera de la cartera y verme obligado a vender en el peor momento.']
+  }
+};
+
+function suscribirPerfil(ev){
+  ev.preventDefault();
+  var f = document.getElementById('np-form');
+  var email = document.getElementById('np-email');
+  var estado = document.getElementById('np-estado');
+  var boton = document.getElementById('np-boton');
+  if(!email.value.trim()) return false;
+  boton.disabled = true; boton.textContent = 'Enviando…';
+  estado.textContent = '';
+  var datos = new URLSearchParams();
+  datos.set('fields[email]', email.value.trim());
+  datos.set('ml-submit', '1');
+  datos.set('anticsrf', 'true');
+  fetch('https://assets.mailerlite.com/jsonp/2784740/forms/203841029310252380/subscribe', {
+    method: 'POST', body: datos, mode: 'cors', headers: {'Accept': 'application/json'}
+  }).then(function(r){ return r.json(); }).then(function(j){
+    if(j && j.success){
+      f.style.display = 'none';
+      estado.innerHTML = '<strong>Hecho.</strong> Revisa tu correo para confirmar la suscripción.';
+      estado.style.color = '#06614A';
+    } else {
+      boton.disabled = false; boton.textContent = 'Recibir mi perfil';
+      estado.textContent = 'No hemos podido completar la suscripción. Revisa el correo.';
+      estado.style.color = '#B23A3A';
+    }
+  }).catch(function(){
+    boton.disabled = false; boton.textContent = 'Recibir mi perfil';
+    estado.textContent = 'No hemos podido conectar. Inténtalo de nuevo.';
+    estado.style.color = '#B23A3A';
+  });
+  return false;
+}
+
+function mCalcPerfil(){
+  var sc=0;
+  if(ms.riesgo==='1') sc+=0; else if(ms.riesgo==='2') sc+=1; else if(ms.riesgo==='3') sc+=2; else sc+=3;
+  if(ms.exp==='si') sc+=1;
+  if(ms.horizonte>=15) sc+=2; else if(ms.horizonte>=7) sc+=1;
+  if(ms.edad==='18-30') sc+=1; else if(ms.edad==='56+') sc-=1;
+  if(ms.laboral==='autonomo' && ms.fe!=='si') sc-=1;
+  if(ms.cotizados==='25+') sc-=1;
+
+  var clave = sc<=-1 ? 'defensivo' : (sc<=1 ? 'conservador' : (sc<=3 ? 'moderado' : (sc<=5 ? 'dinamico' : 'agresivo')));
+  var p = PERFILES[clave];
+
+  var alertas=[];
+  if(ms.da==='si') alertas.push('Tienes deudas con interés alto. Amortizarlas puede ser la mejor inversión antes de empezar.');
+  if(ms.fe==='no') alertas.push('Sin fondo de emergencia, cualquier imprevisto puede obligarte a deshacer posiciones en mal momento.');
+  if(ms.laboral==='autonomo') alertas.push('Con ingresos de autónomo, el colchón debería cubrir 9-12 meses de gastos, no seis.');
+  if(ms.cotizados==='25+' && ms.horizonte>=15) alertas.push('Te queda poco para la jubilación y planteas un horizonte muy largo: revisa si el objetivo y el plazo encajan de verdad.');
+  if(ms.edad==='56+' && ms.riesgo==='4') alertas.push('Con tu edad, una caída fuerte tiene menos tiempo para recuperarse. La tolerancia que declaras y el horizonte no encajan.');
+  if(ms.formacion==='ninguna') alertas.push('Antes de asumir riesgo, conviene dedicar tiempo a entender qué estás contratando. Los primeros pasos pueden ir más despacio.');
+
+  var objMap={jubilacion:'Jubilación anticipada',familia:'Protección familiar',independencia:'Independencia económica',proyecto:'Proyecto concreto',crecer:'Crecer patrimonio'};
+  var nc=['edad','laboral','cotizados','formacion'].filter(function(k){return ms[k]==='nc'}).length;
+  var prefijo = nc===0 ? 'Con alta probabilidad,' : (nc<=2 ? 'En principio,' : 'Estimación orientativa:');
+  var respuestas = 8 - nc;
+
+  var barra = '<div class="alloc-bar">'
+    + '<div style="width:'+p.liq+'%;background:#CBD5E1"></div>'
+    + '<div style="width:'+p.rf+'%;background:#93B4D8"></div>'
+    + '<div style="width:'+p.rvp+'%;background:#C9963A"></div>'
+    + '<div style="width:'+p.alt+'%;background:#8B7FB8"></div>'
+    + '</div>'
+    + '<div class="alloc-leyenda">'
+    + '<span><i class="alloc-punto" style="background:#CBD5E1"></i>Liquidez '+p.liq+' %</span>'
+    + '<span><i class="alloc-punto" style="background:#93B4D8"></i>Renta fija '+p.rf+' %</span>'
+    + '<span><i class="alloc-punto" style="background:#C9963A"></i>Renta variable '+p.rvp+' %</span>'
+    + (p.alt ? '<span><i class="alloc-punto" style="background:#8B7FB8"></i>Alternativos '+p.alt+' %</span>' : '')
+    + '</div>';
+
+  var alertasHTML = alertas.length
+    ? alertas.map(function(a){return '<div class="alert-box">'+a+'</div>'}).join('')
+    : '<div class="ok-box">Tu situación de partida es sólida para empezar a invertir.</div>';
+
+  var pasosHTML = p.pasos.map(function(t,i){return (i+1)+'. '+t}).join('<br>');
+  var erroresHTML = p.errores.map(function(t){return '<li>'+t+'</li>'}).join('');
+
+  document.getElementById('m-resultado').innerHTML =
+    '<div class="perfil-pill" style="background:'+p.color+'">Perfil estimado: '+p.nombre+'</div>'
+    + '<p style="margin:.9rem 0 0;font-size:.9rem">'+prefijo+' tu perfil es <strong>'+p.nombre.toLowerCase()
+    + '</strong>, según '+respuestas+' de las 8 preguntas respondidas.</p>'
+    + '<div class="perfil-desc"><p>'+p.desc+'</p></div>'
+    + '<div class="sub-label">Asignación orientativa</div>' + barra
+    + '<div class="res-grid">'
+    +   '<div class="res-cell"><div class="res-cell-label">Renta variable</div><div class="res-cell-val">'+p.rv+'</div></div>'
+    +   '<div class="res-cell"><div class="res-cell-label">Caída en un mal año</div><div class="res-cell-val">'+p.caida+'</div></div>'
+    +   '<div class="res-cell"><div class="res-cell-label">Horizonte</div><div class="res-cell-val">'+p.horizonte+'</div></div>'
+    + '</div>'
+    + '<div class="res-grid" style="grid-template-columns:1fr">'
+    +   '<div class="res-cell"><div class="res-cell-label">Objetivo declarado</div><div class="res-cell-val">'+(objMap[ms.obj]||'—')+'</div></div>'
+    + '</div>'
+    + alertasHTML
+    + '<div class="sub-label">Errores típicos de este perfil</div><ul class="perfil-errores">'+erroresHTML+'</ul>'
+    + '<div class="next-steps"><div class="next-steps-label">Ejemplo de inversión</div>'
+    +   '<div class="next-steps-body">'+pasosHTML+'</div></div>'
+    + '<div class="sub-label">Recibe tu perfil por email</div>'
+    + '<p style="margin:0 0 .7rem;font-size:.86rem;line-height:1.6;color:#2A3446">Te envío el informe de tu perfil '
+    + 'y la newsletter de los lunes. Sin coste, y te das de baja cuando quieras.</p>'
+    + '<form id="np-form" onsubmit="return suscribirPerfil(event)" style="display:flex;gap:.5rem;flex-wrap:wrap">'
+    + '<input id="np-email" type="email" required placeholder="tu@email.com" '
+    + 'style="flex:1;min-width:180px;padding:11px 13px;border:1px solid #D9DEE6;border-radius:6px;font-size:14px">'
+    + '<button id="np-boton" type="submit" style="background:var(--navy);color:#fff;border:none;border-radius:6px;'
+    + 'padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer">Recibir mi perfil</button></form>'
+    + '<p id="np-estado" style="font-size:.8rem;margin:.5rem 0 0"></p>'
+    + '<p style="margin:.2rem 0 0;font-size:.72rem;color:var(--muted)">Al suscribirte aceptas la '
+    + '<a href="/privacidad/" style="color:inherit">política de privacidad</a>.</p>'
+    + '<p style="margin:1rem 0 0;font-size:.75rem;color:var(--muted);line-height:1.55">Orientación educativa, '
+    + 'no un perfil de idoneidad MiFID II ni una recomendación personalizada. La asignación es una referencia '
+    + 'general: cualquier decisión real exige revisar tu situación completa.</p>'
+    + '<div style="background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:16px 18px;'
+    + 'margin:1.4rem 0 0;font-size:.86rem;line-height:1.6">'
+    + '<div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;'
+    + 'font-weight:600;margin-bottom:4px">¡Invierte con criterio! 25 % de descuento en informes profesionales de las acciones que seguimos</div>'
+    + '<p style="margin:0 0 .6rem">Un informe cuesta <s style="color:#A9A292">89 €</s>. '
+    + 'Los primeros clientes pagan <strong>66,75 €</strong> hasta el 31 de diciembre.</p>'
+    + '<p style="margin:0 0 .35rem"><strong>Qué incluye</strong></p>'
+    + '<ul style="margin:0 0 .7rem;padding-left:18px">'
+    + '<li>Análisis técnico con gráficos: precio, medias, volumen y RSI</li>'
+    + '<li>Análisis fundamental: ratios, márgenes, deuda y crecimiento</li>'
+    + '<li>Comparativa con tres competidores del sector</li>'
+    + '<li>Contexto macro: tipos, inflación y divisa</li>'
+    + '<li>Valoración por descuento de flujos, con sensibilidad y tres escenarios</li>'
+    + '<li>Riesgos, catalizadores y noticias del último mes</li></ul>'
+    + '<p style="margin:0 0 .35rem"><strong>Cuánto trabajo hay detrás</strong></p>'
+    + '<p style="margin:0 0 .7rem">Entre 8 y 12 horas de análisis. A 66,75 €, menos que dos horas de trabajo '
+    + 'de cualquier profesional y menos que la comisión de una operación mal planteada.</p>'
+    + '<p style="margin:0 0 .35rem"><strong>Por qué merece la pena</strong></p>'
+    + '<p style="margin:0">Invertir sin entender la empresa es apostar. El informe no te dice qué comprar: '
+    + 'te dice qué estás comprando, cuánto vale según sus flujos y en qué punto tu tesis dejaría de tener '
+    + 'sentido. Eso no garantiza acertar; evita equivocarte a ciegas.</p>'
+    + '<a href="/repositorio/" style="display:inline-block;margin-top:10px;font-size:.82rem;color:#8A6420;'
+    + 'text-decoration:underline">Elige entre los análisis ya publicados →</a>'
+    + '</div>';
+
+  mGoTo(5);
+}
+
+function heroYN(el,v){
+  var fb=document.getElementById('hero-feedback');
+  if(v==='sell') fb.textContent='Perfil conservador — el tiempo ayuda más que el timing.';
+  else if(v==='hold') fb.textContent='Perfil moderado — la disciplina es tu mayor ventaja.';
+  else fb.textContent='Perfil dinámico — el largo plazo está de tu lado.';
+  fb.style.opacity='0.7';
+  setTimeout(function(){abrirOnboarding()},800);
+}
+</script>
+
+<style>
+#cc{position:fixed;left:0;right:0;bottom:0;z-index:9999;display:none;gap:14px 22px;align-items:center;
+    justify-content:space-between;flex-wrap:wrap;padding:15px 22px;background:#0A1628;color:#F4EFE6;
+    font-family:'DM Sans',system-ui,sans-serif;font-size:14px;line-height:1.5;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+#cc p{margin:0;max-width:680px}
+#cc a{color:inherit;text-decoration:underline}
+#cc .acciones{display:flex;gap:10px;flex-wrap:wrap}
+#cc button{font-family:inherit;font-size:14px;font-weight:500;border-radius:6px;padding:10px 18px;
+           cursor:pointer;border:1px solid rgba(244,239,230,.45);background:transparent;color:inherit}
+#cc button.si{background:#C9963A;border-color:#C9963A;color:#0A1628}
+</style>
+<div id="cc" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <p>Uso cookies propias y de Google Analytics para saber qué contenido se lee. Si aceptas, se cargan;
+     si no, la web funciona igual. <a href="/cookies/">Más información</a>.</p>
+  <div class="acciones">
+    <button id="cc-no" type="button">Solo lo necesario</button>
+    <button id="cc-si" class="si" type="button">Aceptar</button>
+  </div>
+</div>
+<script>
+(function () {
+  var ID = "G-BBH2YTQV88";
+  function cargar() {
+    if (!ID) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("consent", "default", {ad_storage:"denied",ad_user_data:"denied",
+      ad_personalization:"denied",analytics_storage:"denied"});
+    gtag("js", new Date());
+    gtag("consent", "update", {analytics_storage:"granted"});
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + ID;
+    document.head.appendChild(s);
+    gtag("config", ID, {anonymize_ip: true});
+  }
+  var caja = document.getElementById("cc");
+  if (!ID) { caja.style.display = "none"; return; }
+  var guardado = null;
+  try { guardado = localStorage.getItem("consentimiento"); } catch (e) {}
+  if (guardado === "1") { cargar(); }
+  else if (guardado !== "0") { caja.style.display = "flex"; }
+  document.getElementById("cc-si").onclick = function () {
+    try { localStorage.setItem("consentimiento", "1"); } catch (e) {}
+    caja.style.display = "none"; cargar();
+  };
+  document.getElementById("cc-no").onclick = function () {
+    try { localStorage.setItem("consentimiento", "0"); } catch (e) {}
+    caja.style.display = "none";
+  };
+})();
+</script>
+
+<script>
+(function(){
+  try {
+    var inf = new URLSearchParams(location.search).get('informe');
+    if (!inf) return;
+    var ctx = document.querySelector('textarea[name="contexto"]');
+    if (ctx && !ctx.value.trim()) ctx.value = 'Solicito el informe del repositorio: ' + inf + '.';
+    var destino = document.getElementById('pedido');
+    if (destino) setTimeout(function(){ destino.scrollIntoView({behavior:'smooth'}); }, 700);
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

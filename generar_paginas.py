@@ -98,8 +98,7 @@ cuenta la situación concreta, los objetivos ni la tolerancia al riesgo de ningu
 Pueden contener errores o quedar desactualizados. El rendimiento pasado no garantiza resultados futuros.</p>
 
 <h2>Servicios de pago y derecho de desistimiento</h2>
-<p>Los informes se solicitan a través del formulario del sitio y se abonan por transferencia o Bizum
-tras la confirmación del pedido, con factura. El plazo de entrega indicado es de 24 a 48 horas.</p>
+<p>Los informes se solicitan a través del formulario del sitio y se abonan por Bizum al +34 686 875 142 tras la confirmación del pedido, con factura. El plazo de entrega indicado es de 24 a 48 horas.</p>
 <p>Al tratarse de un contenido digital personalizado que se ejecuta a petición del cliente, una vez
 iniciada la elaboración del informe <strong>no procede el derecho de desistimiento</strong>
 (art. 103.m del Texto Refundido de la Ley General para la Defensa de los Consumidores). Antes de
@@ -213,7 +212,7 @@ y no quiero que tu solicitud se quede en un cajón. Pulsa aquí y me llega direc
 <a class="cta" href="mailto:sebastian.prat@gmail.com?subject=Pedido%20de%20an%C3%A1lisis&body=Hola%20Sebasti%C3%A1n%2C%0A%0AQuiero%20un%20an%C3%A1lisis%20de%3A%20%0A%0A%C2%B7%20Empresa%3A%20%0A%C2%B7%20Qu%C3%A9%20quiero%20saber%3A%20%0A%0AGracias.">Enviar mi pedido por correo →</a>
 
 <p style="margin-top:1.4rem">Con ese correo te respondo en menos de 24 horas con la confirmación del
-pedido, el importe con el descuento de lanzamiento y los datos para pagar por transferencia o Bizum.
+pedido, el importe con el descuento de lanzamiento y el número de Bizum (+34 686 875 142).
 El informe se entrega en 24-48 horas desde el pago.</p>
 
 <p style="font-size:.85rem;color:var(--muted)">El botón abre tu programa de correo con el mensaje ya

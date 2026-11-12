@@ -73,11 +73,14 @@ __ESTILO__
     <label for="email">Tu email</label>
     <input type="email" id="email" name="email" required placeholder="para enviarte el informe">
 
-    <label for="pago">Cómo prefieres pagar</label>
-    <select id="pago" name="pago">
-      <option>Transferencia bancaria</option>
-      <option>Bizum</option>
-    </select>
+    <label>Forma de pago</label>
+    <div style="background:#F7F3EA;border:1px solid #E3DCCB;border-radius:6px;padding:14px 16px;
+         margin-bottom:18px;font-size:14.5px;line-height:1.6">
+      <strong>Bizum al +34 686 875 142</strong><br>
+      <span style="color:#5A6478;font-size:13px">Al confirmar el pedido recibirás los datos y el
+      importe. El informe se entrega en 24-48 h desde el pago.</span>
+    </div>
+    <input type="hidden" name="pago" value="Bizum">
 
     <label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;
            letter-spacing:0;font-size:13.5px;line-height:1.55;color:#3A4459;margin-bottom:20px">
