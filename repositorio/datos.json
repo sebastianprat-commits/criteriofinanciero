@@ -1,5 +1,17 @@
 [
  {
+  "nombre": "ACS, Actividades de Construcción y Servicios, S.A.",
+  "ticker": "ACS.MC",
+  "mercado": "Bolsa de Madrid (BME)",
+  "fecha": "2026-11-12",
+  "dias": 0,
+  "precio_accion": "92,90",
+  "valor_dcf": "81,64",
+  "precio_informe": 66.75,
+  "etiqueta": "Reciente",
+  "slug": "ACS_MC_20261112"
+ },
+ {
   "nombre": "Iberdrola, S.A.",
   "ticker": "IBE.MC",
   "mercado": "Bolsa de Madrid (BME)",
@@ -22,17 +34,5 @@
   "precio_informe": 66.75,
   "etiqueta": "Reciente",
   "slug": "IDR_MC_20261112"
- },
- {
-  "nombre": "ACS, Actividades de Construcción y Servicios, S.A.",
-  "ticker": "ACS.MC",
-  "mercado": "Bolsa de Madrid (BME)",
-  "fecha": "2026-11-12",
-  "dias": 0,
-  "precio_accion": "92,90",
-  "valor_dcf": "81,64",
-  "precio_informe": 66.75,
-  "etiqueta": "Reciente",
-  "slug": "ACS_MC_20261112"
  }
 ]
