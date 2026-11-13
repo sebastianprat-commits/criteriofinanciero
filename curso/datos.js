@@ -186,7 +186,103 @@ const CURSO = {
       }
     },
 
-    { numero: 3, publicada: false, modulo: 'Módulo 1 · Fundamentos', tituloCorto: 'El beneficio no es la caja' },
+    {
+      numero: 3,
+      publicada: true,
+      modulo: 'Módulo 1 · Fundamentos',
+      titulo: 'Lección 3 · El beneficio no es la caja',
+      tituloCorto: 'El beneficio no es la caja',
+      entradilla: 'Por qué una empresa que gana puede quedarse sin dinero. Cuatro minutos de ' +
+        'vídeo, seis preguntas y una cascada en la que ves cómo el beneficio se va perdiendo ' +
+        'hasta llegar a la caja.',
+      preguntas: [
+        {
+          enunciado: 'Una empresa presenta 300.000 € de beneficio y su banco le deniega un ' +
+                     'préstamo por falta de liquidez. ¿Cómo puede ser?',
+          opciones: [
+            'Es un error del banco',
+            'El beneficio está en clientes sin cobrar y en existencias, no en la cuenta',
+            'Ha pagado demasiados impuestos'
+          ],
+          correcta: 1,
+          explicacion: 'El beneficio contable reconoce la venta cuando se factura, no cuando se ' +
+            'cobra. Si vende a 90 días y crece rápido, tiene un beneficio enorme y una cuenta ' +
+            'corriente vacía. Es el problema de tesorería clásico del crecimiento.'
+        },
+        {
+          enunciado: '¿Qué es el flujo de caja libre?',
+          opciones: [
+            'El beneficio después de impuestos',
+            'Lo que queda del beneficio tras impuestos, inversión y necesidades de circulante',
+            'El saldo de la cuenta del banco'
+          ],
+          correcta: 1,
+          explicacion: 'Es el dinero que de verdad sobra después de mantener el negocio en marcha. ' +
+            'De ahí salen los dividendos, la devolución de deuda o las nuevas inversiones. Lo que ' +
+            'no llega a flujo libre no se puede repartir.'
+        },
+        {
+          enunciado: 'La empresa invierte 200.000 € y amortiza 120.000 €. ¿Qué indica?',
+          opciones: [
+            'Que está creciendo en capacidad: invierte más de lo que se desgasta',
+            'Que está perdiendo dinero',
+            'Que tiene demasiada deuda'
+          ],
+          correcta: 0,
+          explicacion: 'La amortización refleja el desgaste de lo que ya tiene. Si invierte por ' +
+            'encima, está ampliando. Eso consume caja hoy, pero suele ser buena señal si la ' +
+            'inversión genera retorno. Si fuera al contrario, la empresa se estaría descapitalizando.'
+        },
+        {
+          enunciado: 'Las existencias crecen un 40 % y las ventas un 10 %. ¿Qué mirarías?',
+          opciones: [
+            'Nada, es normal si hay crecimiento',
+            'Que se está acumulando mercancía que no se vende y consume caja',
+            'Que la empresa va a vender más el año que viene'
+          ],
+          correcta: 1,
+          explicacion: 'Las existencias deberían crecer al ritmo de las ventas. Si crecen cuatro ' +
+            'veces más, o hay un pedido grande en camino —hay que comprobarlo— o hay producto ' +
+            'parado. En el segundo caso, ese dinero está inmovilizado y puede acabar en provisión.'
+        },
+        {
+          enunciado: '¿Qué documento de las cuentas enseña de verdad la caja generada?',
+          opciones: [
+            'La cuenta de resultados',
+            'El balance',
+            'El estado de flujos de efectivo'
+          ],
+          correcta: 2,
+          explicacion: 'La cuenta de resultados habla de devengo (cuándo se factura), el balance es ' +
+            'una foto del día. El estado de flujos de efectivo es el único que dice cuánto dinero ' +
+            'ha entrado y salido, y de dónde. Es el documento que menos se lee y el que más aclara.'
+        },
+        {
+          enunciado: 'Una empresa crece un 30 % anual financiándose solo con proveedores. ¿Qué ' +
+                     'riesgo tiene?',
+          opciones: [
+            'Ninguno, es la forma más barata de financiarse',
+            'Que si un proveedor acorta el plazo, se queda sin tesorería',
+            'Que paga demasiados intereses'
+          ],
+          correcta: 1,
+          explicacion: 'Financiarse con proveedores es barato hasta que deja de serlo. Si el ' +
+            'crecimiento depende de estirar pagos y un proveedor importante cambia las condiciones, ' +
+            'la empresa se queda sin margen. Es la quiebra más rápida que existe.'
+        }
+      ],
+      interaccion: {
+        tipo: 'puente',
+        titulo: 'De beneficio a caja',
+        intro: 'Esta empresa tiene 350.000 € de beneficio. Mueve la inversión y lo que se queda ' +
+          'en existencias y clientes, y mira cuánto llega de verdad a la caja. Fíjate en la ' +
+          'diferencia entre la primera barra y la última.',
+        enunciado: '',
+        ebitda: 350000,
+        capex: 80000,
+        circulante: 30000
+      }
+    },
     {
       numero: 4,
       publicada: true,
@@ -292,7 +388,104 @@ const CURSO = {
         ]
       }
     },
-    { numero: 5, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Descuento de flujos I: proyectar la caja' },
+    {
+      numero: 5,
+      publicada: true,
+      modulo: 'Módulo 2 · Los métodos',
+      titulo: 'Lección 5 · Proyectar la caja',
+      tituloCorto: 'Proyectar la caja',
+      entradilla: 'Cómo se construye la proyección a cinco años sin inventar. Tres minutos de ' +
+        'vídeo, seis preguntas y una tabla donde cambias el crecimiento de cada año y ves el ' +
+        'valor moverse.',
+      preguntas: [
+        {
+          enunciado: '¿Por qué se proyectan cinco años y no veinte?',
+          opciones: [
+            'Porque es la costumbre',
+            'Porque a partir de cinco años la incertidumbre hace que el detalle no aporte nada',
+            'Porque los bancos solo prestan a cinco años'
+          ],
+          correcta: 1,
+          explicacion: 'Proyectar veinte años con detalle da una falsa sensación de precisión: ' +
+            'nadie sabe qué pasará en el año doce. Se proyectan cinco con cuidado y el resto se ' +
+            'resume en el valor terminal, que es honestamente un supuesto.'
+        },
+        {
+          enunciado: 'Una empresa creció un 20 % los últimos tres años. ¿Proyectas un 20 % los ' +
+                     'próximos cinco?',
+          opciones: [
+            'Sí, es su ritmo histórico',
+            'No: el crecimiento debe decrecer hacia la media, y hay que justificarlo',
+            'Sí, pero solo los dos primeros años'
+          ],
+          correcta: 1,
+          explicacion: 'El crecimiento pasado no se sostiene indefinidamente. Lo razonable es ' +
+            'proyectar menos cada año hasta acercarse al crecimiento de la economía. Un 20 % ' +
+            'constante durante cinco años implica multiplicar el tamaño por dos y medio.'
+        },
+        {
+          enunciado: '¿Qué hay que restar al beneficio para obtener el flujo de caja?',
+          opciones: [
+            'Solo los impuestos',
+            'Impuestos, inversión y variación del circulante',
+            'Solo la inversión'
+          ],
+          correcta: 1,
+          explicacion: 'Los tres. Si te olvidas de la inversión, estás suponiendo que la empresa ' +
+            'crece sin comprar nada. Si te olvidas del circulante, supones que crece sin financiar ' +
+            'existencias ni clientes. Las dos omisiones inflan la valoración.'
+        },
+        {
+          enunciado: 'Proyectas crecer un 10 % anual e invertir solo el 2 % de las ventas. ¿Qué ' +
+                     'está mal?',
+          opciones: [
+            'Nada, si el negocio es poco intensivo en capital',
+            'Que el crecimiento exige inversión: ese 10 % no es creíble con un 2 %',
+            'Que inviertes demasiado'
+          ],
+          correcta: 1,
+          explicacion: 'Salvo en negocios de servicios muy concretos, crecer exige invertir. Un ' +
+            'crecimiento alto con inversión mínima es la señal más clara de una proyección hecha ' +
+            'para que salga el número que se quería.'
+        },
+        {
+          enunciado: 'La proyección da un flujo libre negativo los dos primeros años. ¿Es un error?',
+          opciones: [
+            'Sí, el flujo libre nunca puede ser negativo',
+            'No: una empresa en expansión puede consumir caja al principio',
+            'Sí, habría que subir el crecimiento'
+          ],
+          correcta: 1,
+          explicacion: 'No es un error: es información. Si la empresa invierte mucho para crecer, ' +
+            'consume caja al principio. Lo que hay que comprobar es que eso esté financiado y que ' +
+            'el flujo se vuelva positivo en un plazo razonable.'
+        },
+        {
+          enunciado: '¿Cuál es la forma más rápida de inflar una valoración con la proyección?',
+          opciones: [
+            'Subir la inversión prevista',
+            'Subir el crecimiento de los cinco años a la vez',
+            'Bajar los impuestos'
+          ],
+          correcta: 1,
+          explicacion: 'Dos o tres puntos más de crecimiento en cada año, compuestos, cambian el ' +
+            'flujo del año cinco y con él el valor terminal. Es el ajuste que más mueve el ' +
+            'resultado y el más difícil de detectar si no se mira año a año.'
+        }
+      ],
+      interaccion: {
+        tipo: 'proyeccion',
+        titulo: 'Construye la proyección',
+        intro: 'Cambia el crecimiento de cada año y mira cómo se mueve el valor. Prueba a poner ' +
+          'un 10 % todos los años y observa qué pasa con el flujo del año cinco y con el valor ' +
+          'terminal: ahí está el efecto de la composición.',
+        enunciado: '',
+        ebitda: 350000,
+        crecimientos: [8, 6, 4, 3, 2],
+        wacc: 10.3,
+        g: 1.5
+      }
+    },
     {
       numero: 6,
       publicada: true,

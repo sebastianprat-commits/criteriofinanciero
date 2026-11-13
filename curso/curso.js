@@ -593,13 +593,119 @@ function componenteProyeccion(contenedor, cfg) {
   pintar();
 }
 
+
+/* ------------------------------------------------------------- puente */
+function componentePuente(contenedor, cfg) {
+  const base = cfg.ebitda || 350000;
+
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:18px">${cfg.enunciado || ''}</p>
+      <div class="sliders">
+        <div class="slider">
+          <label for="u_capex">Inversión del año (capex)</label>
+          <input id="u_capex" type="range" min="0" max="200000" step="5000" value="${cfg.capex || 80000}">
+          <div class="valor" id="u_vcapex"></div>
+          <div class="ayuda-campo">Compras de máquinas, vehículos o locales. Se resta: ese dinero
+            no está disponible.</div>
+        </div>
+        <div class="slider">
+          <label for="u_circulante">Aumento de existencias y clientes</label>
+          <input id="u_circulante" type="range" min="-50000" max="150000" step="5000"
+                 value="${cfg.circulante || 30000}">
+          <div class="valor" id="u_vcirc"></div>
+          <div class="ayuda-campo">Si fabricas más de lo que cobras, el dinero se queda en el
+            almacén o en facturas sin cobrar. Puede ser negativo si cobras antes de pagar.</div>
+        </div>
+      </div>
+      <div class="resultado">
+        <div class="cifra" id="u_valor">—</div>
+        <div class="nota" id="u_nota"></div>
+      </div>
+      <svg id="u_svg" viewBox="0 0 800 260" style="width:100%;height:260px;margin-top:14px"></svg>
+      <div class="aviso" id="u_aviso"></div>
+    </div>`;
+
+  function pintar() {
+    const capex = Number(document.getElementById('u_capex').value);
+    const circulante = Number(document.getElementById('u_circulante').value);
+    const impuesto = base * 0.25;
+    const fcf = base - impuesto - capex - circulante;
+
+    document.getElementById('u_vcapex').textContent = euros(capex);
+    document.getElementById('u_vcirc').textContent = euros(circulante);
+    document.getElementById('u_valor').textContent = euros(fcf);
+    document.getElementById('u_nota').textContent =
+      `de ${euros(base)} de beneficio, solo esto llega a la caja`;
+
+    const pasos = [
+      {etiqueta: 'EBITDA', valor: base, tipo: 'inicio'},
+      {etiqueta: 'Impuestos (25 %)', valor: -impuesto, tipo: 'resta'},
+      {etiqueta: 'Inversión', valor: -capex, tipo: 'resta'},
+      {etiqueta: 'Circulante', valor: -circulante, tipo: 'resta'},
+      {etiqueta: 'Caja libre', valor: fcf, tipo: 'total'}
+    ];
+
+    const ancho = 800, alto = 260, margen = 40;
+    const escala = Math.max(base, ...pasos.map(p => Math.abs(p.valor))) * 1.15;
+    const anchoHub = (ancho - 2 * margen) / pasos.length;
+    let acumulado = 0;
+    let svg = '';
+
+    pasos.forEach((p, i) => {
+      const x = margen + i * anchoHub + anchoHub * 0.18;
+      const w = anchoHub * 0.64;
+      let y, h, color;
+
+      if (p.tipo === 'inicio') {
+        h = p.valor / escala * (alto - 60);
+        y = alto - 40 - h; acumulado = p.valor; color = '#0A1628';
+      } else if (p.tipo === 'total') {
+        h = Math.abs(p.valor) / escala * (alto - 60);
+        y = alto - 40 - h; color = p.valor >= 0 ? '#C9963A' : '#B4462F';
+      } else {
+        const inicio = acumulado;
+        acumulado += p.valor;
+        const yInicio = alto - 40 - inicio / escala * (alto - 60);
+        const yFin = alto - 40 - acumulado / escala * (alto - 60);
+        y = Math.min(yInicio, yFin); h = Math.abs(yFin - yInicio);
+        color = '#8A94A6';
+      }
+
+      svg += `<rect x="${x}" y="${y}" width="${w}" height="${Math.max(2, h)}" fill="${color}" rx="3"/>`;
+      svg += `<text x="${x + w / 2}" y="${alto - 22}" font-size="11" text-anchor="middle"
+              fill="#5A6478">${p.etiqueta}</text>`;
+      const etiqueta = (p.tipo === 'resta' ? '−' : '') + euros(Math.abs(p.valor));
+      svg += `<text x="${x + w / 2}" y="${y - 7}" font-size="11.5" text-anchor="middle"
+              fill="#0A1628" font-weight="600">${etiqueta}</text>`;
+    });
+
+    document.getElementById('u_svg').innerHTML = svg;
+
+    const proporcion = base ? fcf / base * 100 : 0;
+    document.getElementById('u_aviso').textContent = proporcion < 20
+      ? `Solo el ${proporcion.toFixed(0)} % del beneficio llega a la caja. La empresa gana en el ` +
+        'papel, pero no tiene dinero: cualquier bache de tesorería la pone en apuros.'
+      : proporcion > 60
+      ? `El ${proporcion.toFixed(0)} % del beneficio llega a caja: es una empresa que convierte ` +
+        'bien su resultado en dinero, y eso es lo que se puede repartir o reinvertir.'
+      : `El ${proporcion.toFixed(0)} % del beneficio llega a caja. El resto se ha ido en ` +
+        'impuestos, inversión y capital circulante.';
+  }
+
+  ['u_capex', 'u_circulante'].forEach(id =>
+    document.getElementById(id).addEventListener('input', pintar));
+  pintar();
+}
+
 const COMPONENTES = {
   simulador: componenteSimulador,
   wacc: componenteWacc,
   diagnostico: componenteDiagnostico,
   comparador: componenteComparador,
   normalizador: componenteNormalizador,
-  proyeccion: componenteProyeccion
+  proyeccion: componenteProyeccion,
+  puente: componentePuente
 };
 
 /* --------------------------------------------------------------- página */
