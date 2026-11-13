@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Pruebas de los componentes · Curso</title>
+<style>
+body{font-family:ui-monospace,Consolas,monospace;background:#0A1628;color:#E8E4DA;
+     padding:26px;font-size:14px;line-height:1.7}
+h1{font-family:system-ui;font-size:20px;color:#C9963A;margin-bottom:14px}
+.fila{padding:3px 0}
+.ok{color:#5BC98C}.mal{color:#E06B5B}
+#resumen{margin-top:18px;padding:12px 16px;border-left:3px solid #C9963A;background:#132239;
+         font-size:16px}
+#caja{position:absolute;left:-9999px;top:0;width:900px}
+</style>
+</head>
+<body>
+<h1>Pruebas de los componentes del curso</h1>
+<div id="salida"></div>
+<div id="resumen">ejecutando…</div>
+<div id="caja"></div>
+
+<script src="curso.js"></script>
+<script>
+const aEuros = v => new Intl.NumberFormat('es-ES', {maximumFractionDigits: 0}).format(Math.round(v)) + ' €';
+const contenedor = () => {
+  const c = document.createElement('div');
+  document.getElementById('caja').innerHTML = '';
+  document.getElementById('caja').appendChild(c);
+  return c;
+};
+const aNum = texto => Number(String(texto).replace(/[^\d,-]/g, '').replace(/\./g, '').replace(',', '.'));
+
+const PRUEBAS = [
+  {
+    nombre: 'simulador · el valor cambia al mover la tasa',
+    async fn() {
+      const c = contenedor();
+      componenteSimulador(c, {ebitda: 350000, crecimiento: 3, wacc: 10.3, g: 1.5});
+      const alto = aNum(document.getElementById('valor').textContent);
+      const s = document.getElementById('s_wacc');
+      s.value = 14;
+      s.dispatchEvent(new Event('input'));
+      const bajo = aNum(document.getElementById('valor').textContent);
+      if (!(alto > bajo)) return `esperaba que bajara: ${alto} -> ${bajo}`;
+      const nota = document.getElementById('nota').textContent;
+      if (!nota.includes('menos')) return `la nota no avisa de la caída: ${nota}`;
+      return true;
+    }
+  },
+  {
+    nombre: 'wacc · la suma de las piezas cuadra',
+    async fn() {
+      const c = contenedor();
+      componenteWacc(c, {rf: 3.3, prima: 5.5, beta: 1.0, tamano: 2.0});
+      const total = aNum(document.getElementById('wacc_total').textContent);
+      const esperado = 3.3 + 5.5 * 1.0 + 2.0;
+      return Math.abs(total - esperado) < 0.15 ? true : `esperaba ${esperado}, salió ${total}`;
+    }
+  },
+  {
+    nombre: 'wacc · la beta multiplica la prima de mercado',
+    async fn() {
+      const c = contenedor();
+      componenteWacc(c, {rf: 3.3, prima: 5.5, beta: 1.0, tamano: 2.0});
+      const beta = document.getElementById('w_beta');
+      beta.value = 1.5;
+      beta.dispatchEvent(new Event('input'));
+      const total = aNum(document.getElementById('wacc_total').textContent);
+      const esperado = 3.3 + 5.5 * 1.5 + 2.0;
+      return Math.abs(total - esperado) < 0.15 ? true : `esperado ${esperado}, salió ${total}`;
+    }
+  },
+  {
+    nombre: 'diagnóstico · margen, deuda e inversión',
+    async fn() {
+      const c = contenedor();
+      componenteDiagnostico(c, {ventas: 2500000, ebitda: 350000, deuda: 400000, caja: 150000, capex: 80000});
+      const tarjetas = document.querySelectorAll('.veredicto');
+      if (tarjetas.length !== 3) return `esperaba 3 veredictos, hay ${tarjetas.length}`;
+      const margen = tarjetas[0].querySelector('.valor').textContent;
+      if (!margen.includes('14,0')) return `margen inesperado: ${margen}`;
+      const deuda = tarjetas[1].querySelector('.valor').textContent;
+      if (!deuda.includes('0,7')) return `deuda inesperada: ${deuda}`;
+      return true;
+    }
+  },
+  {
+    nombre: 'comparador · la mediana manda',
+    async fn() {
+      const c = contenedor();
+      componenteComparador(c, {
+        ebitda: 1200000, deudaNeta: 400000,
+        pares: [
+          {nombre: 'A', multiple: 7.2, incluido: true, nota: ''},
+          {nombre: 'B', multiple: 6.8, incluido: true, nota: ''},
+          {nombre: 'C', multiple: 18.4, incluido: false, nota: ''}
+        ]
+      });
+      let valor = aNum(document.getElementById('c_valor').textContent);
+      const esperado = 1200000 * 7.0 - 400000;
+      if (Math.abs(valor - esperado) > 1) return `con dos pares esperaba ${esperado}, salió ${valor}`;
+      const tercero = document.querySelector('input[data-i="2"]');
+      tercero.checked = true;
+      tercero.dispatchEvent(new Event('change'));
+      valor = aNum(document.getElementById('c_valor').textContent);
+      const nuevo = 1200000 * 7.2 - 400000;
+      return Math.abs(valor - nuevo) < 1000 ? true : `al añadir el tercero esperaba ~${nuevo}, salió ${valor}`;
+    }
+  },
+  {
+    nombre: 'normalizador · ajusta y desajusta',
+    async fn() {
+      const c = contenedor();
+      componenteNormalizador(c, {
+        ebitda: 350000,
+        partidas: [
+          {concepto: 'Gastos personales', explicacion: '', importe: 12000, signo: 1, ajustar: true},
+          {concepto: 'Sueldo bajo', explicacion: '', importe: 18000, signo: -1, ajustar: true},
+          {concepto: 'Subvención', explicacion: '', importe: 30000, signo: -1, ajustar: false}
+        ]
+      });
+      const con = aNum(document.getElementById('n_valor').textContent);
+      if (con !== 344000) return `esperaba 344.000, salió ${con}`;
+      const subvencion = document.querySelector('input[data-i="2"]');
+      subvencion.checked = true;
+      subvencion.dispatchEvent(new Event('change'));
+      const sin = aNum(document.getElementById('n_valor').textContent);
+      return sin === 314000 ? true : `al marcar la subvención esperaba 314.000, salió ${sin}`;
+    }
+  },
+  {
+    nombre: 'proyección · el valor terminal pesa más que los cinco años',
+    async fn() {
+      const c = contenedor();
+      componenteProyeccion(c, {ebitda: 350000, crecimientos: [6,5,4,3,2], wacc: 10.3, g: 1.5});
+      const nota = document.getElementById('p_nota').textContent;
+      const peso = Number(nota.match(/\((\d+) %\)/)[1]);
+      return peso > 55 && peso < 80 ? true : `peso del valor terminal inesperado: ${peso} %`;
+    }
+  },
+  {
+    nombre: 'puente · el flujo libre es el de la cuenta',
+    async fn() {
+      const c = contenedor();
+      componentePuente(c, {ebitda: 350000, capex: 80000, circulante: 30000});
+      const valor = aNum(document.getElementById('u_valor').textContent);
+      const esperado = 350000 - 87500 - 80000 - 30000;
+      return valor === esperado ? true : `esperaba ${esperado}, salió ${valor}`;
+    }
+  },
+  {
+    nombre: 'balance · valor de empresa menos deuda',
+    async fn() {
+      const c = contenedor();
+      componenteBalance(c, {ev: 3000000, deuda: 900000, caja: 250000, inmueble: false,
+                            participaciones: false, leasing: false});
+      const valor = aNum(document.getElementById('b_valor').textContent);
+      return valor === 2350000 ? true : `esperaba 2.350.000, salió ${valor}`;
+    }
+  },
+  {
+    nombre: 'detector · marca bien aciertos y fallos',
+    async fn() {
+      const c = contenedor();
+      componenteDetector(c, {
+        afirmaciones: [
+          {texto: 'A', correcta: 0, explicacion: ''},
+          {texto: 'B', correcta: 1, explicacion: ''}
+        ]
+      });
+      // A: la respuesta correcta es «es un error» (0)
+      document.querySelector('#f0 button[data-v="0"]').click();
+      // B: la respuesta correcta es «es correcto» (1); pulso mal
+      document.querySelector('#f1 button[data-v="0"]').click();
+
+      const a = document.querySelector('#f0 button[data-v="0"]');
+      const bCorrecta = document.querySelector('#f1 button[data-v="1"]');
+      const bPulsada = document.querySelector('#f1 button[data-v="0"]');
+      if (!a.classList.contains('bien')) return 'la respuesta acertada no se marca en verde';
+      if (!bCorrecta.classList.contains('bien')) return 'la correcta no se enseña en verde';
+      if (!bPulsada.classList.contains('mal')) return 'la fallada no se marca en rojo';
+      const marcador = document.getElementById('f_marcador').textContent;
+      return marcador.includes('1 de 2') ? true : `marcador inesperado: ${marcador}`;
+    }
+  },
+  {
+    nombre: 'pasos · avanza y vuelve',
+    async fn() {
+      const c = contenedor();
+      componentePasos(c, {pasos: [{titulo: 'Uno', texto: 'a'}, {titulo: 'Dos', texto: 'b'}]});
+      const primero = document.getElementById('paso_caja').textContent;
+      document.getElementById('paso_siguiente').click();
+      const segundo = document.getElementById('paso_caja').textContent;
+      if (primero === segundo) return 'no cambia de paso';
+      document.getElementById('paso_atras').click();
+      const vuelta = document.getElementById('paso_caja').textContent;
+      return vuelta === primero ? true : 'no vuelve al paso anterior';
+    }
+  },
+  {
+    nombre: 'reto · distingue dentro y fuera del rango',
+    async fn() {
+      const c = contenedor();
+      componenteReto(c, {ebitda: 350000, deudaNeta: 250000, referencia: [2106629, 2900000], datos: []});
+      const wacc = document.getElementById('r_wacc');
+      wacc.value = 10.3;
+      wacc.dispatchEvent(new Event('input'));
+      document.getElementById('r_comprobar').click();
+      const dentro = document.getElementById('r_resultado').textContent;
+      if (!dentro.includes('dentro del rango')) return 'no detecta el valor dentro del rango';
+      wacc.value = 7;
+      wacc.dispatchEvent(new Event('input'));
+      document.getElementById('r_comprobar').click();
+      const fuera = document.getElementById('r_resultado').textContent;
+      return fuera.includes('fuera del rango') ? true : 'no detecta el valor fuera del rango';
+    }
+  }
+];
+
+(async () => {
+  const salida = document.getElementById('salida');
+  let bien = 0;
+  for (const prueba of PRUEBAS) {
+    let resultado;
+    try {
+      resultado = await prueba.fn();
+    } catch (e) {
+      resultado = 'excepción: ' + e.message;
+    }
+    const pasa = resultado === true;
+    if (pasa) bien++;
+    const linea = document.createElement('div');
+    linea.className = 'fila ' + (pasa ? 'ok' : 'mal');
+    linea.textContent = (pasa ? '✓ ' : '✗ ') + prueba.nombre + (pasa ? '' : ' -> ' + resultado);
+    salida.appendChild(linea);
+  }
+  const resumen = document.getElementById('resumen');
+  resumen.textContent = `PRUEBAS: ${bien} de ${PRUEBAS.length} correctas`;
+  resumen.style.borderLeftColor = bien === PRUEBAS.length ? '#5BC98C' : '#E06B5B';
+})();
+</script>
+</body>
+</html>
