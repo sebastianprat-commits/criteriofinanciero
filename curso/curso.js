@@ -698,6 +698,127 @@ function componentePuente(contenedor, cfg) {
   pintar();
 }
 
+
+/* ------------------------------------------------------------- balance */
+function componenteBalance(contenedor, cfg) {
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">${cfg.enunciado || ''}</p>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:16px">
+        <span style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">
+          Valor de empresa</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:26px">${euros(cfg.ev)}</span>
+      </div>
+      <div class="diag">
+        <div class="entrada"><label for="b_deuda">Deuda financiera (€)</label>
+          <input id="b_deuda" type="number" value="${cfg.deuda}">
+          <div class="ayuda-campo">Préstamos y pólizas. Se resta: el comprador la hereda.</div></div>
+        <div class="entrada"><label for="b_caja">Caja disponible (€)</label>
+          <input id="b_caja" type="number" value="${cfg.caja}">
+          <div class="ayuda-campo">Se suma: es dinero que se lleva el comprador.</div></div>
+      </div>
+      <div style="display:grid;gap:8px;margin:16px 0">
+        <label class="par"><input type="checkbox" id="b_inmueble" ${cfg.inmueble ? 'checked' : ''}>
+          <span class="nombre" style="flex:1">Inmueble no afecto al negocio (450.000 €)
+            <div class="ayuda-campo" style="margin-top:4px">Una nave alquilada a terceros. No genera
+              la facturación, pero se vende aparte: se suma.</div></span></label>
+        <label class="par"><input type="checkbox" id="b_participaciones" ${cfg.participaciones ? 'checked' : ''}>
+          <span class="nombre" style="flex:1">Participación en otra empresa (120.000 €)
+            <div class="ayuda-campo" style="margin-top:4px">Una inversión financiera. Vale dinero,
+              pero no forma parte del negocio valorado.</div></span></label>
+        <label class="par"><input type="checkbox" id="b_leasing" ${cfg.leasing ? 'checked' : ''}>
+          <span class="nombre" style="flex:1">Deuda por arrendamiento pendiente (180.000 €)
+            <div class="ayuda-campo" style="margin-top:4px">Los leases ya son deuda desde la norma
+              contable actual. Muchos informes los olvidan.</div></span></label>
+      </div>
+      <div class="resultado">
+        <div class="cifra" id="b_valor">—</div>
+        <div class="nota">lo que paga el comprador por las acciones</div>
+      </div>
+      <div class="aviso" id="b_aviso"></div>
+    </div>`;
+
+  function pintar() {
+    const deuda = Number(document.getElementById('b_deuda').value) || 0;
+    const caja = Number(document.getElementById('b_caja').value) || 0;
+    const inmueble = document.getElementById('b_inmueble').checked ? 450000 : 0;
+    const participaciones = document.getElementById('b_participaciones').checked ? 120000 : 0;
+    const leasing = document.getElementById('b_leasing').checked ? 180000 : 0;
+
+    const equity = cfg.ev - deuda - leasing + caja + inmueble + participaciones;
+    document.getElementById('b_valor').textContent = euros(equity);
+
+    const aviso = document.getElementById('b_aviso');
+    aviso.textContent = equity < 0
+      ? 'Las acciones no valen nada: la deuda supera el valor de la empresa. En ese caso se ' +
+        'negocia con los acreedores, no se compra.'
+      : leasing === 0
+      ? 'Ojo: has dejado el arrendamiento fuera. Si la empresa tiene leasing, es deuda y resta. ' +
+        'Marcarlo cambia el resultado en 180.000 €.'
+      : 'El puente está completo: valor de empresa, menos deuda (incluidos leases), más caja y ' +
+        'más lo que vale pero no genera la facturación.';
+  }
+
+  ['b_deuda', 'b_caja', 'b_inmueble', 'b_participaciones', 'b_leasing'].forEach(id =>
+    document.getElementById(id).addEventListener('input', pintar));
+  ['b_inmueble', 'b_participaciones', 'b_leasing'].forEach(id =>
+    document.getElementById(id).addEventListener('change', pintar));
+  pintar();
+}
+
+
+/* ------------------------------------------------------------- detector */
+function componenteDetector(contenedor, cfg) {
+  let acertadas = 0, respondidas = 0;
+
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">${cfg.enunciado || ''}</p>
+      ${cfg.afirmaciones.map((a, i) => `
+        <div class="pregunta" id="f${i}" style="margin-bottom:12px">
+          <div class="enunciado">«${a.texto}»</div>
+          <div style="display:flex;gap:10px">
+            <button class="opcion" style="width:auto;padding:9px 18px" data-f="${i}" data-v="1">
+              Es correcto</button>
+            <button class="opcion" style="width:auto;padding:9px 18px" data-f="${i}" data-v="0">
+              Es un error</button>
+          </div>
+          <div class="explica" id="fe${i}">${a.explicacion}</div>
+        </div>`).join('')}
+      <div id="f_marcador" style="font-weight:500;margin-top:8px"></div>
+    </div>`;
+
+  contenedor.querySelectorAll('button[data-f]').forEach(boton => {
+    boton.addEventListener('click', () => {
+      const i = Number(boton.dataset.f);
+      const caja = document.getElementById('f' + i);
+      if (caja.dataset.respondida) return;
+      caja.dataset.respondida = '1';
+      const a = cfg.afirmaciones[i];
+      const elegido = boton.dataset.v === '1';
+
+      caja.querySelectorAll('button[data-f]').forEach(b => {
+        b.disabled = true;
+        const valor = b.dataset.v === '1';
+        if (valor === a.correcta) b.classList.add('bien');
+        else if (valor === elegido) b.classList.add('mal');
+      });
+      document.getElementById('fe' + i).classList.add('visible');
+      respondidas++;
+      if (elegido === a.correcta) acertadas++;
+
+      const marcador = document.getElementById('f_marcador');
+      if (respondidas === cfg.afirmaciones.length) {
+        marcador.textContent = acertadas === cfg.afirmaciones.length
+          ? `Has detectado los ${acertadas}. Ya puedes leer un informe ajeno con criterio.`
+          : `Has acertado ${acertadas} de ${cfg.afirmaciones.length}. Lee las explicaciones de las que fallaste.`;
+      } else {
+        marcador.textContent = `Llevas ${acertadas} de ${respondidas}.`;
+      }
+    });
+  });
+}
+
 const COMPONENTES = {
   simulador: componenteSimulador,
   wacc: componenteWacc,
@@ -705,7 +826,9 @@ const COMPONENTES = {
   comparador: componenteComparador,
   normalizador: componenteNormalizador,
   proyeccion: componenteProyeccion,
-  puente: componentePuente
+  puente: componentePuente,
+  balance: componenteBalance,
+  detector: componenteDetector
 };
 
 /* --------------------------------------------------------------- página */

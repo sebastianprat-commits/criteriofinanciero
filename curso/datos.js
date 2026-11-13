@@ -788,8 +788,216 @@ const CURSO = {
         ]
       }
     },
-    { numero: 9, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Deuda, caja y lo que no está en el balance' },
-    { numero: 10, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Los cinco errores que inflan una valoración' },
+    {
+      numero: 9,
+      publicada: true,
+      modulo: 'Módulo 3 · Ajustes y trampas',
+      titulo: 'Lección 9 · Del valor de empresa al de las acciones',
+      tituloCorto: 'Del valor de empresa al de las acciones',
+      entradilla: 'La deuda, la caja y lo que nadie mira. Tres minutos de vídeo, seis preguntas y ' +
+        'un puente de balance en el que ves cómo cambia lo que paga el comprador.',
+      preguntas: [
+        {
+          enunciado: 'El valor de empresa es 3 millones y la deuda financiera es 1 millón. ' +
+                     '¿Cuánto valen las acciones, sin caja?',
+          opciones: ['3 millones', '2 millones', '4 millones'],
+          correcta: 1,
+          explicacion: 'El comprador de acciones hereda la deuda: 3 − 1 = 2 millones. El valor de ' +
+            'empresa es lo que cuesta comprarla entera; el de las acciones, lo que paga el socio ' +
+            'después de asumir las deudas.'
+        },
+        {
+          enunciado: '¿Cuál de estas partidas NO se resta al valor de empresa?',
+          opciones: ['Deuda con bancos', 'Deuda con proveedores', 'Arrendamientos pendientes'],
+          correcta: 1,
+          explicacion: 'Los proveedores son parte del ciclo normal del negocio y su coste ya está ' +
+            'en el margen. Los bancos y los arrendamientos sí se restan: son deuda financiera que ' +
+            'el comprador asume.'
+        },
+        {
+          enunciado: 'La empresa tiene un inmueble alquilado a un tercero, valorado en 450.000 €. ' +
+                     '¿Qué haces con él?',
+          opciones: [
+            'Nada: no genera la facturación del negocio',
+            'Sumarlo al valor de las acciones, porque vale dinero',
+            'Restarlo, porque es un gasto'
+          ],
+          correcta: 1,
+          explicacion: 'No genera la facturación, pero existe y se puede vender. Se suma aparte, ' +
+            'con su propia valoración. Ignorarlo es regalarle 450.000 € al comprador.'
+        },
+        {
+          enunciado: 'Los arrendamientos pendientes de una empresa son 180.000 €. ¿Cómo se tratan?',
+          opciones: [
+            'Como un gasto del año, no afecta al valor',
+            'Como deuda: se restan del valor de empresa',
+            'Se ignoran si están fuera del balance'
+          ],
+          correcta: 1,
+          explicacion: 'Desde la norma contable actual, los arrendamientos son deuda. Se restan ' +
+            'como cualquier préstamo. Es una de las partidas que más se olvidan en informes ' +
+            'antiguos y cambia el resultado en cientos de miles de euros.'
+        },
+        {
+          enunciado: 'El valor de las acciones sale negativo. ¿Qué significa?',
+          opciones: [
+            'Que hay un error de cálculo siempre',
+            'Que la deuda supera el valor del negocio: hay que renegociar, no comprar',
+            'Que la empresa vale mucho y hay que pagar'
+          ],
+          correcta: 1,
+          explicacion: 'Puede ser correcto: si la deuda supera el valor de empresa, las acciones ' +
+            'no valen nada y los acreedores son los dueños reales. En ese escenario no se compra: ' +
+            'se reestructura.'
+        },
+        {
+          enunciado: '¿Por qué se resta la deuda neta y no la deuda bruta?',
+          opciones: [
+            'Porque la caja también se la lleva el comprador',
+            'Porque las deudas no se pagan',
+            'Porque es una convención contable'
+          ],
+          correcta: 0,
+          explicacion: 'La caja disponible pasa al comprador igual que la deuda. Restar la deuda ' +
+            'bruta sin sumar la caja penaliza dos veces a las empresas con mucho efectivo, que ' +
+            'suelen ser las más sólidas.'
+        }
+      ],
+      interaccion: {
+        tipo: 'balance',
+        titulo: 'Haz el puente tú mismo',
+        intro: 'El valor de empresa está calculado: 3 millones. Ajusta la deuda y la caja, y marca ' +
+          'las partidas que creas que hay que incluir. Mira cuánto acaba pagando el comprador por ' +
+          'las acciones.',
+        enunciado: '',
+        ev: 3000000,
+        deuda: 900000,
+        caja: 250000,
+        inmueble: true,
+        participaciones: false,
+        leasing: false
+      }
+    },
+    {
+      numero: 10,
+      publicada: true,
+      modulo: 'Módulo 3 · Ajustes y trampas',
+      titulo: 'Lección 10 · Los cinco errores',
+      tituloCorto: 'Los cinco errores',
+      entradilla: 'Cómo detectar una valoración inflada en dos minutos. Tres minutos de vídeo, seis ' +
+        'preguntas y un detector en el que juzgas tú cinco afirmaciones de un informe ajeno.',
+      preguntas: [
+        {
+          enunciado: 'Una proyección supone crecer un 15 % anual cinco años, cuando la empresa ' +
+                     'creció un 4 % de media. ¿Qué es?',
+          opciones: [
+            'Optimismo razonable',
+            'Crecimiento heroico: hay que justificar de dónde salen los clientes',
+            'Prudencia, porque siempre se proyecta algo más'
+          ],
+          correcta: 1,
+          explicacion: 'Triplicar el ritmo histórico sin explicar el porqué es el error número uno. ' +
+            'Y como el crecimiento se compone, el error no suma: multiplica. Un 15 % anual cinco ' +
+            'años es duplicar el tamaño.'
+        },
+        {
+          enunciado: 'El informe usa un crecimiento perpetuo del 3,5 %. ¿Qué implica?',
+          opciones: [
+            'Nada, es un valor habitual',
+            'Que la empresa crecerá por encima de la economía para siempre',
+            'Que la inflación se lo comerá'
+          ],
+          correcta: 1,
+          explicacion: 'Un 3,5 % perpetuo durante décadas implica que la empresa acabará siendo más ' +
+            'grande que su país. Con una economía creciendo al 1,5 %, es aritméticamente imposible. ' +
+            'Y como pesa dos tercios del valor, mueve el resultado un 15-20 %.'
+        },
+        {
+          enunciado: 'Un informe da un WACC del 6,2 % para una pyme española sin desglosarlo. ' +
+                     '¿Qué haces?',
+          opciones: [
+            'Aceptarlo: es un dato técnico',
+            'Pedir el desglose: con tipos actuales esa tasa apenas cubre el bono',
+            'Subirlo al 12 % por prudencia'
+          ],
+          correcta: 1,
+          explicacion: 'Con el bono al 3,3 % y una prima de mercado del 5,5 %, un 6,2 % total no ' +
+            'deja nada para el riesgo de tamaño ni para la beta. O el analista tiene una razón muy ' +
+            'buena, o ha bajado la tasa para que salga el número.'
+        },
+        {
+          enunciado: 'Las ventas crecen un 80 % en cinco años y la inversión se mantiene igual. ' +
+                     '¿Qué falta?',
+          opciones: [
+            'Nada, si la empresa tiene capacidad ociosa',
+            'Inversión y circulante: crecer exige comprar y financiar existencias',
+            'Solo los impuestos'
+          ],
+          correcta: 1,
+          explicacion: 'La capacidad ociosa puede explicar el primer año, no cinco. Crecer un 80 % ' +
+            'exige máquinas, personal y financiar más existencias y clientes. Si la proyección no ' +
+            'lo recoge, el flujo libre está inflado.'
+        },
+        {
+          enunciado: 'El informe suma 400.000 € de sinergias que se lograrán tras la compra. ' +
+                     '¿Es legítimo?',
+          opciones: [
+            'Sí, siempre que se expliquen',
+            'Solo si quien las paga es el comprador, no si se descuentan en el precio de venta',
+            'No, nunca'
+          ],
+          correcta: 1,
+          explicacion: 'Las sinergias las crea el comprador con su gestión. Si el vendedor las ' +
+            'incluye en el precio, está cobrando algo que todavía no existe y que hará otro. Es ' +
+            'legítimo mencionarlas; no lo es cobrarlas.'
+        },
+        {
+          enunciado: '¿Cuál es la revisión más eficaz de un informe ajeno?',
+          opciones: [
+            'Comprobar las sumas',
+            'Mirar los supuestos: crecimiento, tasa, inversión y circulante',
+            'Ver si el resultado coincide con la cotización'
+          ],
+          correcta: 1,
+          explicacion: 'Las sumas suelen estar bien: el error está en las hipótesis. Cuatro ' +
+            'preguntas —crecimiento frente al histórico, desglose de la tasa, inversión y ' +
+            'circulante— desmontan la mayoría de las valoraciones infladas.'
+        }
+      ],
+      interaccion: {
+        tipo: 'detector',
+        titulo: 'Detecta los errores',
+        intro: 'Estas son cinco frases sacadas de un informe real de valoración. Decide si son ' +
+          'correctas o si esconden uno de los cinco errores. Al final te digo cuántas has cazado.',
+        enunciado: '',
+        afirmaciones: [
+          {texto: 'La compañía crecerá un 14 % anual durante los próximos cinco años; en los ' +
+                  'últimos cinco creció un 3 % de media.',
+           correcta: 0,
+           explicacion: 'Es un error de crecimiento heroico. Cuadruplicar el ritmo histórico sin ' +
+             'explicar el origen de los clientes no es un supuesto: es un deseo.'},
+          {texto: 'Se aplica un crecimiento perpetuo del 1,5 %, en línea con la economía española.',
+           correcta: 1,
+           explicacion: 'Correcto. Un 1,5 % es defendible y coherente con el crecimiento de la ' +
+             'economía. Es justo lo contrario del error de perpetuidad generosa.'},
+          {texto: 'La tasa de descuento aplicada es del 9,8 %: 3,3 % de bono, 5,5 % de prima de ' +
+                  'mercado y 1 % de prima por tamaño.',
+           correcta: 1,
+           explicacion: 'Correcto: está desglosada y las piezas suman. Que se pueda discutir el ' +
+             '1 % de tamaño es otra cosa; lo importante es que no hay nada escondido.'},
+          {texto: 'Las ventas crecen un 60 % en el periodo y la inversión se mantiene en el 1,5 % ' +
+                  'de las ventas.',
+           correcta: 0,
+           explicacion: 'Error de inversión ignorada. Un 60 % más de ventas con la misma inversión ' +
+             'solo es posible si había una capacidad ociosa enorme, y eso hay que demostrarlo.'},
+          {texto: 'Se añaden 350.000 € por las sinergias que el comprador obtendrá al integrar la ' +
+                  'empresa.',
+           correcta: 0,
+           explicacion: 'Error de sumar lo que no existe. Las sinergias las crea el comprador; ' +
+             'cobrarlas en el precio es cobrar algo que todavía no se ha producido.'}
+        ]
+      }
+    },
     { numero: 11, publicada: false, modulo: 'Módulo 4 · Casos prácticos', tituloCorto: 'Una empresa cotizada, paso a paso' },
     { numero: 12, publicada: false, modulo: 'Módulo 4 · Casos prácticos', tituloCorto: 'Una pyme, paso a paso' }
   ]
