@@ -80,6 +80,14 @@ input{width:100%;padding:11px 13px;border:1px solid #D9DEE6;border-radius:6px;
 button{background:var(--gold);color:var(--navy);border:none;border-radius:6px;padding:14px 24px;
        font-size:15.5px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:18px}
 footer{background:var(--navy);color:#8A94A6;padding:30px 26px;font-size:13px;text-align:center}
+
+.galeria{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+.galeria figure{margin:0}
+.galeria img{width:100%;display:block;border:1px solid var(--linea);border-radius:9px;
+             box-shadow:0 12px 30px rgba(10,22,40,.10)}
+.galeria figcaption{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.55}
+.galeria figcaption strong{color:var(--navy)}
+@media(max-width:820px){.galeria{grid-template-columns:1fr}}
 @media(max-width:820px){
   .hero .interior,.precio{grid-template-columns:1fr}
   .hero h1{font-size:38px}
@@ -142,6 +150,35 @@ footer{background:var(--navy);color:#8A94A6;padding:30px 26px;font-size:13px;tex
         <p>El caso final compara tu valoración con un rango defendible y te dice qué supuesto
           te ha desviado.</p>
       </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h2>Así se ve por dentro</h2>
+    <p class="entrada">Cuatro de los once ejercicios. En todos se mueve algo y el resultado
+      cambia delante de ti.</p>
+    <div class="galeria">
+      <figure>
+        <img src="/assets/img/curso-normalizador.png" alt="Normalizador de EBITDA">
+        <figcaption><strong>Normalizar el beneficio</strong> · marcas qué partidas se ajustan y
+          el panel te dice si te equivocas.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/curso-wacc.png" alt="Simulador de la tasa de descuento">
+        <figcaption><strong>Construir la tasa</strong> · las cuatro piezas por separado, con su
+          peso en el resultado.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/curso-comparador.png" alt="Comparador de múltiplos">
+        <figcaption><strong>Elegir comparables</strong> · incluye o descarta empresas y mira cómo
+          se mueve la mediana.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/curso-reto.png" alt="Caso final con corrección">
+        <figcaption><strong>El caso final</strong> · valoras una empresa y te dice qué supuesto te
+          ha desviado del rango.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -278,6 +315,50 @@ footer{background:var(--navy);color:#8A94A6;padding:30px 26px;font-size:13px;tex
   </section>
 
 </main>
+
+<script>
+(function () {
+  var form = document.querySelector('form[name="curso-espera"]');
+  if (!form) return;
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var boton = form.querySelector('button');
+    var nombre = form.querySelector('input[name="nombre"]').value.trim();
+    var email = form.querySelector('input[name="email"]').value.trim();
+    var situacion = form.querySelector('input[name="situacion"]').value.trim();
+    if (!email) return;
+    boton.disabled = true;
+    boton.textContent = 'Apuntando…';
+
+    // a MailerLite, para que entre en la lista
+    var ml = new URLSearchParams();
+    ml.set('fields[email]', email);
+    if (nombre) ml.set('fields[name]', nombre);
+    ml.set('ml-submit', '1');
+    ml.set('anticsrf', 'true');
+    var peticionMl = fetch(
+      'https://assets.mailerlite.com/jsonp/2784740/forms/203841029310252380/subscribe',
+      { method: 'POST', body: ml, mode: 'cors', headers: { 'Accept': 'application/json' } }
+    ).catch(function () { return null; });
+
+    // a Netlify, para no perder el contacto si MailerLite falla
+    var nl = new URLSearchParams();
+    nl.set('form-name', 'curso-espera');
+    nl.set('nombre', nombre);
+    nl.set('email', email);
+    nl.set('situacion', situacion);
+    var peticionNl = fetch('/', { method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: nl.toString() })
+      .catch(function () { return null; });
+
+    Promise.all([peticionMl, peticionNl]).then(function () {
+      form.innerHTML = '<p style="font-size:16px;color:#06614A;font-weight:500;margin:0">' +
+        '<strong>Apuntado, ' + (nombre || 'gracias') + '.</strong> Te escribo el día que abra, ' +
+        'con el precio de lanzamiento. Nada más hasta entonces.</p>';
+    });
+  });
+})();
+</script>
 
 <footer>
   CriterioFinanciero · Sebastián Prat, economista y titulado EFPA nº 35094 ·
