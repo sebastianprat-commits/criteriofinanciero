@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso: cómo valorar una empresa · CriterioFinanciero</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1628;--navy2:#132239;--gold:#C9963A;--cream:#F7F3EA;--muted:#5A6478;
+      --linea:#E3DCCB;--ok:#2F7D5C;--mal:#B4462F}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--navy);font-family:'DM Sans',system-ui,sans-serif;
+     line-height:1.65;font-size:16px}
+header{background:var(--navy);padding:16px 26px;display:flex;justify-content:space-between;
+       align-items:center;flex-wrap:wrap;gap:12px}
+header .marca{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:22px;text-decoration:none}
+header .progreso{color:#8A94A6;font-size:13px}
+main{max-width:940px;margin:0 auto;padding:40px 24px 90px}
+h1{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;line-height:1.15;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:28px}
+.video{background:#000;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(10,22,40,.18)}
+.video video{display:block;width:100%;height:auto}
+section{margin-top:44px}
+h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:8px}
+.intro{color:var(--muted);margin-bottom:20px;max-width:66ch}
+.pregunta{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:22px 24px;margin-bottom:16px}
+.pregunta .enunciado{font-weight:500;margin-bottom:14px}
+.opciones{display:grid;gap:9px}
+.opcion{border:1px solid var(--linea);border-radius:7px;padding:12px 15px;cursor:pointer;
+        background:#FDFCF9;transition:.15s;font-size:15px;text-align:left;font-family:inherit;
+        color:var(--navy);width:100%}
+.opcion:hover{border-color:var(--gold);background:#FBF6EA}
+.opcion.elegida{border-color:var(--navy);background:#EEF1F6}
+.opcion.bien{border-color:var(--ok);background:#EAF5EF;color:var(--ok);font-weight:500}
+.opcion.mal{border-color:var(--mal);background:#FBEDEA;color:var(--mal)}
+.explica{margin-top:12px;font-size:14px;color:var(--muted);display:none;
+         border-top:1px dashed var(--linea);padding-top:12px}
+.explica.visible{display:block}
+.panel{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:24px 26px}
+.sliders{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px;margin-bottom:20px}
+.slider label{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;
+              color:var(--muted);margin-bottom:6px}
+.slider input{width:100%;accent-color:var(--gold)}
+.slider .valor{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy)}
+.resultado{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+           border-top:1px solid var(--linea);padding-top:18px}
+.resultado .cifra{font-family:'Cormorant Garamond',serif;font-size:46px;color:var(--gold);font-weight:600}
+.resultado .nota{color:var(--muted);font-size:14px}
+svg{width:100%;height:150px;margin-top:14px}
+.siguiente{display:flex;justify-content:space-between;align-items:center;gap:16px;
+           margin-top:40px;padding-top:24px;border-top:1px solid var(--linea);flex-wrap:wrap}
+button.accion{background:var(--gold);color:var(--navy);border:none;border-radius:7px;
+              padding:13px 22px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+button.accion[disabled]{opacity:.4;cursor:not-allowed}
+.aviso{font-size:12.5px;color:var(--muted);margin-top:10px}
+.insignia{display:inline-block;background:rgba(201,150,58,.15);color:#8A6420;font-size:12px;
+          padding:3px 10px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;
+          font-weight:600;margin-bottom:10px}
+@media(max-width:700px){.sliders{grid-template-columns:1fr}h1{font-size:34px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="marca" href="/">CriterioFinanciero</a>
+  <div class="progreso" id="progreso">Lección 1 de 12</div>
+</header>
+
+<main>
+  <div class="insignia">Módulo 1 · Fundamentos</div>
+  <h1>Qué es valorar una empresa</h1>
+  <p class="sub">Y qué no es. Tres minutos de vídeo, cuatro preguntas y un simulador para
+    ver con tus manos lo que mueve una valoración.</p>
+
+  <div class="video">
+    <video controls preload="metadata" poster="">
+      <source src="videos/leccion_01.mp4" type="video/mp4">
+      Tu navegador no reproduce el vídeo.
+    </video>
+  </div>
+
+  <section>
+    <h2>Comprueba que lo has entendido</h2>
+    <p class="intro">Cuatro preguntas. No hay nota: cada respuesta te explica por qué, que es
+      lo que de verdad se aprende.</p>
+    <div id="quiz"></div>
+    <div id="marcador" style="font-weight:500;margin-top:8px"></div>
+  </section>
+
+  <section>
+    <h2>Mueve los números</h2>
+    <p class="intro">Aquí está la parte que ningún vídeo puede darte. Cambia la tasa de descuento,
+      el crecimiento o el beneficio y mira cómo se mueve el valor. Hazlo despacio: la sensación
+      de que un punto de descuento cambia todo es lo que se queda.</p>
+
+    <div class="panel">
+      <div class="sliders">
+        <div class="slider">
+          <label for="s_ebitda">Beneficio (EBITDA)</label>
+          <input id="s_ebitda" type="range" min="100000" max="2000000" step="10000" value="350000">
+          <div class="valor" id="v_ebitda">350.000 €</div>
+        </div>
+        <div class="slider">
+          <label for="s_crec">Crecimiento de ventas (5 años)</label>
+          <input id="s_crec" type="range" min="-5" max="15" step="0.5" value="3">
+          <div class="valor" id="v_crec">3,0 %</div>
+        </div>
+        <div class="slider">
+          <label for="s_wacc">Tasa de descuento (WACC)</label>
+          <input id="s_wacc" type="range" min="6" max="18" step="0.1" value="10.3">
+          <div class="valor" id="v_wacc">10,3 %</div>
+        </div>
+        <div class="slider">
+          <label for="s_g">Crecimiento perpetuo</label>
+          <input id="s_g" type="range" min="0" max="3.5" step="0.1" value="1.5">
+          <div class="valor" id="v_g">1,5 %</div>
+        </div>
+      </div>
+
+      <div class="resultado">
+        <div class="cifra" id="valor">—</div>
+        <div class="nota" id="nota"></div>
+      </div>
+      <svg id="grafico" viewBox="0 0 800 150" preserveAspectRatio="none"></svg>
+      <div class="aviso">El gráfico muestra el valor para cada tasa de descuento entre el 6 % y el
+        18 %, con los demás parámetros como los tienes ahora. El punto dorado es tu situación.</div>
+    </div>
+  </section>
+
+  <div class="siguiente">
+    <div>
+      <div style="font-size:13px;color:var(--muted)">Siguiente</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px">2 · Las tres preguntas</div>
+    </div>
+    <button class="accion" id="btn_siguiente" disabled>Lección 2 en preparación</button>
+  </div>
+</main>
+
+<script>
+// ------------------------------------------------------------ preguntas
+const PREGUNTAS = [
+  {
+    enunciado: "Una empresa cotiza a 40 € y tu valoración da 28 €. ¿Qué significa?",
+    opciones: [
+      "Que la empresa está cara y hay que vender",
+      "Que el mercado paga expectativas que tu valoración no recoge",
+      "Que tu valoración está mal"
+    ],
+    correcta: 1,
+    explicacion: "Ni lo uno ni lo otro. El precio incorpora expectativas de futuro que un modelo " +
+      "basado en números actuales no puede capturar. Puede que el mercado tenga razón y puede " +
+      "que no: lo que no puedes hacer es llamar error a una diferencia que no has explicado."
+  },
+  {
+    enunciado: "¿Cuál de estas tres cosas NO entra en el cálculo del valor?",
+    opciones: [
+      "La deuda de la empresa",
+      "El precio al que cotizaba ayer",
+      "El crecimiento que esperas"
+    ],
+    correcta: 1,
+    explicacion: "El precio de ayer no dice nada sobre lo que vale el negocio. La deuda sí entra " +
+      "(se resta) y el crecimiento también (alimenta la proyección). Confundir precio con valor " +
+      "es el error de partida más común."
+  },
+  {
+    enunciado: "Dos valoraciones de la misma empresa dan 30 y 48 millones. ¿Qué haces?",
+    opciones: [
+      "Hago la media y digo 39",
+      "Me quedo con la más alta porque el mercado suele pagar más",
+      "Miro por qué difieren antes de dar ningún número"
+    ],
+    correcta: 2,
+    explicacion: "Una diferencia del 60 % no se promedia: se explica. Casi siempre está en los " +
+      "supuestos de crecimiento o en la tasa de descuento. Si no sabes de dónde viene la " +
+      "diferencia, no tienes una valoración: tienes dos números."
+  },
+  {
+    enunciado: "¿Cuánto del trabajo de valorar una empresa es entender el negocio?",
+    opciones: [
+      "Alrededor del 30 %: la fórmula es lo importante",
+      "Alrededor del 90 %: el cálculo es lo fácil",
+      "Depende del sector"
+    ],
+    correcta: 1,
+    explicacion: "La aritmética la hace un ordenador en un segundo. Lo que no hace es saber si " +
+      "ese margen del 22 % es sostenible, si el cliente principal se va a ir o si la inversión " +
+      "pendiente se va a comer la caja."
+  }
+];
+
+let acertadas = 0, respondidas = 0;
+
+function pintarQuiz() {
+  const contenedor = document.getElementById('quiz');
+  contenedor.innerHTML = PREGUNTAS.map((p, i) => `
+    <div class="pregunta" id="p${i}">
+      <div class="enunciado">${i + 1}. ${p.enunciado}</div>
+      <div class="opciones">
+        ${p.opciones.map((o, j) =>
+          `<button class="opcion" data-p="${i}" data-o="${j}">${o}</button>`).join('')}
+      </div>
+      <div class="explica" id="e${i}">${p.explicacion}</div>
+    </div>`).join('');
+
+  contenedor.querySelectorAll('.opcion').forEach(boton => {
+    boton.addEventListener('click', () => responder(
+      Number(boton.dataset.p), Number(boton.dataset.o), boton));
+  });
+}
+
+function responder(indice, elegida, boton) {
+  const contenedor = document.getElementById('p' + indice);
+  if (contenedor.dataset.respondida) return;
+  contenedor.dataset.respondida = '1';
+
+  const p = PREGUNTAS[indice];
+  contenedor.querySelectorAll('.opcion').forEach((b, j) => {
+    b.disabled = true;
+    if (j === p.correcta) b.classList.add('bien');
+    else if (j === elegida) b.classList.add('mal');
+  });
+  document.getElementById('e' + indice).classList.add('visible');
+
+  respondidas++;
+  if (elegida === p.correcta) acertadas++;
+
+  const marcador = document.getElementById('marcador');
+  if (respondidas === PREGUNTAS.length) {
+    const texto = acertadas === 4 ? 'Cuatro de cuatro. Puedes pasar a la lección 2.'
+      : acertadas >= 2 ? `Has acertado ${acertadas} de 4. Lee las explicaciones de las que fallaste.`
+      : `Has acertado ${acertadas} de 4. Vuelve al vídeo antes de seguir: es corto.`;
+    marcador.textContent = texto;
+    guardar(acertadas);
+  } else {
+    marcador.textContent = `Llevas ${acertadas} de ${respondidas}.`;
+  }
+}
+
+function guardar(nota) {
+  try {
+    localStorage.setItem('curso_l1', JSON.stringify({nota, fecha: new Date().toISOString()}));
+  } catch (e) {}
+}
+
+// ------------------------------------------------------------ simulador
+const nf = new Intl.NumberFormat('es-ES', {maximumFractionDigits: 0});
+
+function valor(ebitda, crecimiento, wacc, g) {
+  const impuesto = ebitda * 0.25;
+  let flujo = ebitda - impuesto;
+  let pv = 0;
+  for (let anio = 1; anio <= 5; anio++) {
+    const tasa = crecimiento / 100 + (g / 100 - crecimiento / 100) * (anio - 1) / 4;
+    flujo *= (1 + tasa);
+    pv += flujo / Math.pow(1 + wacc / 100, anio);
+  }
+  const terminal = flujo * (1 + g / 100) / (wacc / 100 - g / 100);
+  return pv + terminal / Math.pow(1 + wacc / 100, 5);
+}
+
+function euros(v) { return nf.format(Math.round(v)) + ' €'; }
+
+function pintarSimulador() {
+  const ebitda = Number(document.getElementById('s_ebitda').value);
+  const crecimiento = Number(document.getElementById('s_crec').value);
+  const wacc = Number(document.getElementById('s_wacc').value);
+  const g = Number(document.getElementById('s_g').value);
+
+  document.getElementById('v_ebitda').textContent = euros(ebitda);
+  document.getElementById('v_crec').textContent = crecimiento.toFixed(1).replace('.', ',') + ' %';
+  document.getElementById('v_wacc').textContent = wacc.toFixed(1).replace('.', ',') + ' %';
+  document.getElementById('v_g').textContent = g.toFixed(1).replace('.', ',') + ' %';
+
+  const actual = valor(ebitda, crecimiento, wacc, g);
+  document.getElementById('valor').textContent = euros(actual);
+
+  const otro = valor(ebitda, crecimiento, wacc + 1, g);
+  const caida = (otro - actual) / actual * 100;
+  document.getElementById('nota').textContent =
+    `Si la tasa subiera un punto (al ${(wacc + 1).toFixed(1).replace('.', ',')} %), el valor ` +
+    `sería ${euros(otro)}: un ${Math.abs(caida).toFixed(0)} % ${caida < 0 ? 'menos' : 'más'}.`;
+
+  // gráfico
+  const puntos = [];
+  let min = Infinity, max = -Infinity;
+  for (let w = 6; w <= 18.01; w += 0.5) {
+    const v = valor(ebitda, crecimiento, w, g);
+    puntos.push([w, v]);
+    min = Math.min(min, v); max = Math.max(max, v);
+  }
+  const ancho = 800, alto = 150, margen = 8;
+  const x = w => margen + (w - 6) / 12 * (ancho - 2 * margen);
+  const y = v => alto - margen - (v - min) / (max - min || 1) * (alto - 2 * margen);
+  const linea = puntos.map(([w, v], i) =>
+    `${i ? 'L' : 'M'}${x(w).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  const cx = x(wacc), cy = y(actual);
+
+  document.getElementById('grafico').innerHTML = `
+    <path d="${linea}" fill="none" stroke="#0A1628" stroke-width="2.5"/>
+    <line x1="${cx}" y1="0" x2="${cx}" y2="${alto}" stroke="#C9963A" stroke-width="1"
+          stroke-dasharray="4 4"/>
+    <circle cx="${cx}" cy="${cy}" r="6" fill="#C9963A"/>
+    <text x="${margen}" y="${alto - 2}" font-size="10" fill="#8A94A6">6 %</text>
+    <text x="${ancho - margen - 22}" y="${alto - 2}" font-size="10" fill="#8A94A6">18 %</text>`;
+}
+
+['s_ebitda', 's_crec', 's_wacc', 's_g'].forEach(id =>
+  document.getElementById(id).addEventListener('input', pintarSimulador));
+
+pintarQuiz();
+pintarSimulador();
+
+// progreso guardado
+try {
+  const previo = JSON.parse(localStorage.getItem('curso_l1') || 'null');
+  if (previo) document.getElementById('progreso').textContent =
+    `Lección 1 de 12 · ya la hiciste (${previo.nota} de 4)`;
+} catch (e) {}
+</script>
+</body>
+</html>
