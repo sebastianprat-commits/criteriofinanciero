@@ -30,6 +30,16 @@
     </div>
     <a class="accion" href="leccion.html?l=1">Abrir la lección 1</a>
   </div>
+
+  <div class="siguiente" id="certificado">
+    <div>
+      <div style="font-size:13px;color:var(--muted)">Al terminar las doce</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px">Tu certificado</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px" id="cert_texto"></div>
+    </div>
+    <a class="accion sec" href="certificado.html" id="cert_boton">Ver el certificado</a>
+  </div>
+
 </main>
 
 <script src="datos.js"></script>
@@ -59,6 +69,19 @@
   }).join('');
 
   document.getElementById('modulos').innerHTML = html;
+  
+  const total = CURSO.lecciones.length;
+  let completas = 0;
+  for (let i = 1; i <= total; i++) {
+    try { if (localStorage.getItem('curso_l' + i)) completas++; } catch (e) {}
+  }
+  document.getElementById('cert_texto').textContent =
+    completas === total ? 'Completado: ya puedes descargarlo' :
+    completas + ' de ' + total + ' lecciones hechas';
+  if (completas < total) {
+    document.getElementById('cert_boton').textContent = 'Te faltan ' + (total - completas);
+    document.getElementById('cert_boton').style.opacity = '.6';
+  }
   document.getElementById('progreso').textContent =
     `Curso · ${hechas} de ${CURSO.lecciones.length} lecciones hechas`;
 </script>
