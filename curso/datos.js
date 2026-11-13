@@ -187,9 +187,207 @@ const CURSO = {
     },
 
     { numero: 3, publicada: false, modulo: 'Módulo 1 · Fundamentos', tituloCorto: 'El beneficio no es la caja' },
-    { numero: 4, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Múltiplos: comparar con el vecino' },
+    {
+      numero: 4,
+      publicada: true,
+      modulo: 'Módulo 2 · Los métodos',
+      titulo: 'Lección 4 · Múltiplos: comparar con el vecino',
+      tituloCorto: 'Múltiplos: comparar con el vecino',
+      entradilla: 'El método más usado y el peor usado. Cinco minutos de vídeo, seis preguntas y un ' +
+        'comparador en el que eliges tú los pares y ves cómo cambia el valor.',
+      preguntas: [
+        {
+          enunciado: '¿Qué mide el EV/EBITDA?',
+          opciones: [
+            'Cuántos años de beneficio tarda en recuperarse lo que cuesta la empresa',
+            'Cuánto paga el mercado por cada euro de beneficio antes de intereses e impuestos',
+            'La rentabilidad que saca el accionista'
+          ],
+          correcta: 1,
+          explicacion: 'El EV es lo que cuesta comprar la empresa entera: su valor de mercado más ' +
+            'la deuda. Se divide entre el EBITDA, y el resultado dice cuántas veces el beneficio ' +
+            'está pagando el mercado. Un 8x significa que se paga ocho veces el beneficio anual.'
+        },
+        {
+          enunciado: 'Tu empresa tiene un EBITDA de 1 millón y una deuda neta de 500.000 €. ' +
+                     'Aplicando un múltiplo de 6x, ¿cuánto valen las acciones?',
+          opciones: ['6.000.000 €', '5.500.000 €', '3.000.000 €'],
+          correcta: 1,
+          explicacion: '6 × 1.000.000 = 6.000.000 de valor de empresa. Pero el comprador hereda ' +
+            'la deuda: 6.000.000 − 500.000 = 5.500.000 para los accionistas. Olvidar restar la ' +
+            'deuda es el error clásico al usar múltiplos.'
+        },
+        {
+          enunciado: '¿Cuál de estos NO es un buen comparable para una empresa española de ' +
+                     'maquinaria con 20 millones de facturación?',
+          opciones: [
+            'Un fabricante español de maquinaria similar',
+            'Un fabricante alemán del mismo tamaño y sector',
+            'Una empresa de software cotizada en Estados Unidos'
+          ],
+          correcta: 2,
+          explicacion: 'El sector, el tamaño y el país importan. Una empresa de software cotiza a ' +
+            'múltiplos completamente distintos: compararla con un fabricante de maquinaria no ' +
+            'informa de nada. Los dos primeros son comparables razonables.'
+        },
+        {
+          enunciado: 'Un comparable cotiza a 18x porque el mercado espera que duplique su ' +
+                     'beneficio el año que viene. ¿Lo incluyes en la mediana?',
+          opciones: [
+            'Sí, todos los comparables suman',
+            'No: su múltiplo recoge una expectativa que tu empresa no tiene por qué cumplir',
+            'Sí, pero le doy menos peso'
+          ],
+          correcta: 1,
+          explicacion: 'Un múltiplo de 18x no dice que las empresas del sector valgan 18 veces su ' +
+            'beneficio: dice que el mercado espera algo de esa empresa concreta. Mezclar ese ' +
+            'número con los demás contamina la mediana.'
+        },
+        {
+          enunciado: 'La mediana de tus comparables es 7x y el más barato cotiza a 5x. ¿Qué ' +
+                     'haces con el más barato?',
+          opciones: [
+            'Lo descarto para que la mediana salga mejor',
+            'Lo dejo: si es el único, el problema no es el múltiplo, es que no tienes comparables',
+            'Cojo el 5x porque es más prudente'
+          ],
+          correcta: 1,
+          explicacion: 'Descartar el dato que no te gusta es manipular. Si un comparable está muy ' +
+            'por debajo, hay que entender por qué: puede que esté penalizado por algo que tu ' +
+            'empresa también tiene, o que tenga un problema que tú no tienes.'
+        },
+        {
+          enunciado: '¿Qué método es más fiable para una empresa de maquinaria con beneficios ' +
+                     'estables pero vida útil de las máquinas muy larga?',
+          opciones: [
+            'Múltiplos, porque son más objetivos',
+            'Descuento de flujos, porque recoge la inversión futura',
+            'Los dos por igual'
+          ],
+          correcta: 1,
+          explicacion: 'Los múltiplos miran un año; el descuento de flujos mira la inversión que ' +
+            'habrá que hacer para mantener esas máquinas. En negocios intensivos en capital, ' +
+            'ignorar la inversión futura infla la valoración. Por eso se usan los dos.'
+        }
+      ],
+      interaccion: {
+        tipo: 'comparador',
+        titulo: 'Elige tú los comparables',
+        intro: 'La empresa objetivo es un fabricante de maquinaria con 1,2 millones de EBITDA y ' +
+          'una deuda neta de 400.000 €. Marca o desmarca los comparables y mira cómo se mueve el ' +
+          'valor. La mediana es más fiable que la media cuando hay un dato raro.',
+        enunciado: 'Cada comparable trae una nota con su situación. Elegir mal los pares es el ' +
+          'error más frecuente al valorar por múltiplos.',
+        ebitda: 1200000,
+        deudaNeta: 400000,
+        aviso: 'El múltiplo no dice cuánto vale tu empresa: dice cuánto se paga hoy por empresas ' +
+          'parecidas. Si los parecidos no se parecen, el resultado no vale nada.',
+        pares: [
+          {nombre: 'Fabricante español similar', multiple: 7.2, incluido: true, nota: 'mismo tamaño'},
+          {nombre: 'Competidor directo regional', multiple: 6.8, incluido: true, nota: 'mismo negocio'},
+          {nombre: 'Líder europeo del sector', multiple: 9.8, incluido: false, nota: 'cinco veces más grande'},
+          {nombre: 'Empresa en pérdidas', multiple: 18.4, incluido: false, nota: 'múltiplo distorsionado'},
+          {nombre: 'Grupo diversificado', multiple: 8.1, incluido: false, nota: 'varios negocios'},
+          {nombre: 'Maquinaria de EEUU', multiple: 11.3, incluido: false, nota: 'otro mercado y tamaño'}
+        ]
+      }
+    },
     { numero: 5, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Descuento de flujos I: proyectar la caja' },
-    { numero: 6, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Descuento de flujos II: la tasa' },
+    {
+      numero: 6,
+      publicada: true,
+      modulo: 'Módulo 2 · Los métodos',
+      titulo: 'Lección 6 · De dónde sale la tasa',
+      tituloCorto: 'De dónde sale la tasa',
+      entradilla: 'La tasa de descuento, pieza a pieza. Cuatro minutos de vídeo, seis preguntas y un ' +
+        'simulador en el que construyes la tasa moviendo cada componente.',
+      preguntas: [
+        {
+          enunciado: '¿Qué es la tasa de descuento?',
+          opciones: [
+            'El tipo de interés que cobra el banco por prestar',
+            'La rentabilidad que exige quien pone el dinero en el negocio',
+            'El crecimiento que espera la empresa'
+          ],
+          correcta: 1,
+          explicacion: 'Es la rentabilidad mínima que exige el inversor para aceptar el riesgo del ' +
+            'negocio. No es el tipo del banco: es lo que el dinero invertido tiene que rendir para ' +
+            'compensar el riesgo asumido.'
+        },
+        {
+          enunciado: 'Una empresa tiene beta 1,4. ¿Qué significa?',
+          opciones: [
+            'Que es un 40 % más rentable que el mercado',
+            'Que cuando el mercado cae un 10 %, ella cae alrededor de un 14 %',
+            'Que tiene un 40 % más de deuda'
+          ],
+          correcta: 1,
+          explicacion: 'La beta mide sensibilidad, no rentabilidad. Una beta de 1,4 significa que ' +
+            'los movimientos del mercado se amplifican un 40 % en esa acción. Las empresas ' +
+            'cíclicas tienen betas altas; las de alimentación o agua, betas bajas.'
+        },
+        {
+          enunciado: '¿Por qué se suma una prima por tamaño a una pyme?',
+          opciones: [
+            'Porque las pymes son menos rentables',
+            'Porque vender una empresa que no cotiza cuesta tiempo y hay pocos compradores',
+            'Porque las pymes pagan más impuestos'
+          ],
+          correcta: 1,
+          explicacion: 'Es una prima de liquidez. Una acción se vende en segundos; una pyme tarda ' +
+            'meses en encontrar comprador y suele haber solo unos pocos interesados. Esa falta de ' +
+            'liquidez y de transparencia se compensa con una rentabilidad exigida más alta.'
+        },
+        {
+          enunciado: 'Pasas la tasa del 9 % al 10 %. ¿Qué le pasa al valor?',
+          opciones: [
+            'Baja alrededor de un 10-15 %',
+            'Baja un 1 %',
+            'No cambia, solo cambia el valor terminal'
+          ],
+          correcta: 0,
+          explicacion: 'Como la mayor parte del valor está en flujos lejanos, un punto de descuento ' +
+            'pesa mucho. En una valoración típica, pasar del 9 al 10 % reduce el resultado entre un ' +
+            '10 y un 15 %. Por eso se presenta un rango.'
+        },
+        {
+          enunciado: '¿Cuál de estas combinaciones es un error?',
+          opciones: [
+            'Beta 1,0 y prima por tamaño del 2 %',
+            'Beta 1,6 y además una prima por riesgo de cliente del 3 %',
+            'Beta 1,2 en una empresa cíclica'
+          ],
+          correcta: 1,
+          explicacion: 'Puede estar contando dos veces el mismo riesgo: una beta alta ya recoge parte ' +
+            'de la volatilidad y del riesgo de negocio. Añadir encima una prima por concentración ' +
+            'sin justificar duplica la penalización.'
+        },
+        {
+          enunciado: 'Dos analistas valoran la misma empresa: uno usa el 8 % y otro el 11 %. ' +
+                     '¿Cuál tiene razón?',
+          opciones: [
+            'El del 8 %, que es más optimista',
+            'El del 11 %, que es más prudente',
+            'Depende de los supuestos de riesgo, y hay que explicarlos'
+          ],
+          correcta: 2,
+          explicacion: 'La tasa no es cuestión de optimismo: se construye con piezas que se pueden ' +
+            'discutir. Si uno usa beta 0,8 y otro 1,3, los dos pueden estar justificados si lo ' +
+            'explican. Lo que no vale es poner una tasa sin decir de dónde sale.'
+        }
+      ],
+      interaccion: {
+        tipo: 'wacc',
+        titulo: 'Construye la tasa tú mismo',
+        intro: 'Mueve las cuatro piezas y mira cómo se forma la tasa. Fíjate en el peso de cada ' +
+          'una: el bono y la prima de mercado son la base; la beta y el tamaño son lo que se ' +
+          'discute en cada empresa.',
+        rf: 3.3,
+        prima: 5.5,
+        beta: 1.0,
+        tamano: 2.0
+      }
+    },
     { numero: 7, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Valor terminal' },
     { numero: 8, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Normalizar el beneficio' },
     { numero: 9, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Deuda, caja y lo que no está en el balance' },
