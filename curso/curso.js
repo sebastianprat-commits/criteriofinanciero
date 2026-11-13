@@ -796,16 +796,18 @@ function componenteDetector(contenedor, cfg) {
       caja.dataset.respondida = '1';
       const a = cfg.afirmaciones[i];
       const elegido = boton.dataset.v === '1';
+      // a.correcta es 1 (es correcto) o 0 (es un error): se pasa a booleano para poder comparar
+      const esCorrecta = a.correcta === 1 || a.correcta === true;
 
       caja.querySelectorAll('button[data-f]').forEach(b => {
         b.disabled = true;
         const valor = b.dataset.v === '1';
-        if (valor === a.correcta) b.classList.add('bien');
+        if (valor === esCorrecta) b.classList.add('bien');
         else if (valor === elegido) b.classList.add('mal');
       });
       document.getElementById('fe' + i).classList.add('visible');
       respondidas++;
-      if (elegido === a.correcta) acertadas++;
+      if (elegido === esCorrecta) acertadas++;
 
       const marcador = document.getElementById('f_marcador');
       if (respondidas === cfg.afirmaciones.length) {
