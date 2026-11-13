@@ -10,8 +10,7 @@
 <style>
 :root{--navy:#0A1628;--gold:#C9963A;--cream:#F7F3EA;--muted:#5A6478}
 *{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--navy);
-     font-family:'DM Sans',system-ui,sans-serif;line-height:1.7;font-size:16.5px}
+body{margin:0;background:var(--cream);color:var(--navy); font-family:'DM Sans',system-ui,sans-serif;line-height:1.7;font-size:16.5px}
 header.barra{background:var(--navy);padding:18px 24px}
 header.barra a{color:var(--gold);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:22px}
 main{max-width:760px;margin:0 auto;padding:48px 24px 72px}
@@ -26,12 +25,9 @@ h1{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;margin:
 .precio .antes{font-size:16px;color:#A9A292;text-decoration:line-through}
 .baja{background:#ECFDF5;color:#06614A;font-size:12px;font-weight:600;padding:3px 8px;border-radius:4px}
 form{background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:24px}
-label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-      color:var(--muted);margin:0 0 6px}
-input,select,textarea{width:100%;padding:12px 14px;border:1px solid #D9DEE6;border-radius:6px;
-      font-family:inherit;font-size:15px;margin-bottom:18px;background:#fff;color:var(--navy)}
-button{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:6px;
-       padding:15px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit}
+label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase; color:var(--muted);margin:0 0 6px}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid #D9DEE6;border-radius:6px; font-family:inherit;font-size:15px;margin-bottom:18px;background:#fff;color:var(--navy)}
+button{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:6px; padding:15px;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit}
 small{display:block;font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.55}
 .vacio{background:#fff;border:1px dashed #DCD4C4;border-radius:10px;padding:34px;text-align:center}
 footer{background:var(--navy);color:rgba(255,255,255,.5);padding:26px;font-size:13px;text-align:center}
@@ -40,119 +36,11 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none;margin:0 8px}
 </head>
 <body>
 <header class="barra"><a href="/">CriterioFinanciero</a></header>
-<main>
-  <h1>Todavía no está abierto</h1>
-  <div style="background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:26px 28px;margin-bottom:24px">
-    <p style="margin:0 0 10px;font-size:16px;line-height:1.7">La web está en pruebas y los informes
-    todavía no se pueden comprar.</p>
-    <p style="margin:0;font-size:14px;color:#5A6478">Si quieres que te avise el día del lanzamiento,
-    deja tu correo en la <a href="/#pedido" style="color:#8A6420">página principal</a>.</p>
-  </div>
-
-  <div class="resumen" id="resumen" style="display:none">
-    <p style="margin:0;color:var(--muted);font-size:14px">Cargando el informe…</p>
-  </div>
-
-  <div class="vacio" id="error" style="display:none">
-    <p style="margin:0 0 12px">No encuentro ese informe. Puede que el enlace esté incompleto.</p>
-    <a href="/repositorio/" style="color:#8A6420">Ver todos los informes disponibles →</a>
-  </div>
-
-  <form name="compra-informe" style="display:none" method="POST" action="/gracias/" data-netlify="true"
-        netlify-honeypot="bot-field" id="form-compra" style="display:none">
-    <input type="hidden" name="form-name" value="compra-informe">
-    <p hidden><label>No rellenar <input name="bot-field"></label></p>
-    <input type="hidden" name="informe" id="campo-informe">
-    <input type="hidden" name="importe" id="campo-importe">
-    <input type="hidden" name="origen" value="checkout-repositorio">
-
-    <label for="nombre">Tu nombre</label>
-    <input type="text" id="nombre" name="nombre" required placeholder="Nombre y apellidos">
-
-    <label for="email">Tu email</label>
-    <input type="email" id="email" name="email" required placeholder="para enviarte el informe">
-
-    <label>Forma de pago</label>
-    <div style="background:#F7F3EA;border:1px solid #E3DCCB;border-radius:6px;padding:14px 16px;
-         margin-bottom:18px;font-size:14.5px;line-height:1.6">
-      <strong>Bizum al +34 686 875 142</strong><br>
-      <span style="color:#5A6478;font-size:13px">Al confirmar el pedido recibirás los datos y el
-      importe. El informe se entrega en 24-48 h desde el pago.</span>
-    </div>
-    <input type="hidden" name="pago" value="Bizum">
-
-    <label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;
-           letter-spacing:0;font-size:13.5px;line-height:1.55;color:#3A4459;margin-bottom:20px">
-      <input type="checkbox" name="desistimiento" value="aceptado" required
-             style="width:18px;height:18px;margin:2px 0 0;flex:0 0 auto">
-      <span>Sé que el informe es un contenido digital personalizado y que, una vez iniciada su
-      elaboración, <strong>no tengo derecho de desistimiento</strong> (art. 103.m del TRLGDCU).
-      Presto mi conformidad expresa para que el trabajo empiece.</span>
-    </label>
-
-    <label for="notas">Algo que deba saber (opcional)</label>
-    <textarea id="notas" name="notas" rows="3" placeholder="¿Para qué lo quieres? ¿Tienes ya posición?"></textarea>
-
-    <button type="submit">Confirmar el pedido</button>
-    <small>
-      Al confirmar te envío por correo los datos de pago. El informe se entrega en 24-48 horas desde
-      el pago, en PDF. Precio con el descuento de lanzamiento ya aplicado, válido hasta el 31 de diciembre.
-      <a href="/aviso-legal/" style="color:inherit">Condiciones</a> ·
-      <a href="/privacidad/" style="color:inherit">Privacidad</a>
-    </small>
-  </form>
-
-  <small style="text-align:center;margin-top:18px">
-    ¿Buscabas otro informe? <a href="/repositorio/" style="color:#8A6420">Ver todos</a> ·
-    ¿Prefieres un análisis nuevo? <a href="/#pedido" style="color:#8A6420">Pedirlo</a>
-  </small>
+<main> <h1>Todavía no está abierto</h1> <div style="background:#fff;border:1px solid #E3DCCB;border-radius:10px;padding:26px 28px;margin-bottom:24px"> <p style="margin:0 0 10px;font-size:16px;line-height:1.7">La web está en pruebas y los informes todavía no se pueden comprar.</p> <p style="margin:0;font-size:14px;color:#5A6478">Si quieres que te avise el día del lanzamiento, deja tu correo en la <a href="/#pedido" style="color:#8A6420">página principal</a>.</p> </div> <div class="resumen" id="resumen" style="display:none"> <p style="margin:0;color:var(--muted);font-size:14px">Cargando el informe…</p> </div> <div class="vacio" id="error" style="display:none"> <p style="margin:0 0 12px">No encuentro ese informe. Puede que el enlace esté incompleto.</p> <a href="/repositorio/" style="color:#8A6420">Ver todos los informes disponibles →</a> </div> <form name="compra-informe" style="display:none" method="POST" action="/gracias/" data-netlify="true" netlify-honeypot="bot-field" id="form-compra" style="display:none"> <input type="hidden" name="form-name" value="compra-informe"> <p hidden><label>No rellenar <input name="bot-field"></label></p> <input type="hidden" name="informe" id="campo-informe"> <input type="hidden" name="importe" id="campo-importe"> <input type="hidden" name="origen" value="checkout-repositorio"> <label for="nombre">Tu nombre</label> <input type="text" id="nombre" name="nombre" required placeholder="Nombre y apellidos"> <label for="email">Tu email</label> <input type="email" id="email" name="email" required placeholder="para enviarte el informe"> <label>Forma de pago</label> <div style="background:#F7F3EA;border:1px solid #E3DCCB;border-radius:6px;padding:14px 16px; margin-bottom:18px;font-size:14.5px;line-height:1.6"> <strong>Pago por Bizum</strong><br> <span style="color:#5A6478;font-size:13px">Al confirmar el pedido recibirás los datos y el importe. El informe se entrega en 24-48 h desde el pago.</span> </div> <input type="hidden" name="pago" value="Bizum"> <label style="display:flex;gap:10px;align-items:flex-start;text-transform:none; letter-spacing:0;font-size:13.5px;line-height:1.55;color:#3A4459;margin-bottom:20px"> <input type="checkbox" name="desistimiento" value="aceptado" required style="width:18px;height:18px;margin:2px 0 0;flex:0 0 auto"> <span>Sé que el informe es un contenido digital personalizado y que, una vez iniciada su elaboración, <strong>no tengo derecho de desistimiento</strong> (art. 103.m del TRLGDCU). Presto mi conformidad expresa para que el trabajo empiece.</span> </label> <label for="notas">Algo que deba saber (opcional)</label> <textarea id="notas" name="notas" rows="3" placeholder="¿Para qué lo quieres? ¿Tienes ya posición?"></textarea> <button type="submit">Confirmar el pedido</button> <small> Al confirmar te envío por correo los datos de pago. El informe se entrega en 24-48 horas desde el pago, en PDF. Precio con el descuento de lanzamiento ya aplicado, válido hasta el 31 de diciembre. <a href="/aviso-legal/" style="color:inherit">Condiciones</a> · <a href="/privacidad/" style="color:inherit">Privacidad</a> </small> </form> <small style="text-align:center;margin-top:18px"> ¿Buscabas otro informe? <a href="/repositorio/" style="color:#8A6420">Ver todos</a> · ¿Prefieres un análisis nuevo? <a href="/#pedido" style="color:#8A6420">Pedirlo</a> </small>
 </main>
-<footer>
-  <a href="/">Inicio</a><a href="/repositorio/">Informes</a><a href="/glosario/">Glosario</a>
-  <a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/contacto/">Contacto</a>
-</footer>
-
-<script>
-(function () {
-  var ref = new URLSearchParams(location.search).get("ref");
-  var resumen = document.getElementById("resumen");
-  var error = document.getElementById("error");
-  var form = document.getElementById("form-compra");
-
-  function euros(v) {
-    var t = Number(v).toFixed(2).replace(".", ",");
-    return t.endsWith(",00") ? t.slice(0, -3) : t;
-  }
-
-  if (!ref) { resumen.style.display = "none"; error.style.display = "block"; return; }
-
-  fetch("/repositorio/datos.json")
-    .then(function (r) { return r.json(); })
-    .then(function (lista) {
-      var inf = lista.filter(function (i) { return i.slug === ref; })[0];
-      if (!inf) { resumen.style.display = "none"; error.style.display = "block"; return; }
-      var fecha = inf.fecha.split("-").reverse().join("/");
-      var precio = Number(inf.precio_informe);
-      var original = Math.round(precio / 0.75);
-      resumen.innerHTML =
-        '<div class="meta">Estás comprando</div>' +
-        '<h2>' + inf.nombre + '</h2>' +
-        '<div class="meta">' + inf.ticker + ' · ' + inf.mercado + ' · ' + fecha + '</div>' +
-        '<div class="chips">' +
-          (inf.precio_accion ? '<span class="chip">Cotización a cierre del ' + fecha + ' <b>' + inf.precio_accion + ' €</b></span>' : '') +
-          '<span class="chip">12 secciones · PDF</span>' +
-        '</div>' +
-        '<div class="precio"><span class="hoy">' + euros(precio) + ' €</span>' +
-        '<span class="antes">' + euros(original) + ' €</span>' +
-        '<span class="baja">−25 %</span></div>' +
-        '<div style="font-size:11.5px;color:#8A6420;margin-top:6px">Oferta especial de lanzamiento ' +
-        'hasta el 31/12/2026</div>';
-      document.getElementById("campo-informe").value =
-        inf.nombre + " · " + fecha + " (ref. " + inf.slug + ")";
-      document.getElementById("campo-importe").value = euros(precio) + " EUR";
-      form.style.display = "block";
-    })
-    .catch(function () { resumen.style.display = "none"; error.style.display = "block"; });
+<footer> <a href="/">Inicio</a><a href="/repositorio/">Informes</a><a href="/glosario/">Glosario</a> <a href="/aviso-legal/">Aviso legal</a><a href="/privacidad/">Privacidad</a><a href="/contacto/">Contacto</a>
+</footer> <script>
+(function () { var ref = new URLSearchParams(location.search).get("ref"); var resumen = document.getElementById("resumen"); var error = document.getElementById("error"); var form = document.getElementById("form-compra"); function euros(v) { var t = Number(v).toFixed(2).replace(".", ","); return t.endsWith(",00") ? t.slice(0, -3) : t; } if (!ref) { resumen.style.display = "none"; error.style.display = "block"; return; } fetch("/repositorio/datos.json") .then(function (r) { return r.json(); }) .then(function (lista) { var inf = lista.filter(function (i) { return i.slug === ref; })[0]; if (!inf) { resumen.style.display = "none"; error.style.display = "block"; return; } var fecha = inf.fecha.split("-").reverse().join("/"); var precio = Number(inf.precio_informe); var original = Math.round(precio / 0.75); resumen.innerHTML = '<div class="meta">Estás comprando</div>' + '<h2>' + inf.nombre + '</h2>' + '<div class="meta">' + inf.ticker + ' · ' + inf.mercado + ' · ' + fecha + '</div>' + '<div class="chips">' + (inf.precio_accion ? '<span class="chip">Cotización a cierre del ' + fecha + ' <b>' + inf.precio_accion + ' €</b></span>' : '') + '<span class="chip">12 secciones · PDF</span>' + '</div>' + '<div class="precio"><span class="hoy">' + euros(precio) + ' €</span>' + '<span class="antes">' + euros(original) + ' €</span>' + '<span class="baja">−25 %</span></div>' + '<div style="font-size:11.5px;color:#8A6420;margin-top:6px">Oferta especial de lanzamiento ' + 'hasta el 31/12/2026</div>'; document.getElementById("campo-informe").value = inf.nombre + " · " + fecha + " (ref. " + inf.slug + ")"; document.getElementById("campo-importe").value = euros(precio) + " EUR"; form.style.display = "block"; }) .catch(function () { resumen.style.display = "none"; error.style.display = "block"; });
 })();
 </script>
 </body>

@@ -43,6 +43,8 @@ td:first-child,th:first-child{text-align:left}
 .alerta{background:#FDF2E9;border-left:3px solid #C06B2E;padding:12px 16px;
        font-size:13px;color:#7A4415;margin:16px 0}
 .nota{font-size:12px;color:var(--muted);margin-top:14px}
+.oferta{background:#FBF7EC;border:1px solid #E8D9B5;border-radius:8px;padding:18px 20px;margin-top:22px}
+textarea{font-family:inherit}
 @media print{
   header.barra,.acciones,form{display:none!important}
   body{background:#fff}
@@ -193,11 +195,58 @@ métodos —descuento de flujos y múltiplos del sector— y qué variables muev
   <div class="acciones">
     <button type="submit">Calcular valoración</button>
     <button type="button" class="sec" onclick="ejemplo()">Ver un ejemplo</button>
-    <button type="button" class="sec" onclick="window.print()" id="btn-imprimir" style="display:none">Descargar PDF</button>
   </div>
 </form>
 
+
+</div>
+
 <div id="resultado"></div>
+<div id="solicitud" style="display:none;margin-top:26px;background:#fff;border:1px solid var(--linea);
+     border-radius:10px;padding:24px 26px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;margin:0 0 6px">
+    Pedir el informe completo</h2>
+  <p style="font-size:.9rem;color:var(--muted);margin:0 0 18px">
+    Déjame tus datos y te escribo con el importe y la forma de pago. Primero lo confirmas conmigo.</p>
+  <form name="valoracion-pyme" method="POST" action="/gracias/" data-netlify="true"
+        netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="valoracion-pyme">
+    <p hidden><label>No rellenar <input name="bot-field"></label></p>
+    <div class="fila">
+      <div><label for="s_nombre">Tu nombre</label><input id="s_nombre" name="nombre" required placeholder="Nombre y apellidos"></div>
+      <div><label for="s_email">Tu email</label><input id="s_email" type="email" name="email" required placeholder="para enviarte el informe"></div>
+    </div>
+    <div class="fila">
+      <div><label for="s_telefono">Teléfono (opcional)</label><input id="s_telefono" name="telefono" placeholder="600 000 000"></div>
+      <div><label for="s_empresa">Empresa</label><input id="s_empresa" name="empresa" placeholder="Nombre de la sociedad"></div>
+    </div>
+    <label for="s_notas">¿Para qué necesitas la valoración? (opcional)</label>
+    <textarea id="s_notas" name="notas" rows="3" style="width:100%;padding:11px 13px;border:1px solid #D9DEE6;border-radius:6px;font-family:inherit;font-size:15px" placeholder="Venta de la empresa, entrada de un socio, sucesión..."></textarea>
+    <input type="hidden" name="d_nombre" id="d_nombre">
+    <input type="hidden" name="d_sector" id="d_sector">
+    <input type="hidden" name="d_ejercicio" id="d_ejercicio">
+    <input type="hidden" name="d_empleados" id="d_empleados">
+    <input type="hidden" name="d_ventas" id="d_ventas">
+    <input type="hidden" name="d_ebitda" id="d_ebitda">
+    <input type="hidden" name="d_amort" id="d_amort">
+    <input type="hidden" name="d_capex" id="d_capex">
+    <input type="hidden" name="d_gastosPersonales" id="d_gastosPersonales">
+    <input type="hidden" name="d_sueldoSocio" id="d_sueldoSocio">
+    <input type="hidden" name="d_sueldoMercado" id="d_sueldoMercado">
+    <input type="hidden" name="d_deuda" id="d_deuda">
+    <input type="hidden" name="d_caja" id="d_caja">
+    <input type="hidden" name="d_patrimonio" id="d_patrimonio">
+    <input type="hidden" name="d_activos" id="d_activos">
+    <input type="hidden" name="d_crecimiento" id="d_crecimiento">
+    <input type="hidden" name="d_concentracion" id="d_concentracion">
+    <input type="hidden" name="d_relevo" id="d_relevo">
+    <label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:13px;line-height:1.55;color:#3A4459;margin:16px 0">
+      <input type="checkbox" name="condiciones" value="aceptado" required style="width:17px;height:17px;margin:2px 0 0">
+      <span>Entiendo que es una estimación orientativa con los datos que aporto, no una tasación
+      pericial, y acepto la <a href="/privacidad/" style="color:#8A6420">política de privacidad</a>.</span>
+    </label>
+    <button type="submit" style="width:100%">Enviar la solicitud</button>
+  </form>
 
 <script>
 const MULTIPLOS = {
@@ -286,87 +335,73 @@ function calcular() {
 
 function pintar() {
   const r = calcular();
+  const nombre = document.getElementById('nombre').value || 'Tu empresa';
 
-  const tablaFlujos = r.filas.map(f =>
-    `<tr><td>Año ${f.anio}</td><td>${(f.tasa*100).toFixed(1)} %</td>
-     <td>${euros(f.flujo)}</td><td>${f.factor.toFixed(3)}</td>
-     <td>${euros(f.actual)}</td></tr>`).join('');
-
-  const ajustes = [];
-  if (r.gastosPersonales) ajustes.push(`Gastos personales que no son del negocio: +${euros(r.gastosPersonales)}`);
-  if (r.ajusteSueldo) ajustes.push(r.ajusteSueldo > 0
-    ? `Cobra ${euros(r.ajusteSueldo)} por encima del mercado: se descuenta del beneficio`
-    : `Cobra ${euros(-r.ajusteSueldo)} por debajo del mercado: el comprador tendría que pagar más`);
-
-  const factores = [
-    ['El beneficio normalizado', `El EBITDA real para un comprador es ${euros(r.ebitda)}, no el que aparece en tus cuentas (${euros(r.ebitdaBruto)}).`],
-    ['La inversión (capex)', r.capex > r.ebitda * 0.5
-      ? 'Inviertes más de la mitad del beneficio: queda poca caja para el comprador.'
-      : 'La inversión es contenida frente al beneficio, así que buena parte llega a caja.'],
-    ['La deuda neta', r.deudaNeta > 0
-      ? `Debes ${euros(r.deudaNeta)} más de lo que hay en caja: se resta del valor.`
-      : `Tienes más caja que deuda: ${euros(-r.deudaNeta)} se suman al valor.`],
-    ['El riesgo', r.concentracion || r.relevo
-      ? 'Un cliente dominante o la dependencia de una persona suben la tasa de descuento y bajan el valor.'
-      : 'Sin concentración ni dependencia personal: se aplica la tasa base del sector.']
-  ];
+  const alertas = [
+    r.micro ? `<div class="alerta"><strong>Empresa pequeña (menos de 1 millón de facturación).</strong>
+      En este tamaño el negocio depende del dueño y el descuento de flujos a perpetuidad no es fiable.
+      La valoración usa múltiplos del beneficio disponible para el dueño (3× – 4×).</div>` : '',
+    r.sueloAplicado ? `<div class="alerta"><strong>Se ha aplicado el suelo del patrimonio.</strong>
+      Los métodos de beneficio dan menos que los ${euros(r.suelo)} de patrimonio contable más activos
+      no afectos, que es el mínimo al que se vendería.</div>` : ''
+  ].join('');
 
   document.getElementById('resultado').innerHTML = `
-    <h2>${document.getElementById('nombre').value || 'Tu empresa'}</h2>
-    <div class="sub">${NOMBRES[r.sector]} · cuentas de ${document.getElementById('ejercicio').value}
-      · ${euros(r.ventas)} de facturación · margen sobre beneficio normalizado ${r.margen.toFixed(1)} %</div>
+    <h2>${nombre}</h2>
+    <div class="sub">${NOMBRES[r.sector]} · ${euros(r.ventas)} de facturación ·
+      margen sobre beneficio normalizado ${r.margen.toFixed(1)} %</div>
     <div class="rango">${euros(r.bajo)} – ${euros(r.alto)}</div>
-    <div class="sub">Rango estimado del 100 % del capital. Diferencia entre extremos: ${r.desvio.toFixed(0)} %.</div>
+    <div class="sub">Rango estimado del 100 % del capital. Los dos métodos difieren un ${r.desvio.toFixed(0)} %.</div>
 
-    ${r.micro ? `<div class="alerta"><strong>Empresa pequeña (facturación inferior a 1 millón).</strong>
-      En este tamaño el negocio suele depender del dueño y el descuento de flujos a perpetuidad no es
-      fiable. La valoración se hace con múltiplos del beneficio disponible para el dueño
-      (${r.mMin}× – ${r.mMax}×), que es como se compran y venden estas empresas en la práctica.</div>` : ''}
-
-    ${r.sueloAplicado ? `<div class="alerta"><strong>Se ha aplicado el suelo del patrimonio.</strong>
-      Los métodos de beneficio dan un valor inferior a los ${euros(r.suelo)} de patrimonio contable
-      (más activos no afectos). Nadie vende por debajo de lo que suman sus activos, así que el rango
-      parte de ahí.</div>` : ''}
-
-    ${ajustes.length ? `<div class="aviso"><strong>Ajustes aplicados al beneficio:</strong>
-      <ul style="margin:8px 0 0;padding-left:18px">${ajustes.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''}
+    ${alertas}
 
     <table>
       <tr><th>Método</th><th>Valor</th><th>Base</th></tr>
       ${r.micro ? '' : `<tr><td>Descuento de flujos</td><td>${euros(r.capitalDCF)}</td>
-          <td>WACC ${r.wacc.toFixed(1)} %, crecimiento ${r.crecimiento} %, perpetuidad ${G_TERMINAL} %</td></tr>`}
-      <tr><td>Múltiplos ${r.micro ? 'de beneficio del dueño' : 'del sector'}</td>
+        <td>WACC ${r.wacc.toFixed(1)} %</td></tr>`}
+      <tr><td>Múltiplos${r.micro ? ' del beneficio' : ' del sector'}</td>
           <td>${euros(r.multMin)} – ${euros(r.multMax)}</td>
           <td>${r.mMin}× – ${r.mMax}× sobre ${euros(r.ebitda)}</td></tr>
-      <tr><td>Deuda neta</td><td>${euros(r.deudaNeta)}</td><td>Deuda menos caja</td></tr>
-      <tr><td>Activos no afectos</td><td>${euros(r.activos)}</td><td>Se suman al valor</td></tr>
-      ${r.suelo ? `<tr><td>Suelo por patrimonio</td><td>${euros(r.suelo)}</td>
-          <td>Patrimonio neto más activos no afectos</td></tr>` : ''}
     </table>
 
-    ${r.micro ? '' : `<table>
-      <tr><th>Año</th><th>Crecimiento</th><th>Flujo de caja</th><th>Descuento</th><th>Valor actual</th></tr>
-      ${tablaFlujos}
-      <tr><td>Valor terminal</td><td colspan="4">${euros(r.terminal)} (descontado: ${euros(r.pvTerminal)})</td></tr>
-      <tr><td><strong>Valor de la empresa</strong></td><td colspan="4"><strong>${euros(r.ev)}</strong></td></tr>
-    </table>`}
-
-    <h2 style="font-size:22px;margin-top:26px">Qué mueve tu valoración</h2>
-    <ul>${factores.map(([t, d]) => `<li style="margin-bottom:10px"><strong>${t}:</strong> ${d}</li>`).join('')}</ul>
-
-    <div class="aviso">
-      <strong>Qué es y qué no es este cálculo.</strong> Es una estimación orientativa basada en las
-      cifras que has introducido, con dos métodos contrastados. No sustituye a una valoración
-      pericial ni a una due diligence: para una operación real hay que revisar las cuentas completas,
-      los contratos y la situación del sector. El resultado depende por completo de la calidad de los
-      datos aportados.
+    <div class="oferta">
+      <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6420;font-weight:600">
+        Informe completo · 199 €</div>
+      <p style="margin:.6rem 0 .8rem;font-size:.92rem">El rango es la conclusión. El informe explica
+      por qué:</p>
+      <ul style="margin:0 0 1rem;padding-left:18px;font-size:.9rem">
+        <li>De dónde sale el beneficio: ajustes al EBITDA y al sueldo del socio</li>
+        <li>Proyección a cinco años, valor terminal y tasa de descuento aplicada</li>
+        <li>Contraste entre los dos métodos y por qué difieren</li>
+        <li>Qué palancas suben tu valoración y cuáles la frenan</li>
+        <li>PDF con nota metodológica y legal</li>
+      </ul>
+      <button type="button" onclick="mostrarSolicitud()">Solicitar el informe — 199 €</button>
+      <p style="font-size:.75rem;color:var(--muted);margin:.7rem 0 0">
+        Recibirás el informe en 24-48 horas desde la confirmación del pago.</p>
     </div>
-    <p class="nota">CriterioFinanciero · Sebastián Prat, titulado EFPA nº 35094 ·
-      ${new Date().toLocaleDateString('es-ES')}</p>
   `;
   document.getElementById('resultado').style.display = 'block';
-  document.getElementById('btn-imprimir').style.display = 'inline-block';
   document.getElementById('resultado').scrollIntoView({behavior:'smooth'});
+  volcarDatos();
+}
+
+function volcarDatos() {
+  const campos = ['nombre','sector','ejercicio','empleados','ventas','ebitda','amort','capex',
+                  'gastosPersonales','sueldoSocio','sueldoMercado','deuda','caja','patrimonio',
+                  'activos','crecimiento','concentracion','relevo'];
+  for (const c of campos) {
+    const destino = document.getElementById('d_' + c);
+    const origen = document.getElementById(c);
+    if (destino) destino.value = origen ? origen.value : '';
+  }
+}
+
+function mostrarSolicitud() {
+  volcarDatos();
+  const f = document.getElementById('solicitud');
+  f.style.display = 'block';
+  f.scrollIntoView({behavior:'smooth'});
 }
 
 function ejemplo() {
