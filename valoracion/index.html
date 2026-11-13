@@ -40,6 +40,8 @@ th{background:#EFE7D7;text-align:left}
 td:first-child,th:first-child{text-align:left}
 .aviso{background:#FBF7EC;border-left:3px solid var(--gold);padding:12px 16px;
        font-size:13px;color:#5A4A22;margin-top:18px}
+.alerta{background:#FDF2E9;border-left:3px solid #C06B2E;padding:12px 16px;
+       font-size:13px;color:#7A4415;margin:16px 0}
 .nota{font-size:12px;color:var(--muted);margin-top:14px}
 @media print{
   header.barra,.acciones,form{display:none!important}
@@ -114,6 +116,29 @@ métodos —descuento de flujos y múltiplos del sector— y qué variables muev
   </fieldset>
 
   <fieldset>
+    <legend>Ajustes del propietario</legend>
+    <p class="ayuda" style="margin-top:0">Casi ninguna pyme presenta un EBITDA que refleje la realidad:
+      el dueño mezcla gastos personales y su sueldo no es el de mercado. Estos ajustes son los que
+      haría un comprador antes de pagar.</p>
+    <div class="fila">
+      <div>
+        <label for="gastosPersonales">Gastos personales dentro de la empresa (€)</label>
+        <input id="gastosPersonales" type="number" min="0" step="1000" placeholder="0">
+        <div class="ayuda">Coche, viajes o gastos del hogar pagados por la sociedad. Se suman al beneficio.</div>
+      </div>
+      <div>
+        <label for="sueldoSocio">Sueldo del socio (€)</label>
+        <input id="sueldoSocio" type="number" min="0" step="1000" placeholder="0">
+        <div class="ayuda">Lo que cobra realmente por su trabajo.</div>
+      </div>
+    </div>
+    <label for="sueldoMercado">Sueldo de mercado para ese puesto (€)</label>
+    <input id="sueldoMercado" type="number" min="0" step="1000" placeholder="0">
+    <div class="ayuda">Lo que costaría contratar a alguien que hiciera su trabajo. Si cobra menos, la
+      diferencia se resta del beneficio.</div>
+  </fieldset>
+
+  <fieldset>
     <legend>Balance</legend>
     <div class="fila">
       <div>
@@ -126,9 +151,18 @@ métodos —descuento de flujos y múltiplos del sector— y qué variables muev
         <input id="caja" type="number" min="0" step="1000" placeholder="150000">
       </div>
     </div>
-    <label for="activos">Activos no afectos al negocio (€)</label>
-    <input id="activos" type="number" min="0" step="1000" placeholder="0">
-    <div class="ayuda">Inmuebles o participaciones que no generan la facturación. Se suman al valor.</div>
+    <div class="fila">
+      <div>
+        <label for="patrimonio">Patrimonio neto contable (€)</label>
+        <input id="patrimonio" type="number" min="0" step="1000" placeholder="0">
+        <div class="ayuda">El valor en libros de la empresa. Actúa como suelo: por debajo de eso, nadie vende.</div>
+      </div>
+      <div>
+        <label for="activos">Activos no afectos al negocio (€)</label>
+        <input id="activos" type="number" min="0" step="1000" placeholder="0">
+        <div class="ayuda">Inmuebles o participaciones que no generan la facturación.</div>
+      </div>
+    </div>
   </fieldset>
 
   <fieldset>
@@ -141,19 +175,13 @@ métodos —descuento de flujos y múltiplos del sector— y qué variables muev
       </div>
       <div>
         <label for="concentracion">¿Un cliente supera el 30 % de las ventas?</label>
-        <select id="concentracion">
-          <option value="no">No</option>
-          <option value="si">Sí</option>
-        </select>
+        <select id="concentracion"><option value="no">No</option><option value="si">Sí</option></select>
       </div>
     </div>
     <div class="fila">
       <div>
         <label for="relevo">¿Depende de una persona clave?</label>
-        <select id="relevo">
-          <option value="si">Sí</option>
-          <option value="no">No</option>
-        </select>
+        <select id="relevo"><option value="si">Sí</option><option value="no">No</option></select>
       </div>
       <div>
         <label for="wacc">Tasa de descuento (opcional, %)</label>
@@ -177,6 +205,7 @@ const MULTIPLOS = {
   servicios:[8,11], alimentacion:[9,12], transporte:[6,8], salud:[10,13],
   energia:[6,8], otro:[7,9]
 };
+const MULTIPLOS_MICRO = [3, 4];   // sobre beneficio disponible del dueño
 const NOMBRES = {
   industria:'Industria y fabricación', construccion:'Construcción e instalaciones',
   comercio:'Comercio y distribución', tecnologia:'Tecnología y software',
@@ -184,35 +213,38 @@ const NOMBRES = {
   transporte:'Transporte y logística', salud:'Salud y clínicas',
   energia:'Energía y medio ambiente', otro:'Otro'
 };
-const RF = 3.3;          // bono español a 10 años
-const PRIMA_PYME = 6.0;  // falta de liquidez, tamaño, dependencia
-const PRIMA_CLIENTE = 1.5;
-const PRIMA_PERSONA = 1.0;
-const G_TERMINAL = 1.5;
+const RF = 3.3, PRIMA_PYME = 6.0, PRIMA_CLIENTE = 1.5, PRIMA_PERSONA = 1.0, G_TERMINAL = 1.5;
+const UMBRAL_MICRO = 1000000;
 
 const n = id => parseFloat(document.getElementById(id).value.replace(',', '.')) || 0;
 const euros = v => new Intl.NumberFormat('es-ES', {maximumFractionDigits:0}).format(Math.round(v)) + ' €';
 
 function calcular() {
-  const ventas = n('ventas'), ebitda = n('ebitda'), amort = n('amort'), capex = n('capex');
-  const deuda = n('deuda'), caja = n('caja'), activos = n('activos');
+  const ventas = n('ventas'), ebitdaBruto = n('ebitda'), amort = n('amort'), capex = n('capex');
+  const deuda = n('deuda'), caja = n('caja'), activos = n('activos'), patrimonio = n('patrimonio');
+  const gastosPersonales = n('gastosPersonales'), sueldoSocio = n('sueldoSocio'), sueldoMercado = n('sueldoMercado');
   const crecimiento = Math.min(20, Math.max(-10, n('crecimiento')));
   const sector = document.getElementById('sector').value;
   const concentracion = document.getElementById('concentracion').value === 'si';
   const relevo = document.getElementById('relevo').value === 'si';
   const waccManual = n('wacc');
 
-  // flujo de caja libre sostenible
-  const impuesto = Math.max(0, (ebitda - amort)) * 0.25;
-  const fcf = Math.max(0, ebitda - capex - impuesto);
+  // 1. normalización del beneficio
+  const ajusteSueldo = sueldoSocio - sueldoMercado;   // si cobra menos, resta
+  const ebitdaNormalizado = ebitdaBruto + gastosPersonales + ajusteSueldo;
+  const ebitda = Math.max(0, ebitdaNormalizado);
 
-  // tasa de descuento
+  const micro = ventas < UMBRAL_MICRO;
+  const deudaNeta = deuda - caja;
+
+  // 2. tasa de descuento
   let wacc = waccManual > 0 ? waccManual
            : RF + PRIMA_PYME + (concentracion ? PRIMA_CLIENTE : 0) + (relevo ? PRIMA_PERSONA : 0);
-  const waccDecimal = wacc / 100;
-  const g = G_TERMINAL / 100;
+  const waccDecimal = wacc / 100, g = G_TERMINAL / 100;
 
-  // proyección a cinco años con crecimiento decreciente
+  // 3. descuento de flujos (no se usa en micro)
+  const impuesto = Math.max(0, ebitda - amort) * 0.25;
+  const fcf = Math.max(0, ebitda - capex - impuesto);
   const filas = [];
   let flujo = fcf, pv = 0;
   for (let anio = 1; anio <= 5; anio++) {
@@ -222,85 +254,112 @@ function calcular() {
     filas.push({anio, tasa, flujo, factor, actual: flujo * factor});
     pv += flujo * factor;
   }
-  const terminal = filas[4].flujo * (1 + g) / (waccDecimal - g);
+  const terminal = flujo * (1 + g) / (waccDecimal - g);
   const pvTerminal = terminal / Math.pow(1 + waccDecimal, 5);
   const ev = pv + pvTerminal;
-  const deudaNeta = deuda - caja;
-  const capital = ev - deudaNeta + activos;
+  const capitalDCF = ev - deudaNeta + activos;
 
-  // método de múltiplos
-  const [mMin, mMax] = MULTIPLOS[sector];
-  const evMin = ebitda * mMin, evMax = ebitda * mMax;
-  const multMin = evMin - deudaNeta + activos;
-  const multMax = evMax - deudaNeta + activos;
+  // 4. múltiplos del sector
+  const [mMin, mMax] = micro ? MULTIPLOS_MICRO : MULTIPLOS[sector];
+  const multMin = ebitda * mMin - deudaNeta + activos;
+  const multMax = ebitda * mMax - deudaNeta + activos;
 
-  const bajo = Math.max(0, Math.min(capital, multMin));
-  const alto = Math.max(0, Math.max(capital, multMax));
+  // 5. rango: en micro solo múltiplos; en el resto, ambos métodos
+  let bajo = micro ? multMin : Math.min(capitalDCF, multMin);
+  let alto = micro ? multMax : Math.max(capitalDCF, multMax);
+  bajo = Math.max(0, bajo); alto = Math.max(0, alto);
 
-  return {ventas, ebitda, amort, capex, fcf, impuesto, wacc, crecimiento, sector,
-          concentracion, relevo, filas, pv, terminal, pvTerminal, ev, deudaNeta,
-          activos, capital, multMin, multMax, mMin, mMax, bajo, alto,
+  // 6. suelo por patrimonio contable
+  const suelo = patrimonio + activos;
+  let sueloAplicado = false;
+  if (suelo > 0 && bajo < suelo) { bajo = suelo; sueloAplicado = true; }
+  if (alto < bajo) alto = bajo;
+
+  const desvio = alto > 0 ? (alto - bajo) / alto * 100 : 0;
+
+  return {ventas, ebitdaBruto, gastosPersonales, ajusteSueldo, ebitda, amort, capex, impuesto, fcf,
+          wacc, crecimiento, sector, micro, concentracion, relevo, filas, pv, terminal, pvTerminal,
+          ev, deudaNeta, activos, patrimonio, capitalDCF, multMin, multMax, mMin, mMax,
+          bajo, alto, suelo, sueloAplicado, desvio,
           margen: ventas ? ebitda / ventas * 100 : 0};
 }
 
 function pintar() {
   const r = calcular();
-  const desvio = r.alto > 0 ? (r.alto - r.bajo) / r.alto * 100 : 0;
 
   const tablaFlujos = r.filas.map(f =>
     `<tr><td>Año ${f.anio}</td><td>${(f.tasa*100).toFixed(1)} %</td>
      <td>${euros(f.flujo)}</td><td>${f.factor.toFixed(3)}</td>
      <td>${euros(f.actual)}</td></tr>`).join('');
 
+  const ajustes = [];
+  if (r.gastosPersonales) ajustes.push(`Gastos personales que no son del negocio: +${euros(r.gastosPersonales)}`);
+  if (r.ajusteSueldo) ajustes.push(r.ajusteSueldo > 0
+    ? `Cobra ${euros(r.ajusteSueldo)} por encima del mercado: se descuenta del beneficio`
+    : `Cobra ${euros(-r.ajusteSueldo)} por debajo del mercado: el comprador tendría que pagar más`);
+
   const factores = [
-    ['El EBITDA', 'Es el motor. Cada 10.000 € de EBITDA adicional mueven la valoración en varias veces esa cifra.'],
+    ['El beneficio normalizado', `El EBITDA real para un comprador es ${euros(r.ebitda)}, no el que aparece en tus cuentas (${euros(r.ebitdaBruto)}).`],
     ['La inversión (capex)', r.capex > r.ebitda * 0.5
-      ? 'Estás invirtiendo más de la mitad del EBITDA: eso reduce la caja disponible y la valoración.'
-      : 'La inversión es contenida frente al EBITDA, así que buena parte del beneficio llega a caja.'],
+      ? 'Inviertes más de la mitad del beneficio: queda poca caja para el comprador.'
+      : 'La inversión es contenida frente al beneficio, así que buena parte llega a caja.'],
     ['La deuda neta', r.deudaNeta > 0
-      ? `Debes ${euros(r.deudaNeta)} más de lo que tienes en caja. Eso se resta del valor.`
+      ? `Debes ${euros(r.deudaNeta)} más de lo que hay en caja: se resta del valor.`
       : `Tienes más caja que deuda: ${euros(-r.deudaNeta)} se suman al valor.`],
     ['El riesgo', r.concentracion || r.relevo
-      ? 'La concentración en un cliente o la dependencia de una persona clave suben la tasa de descuento y bajan el valor.'
-      : 'No has marcado concentración ni dependencia personal: la tasa aplicada es la base del sector.']
+      ? 'Un cliente dominante o la dependencia de una persona suben la tasa de descuento y bajan el valor.'
+      : 'Sin concentración ni dependencia personal: se aplica la tasa base del sector.']
   ];
 
   document.getElementById('resultado').innerHTML = `
     <h2>${document.getElementById('nombre').value || 'Tu empresa'}</h2>
     <div class="sub">${NOMBRES[r.sector]} · cuentas de ${document.getElementById('ejercicio').value}
-      · ${euros(r.ventas)} de facturación · margen EBITDA ${r.margen.toFixed(1)} %</div>
+      · ${euros(r.ventas)} de facturación · margen sobre beneficio normalizado ${r.margen.toFixed(1)} %</div>
     <div class="rango">${euros(r.bajo)} – ${euros(r.alto)}</div>
-    <div class="sub">Rango estimado de valor del 100 % del capital. Los dos métodos difieren un
-      ${desvio.toFixed(0)} %.</div>
+    <div class="sub">Rango estimado del 100 % del capital. Diferencia entre extremos: ${r.desvio.toFixed(0)} %.</div>
+
+    ${r.micro ? `<div class="alerta"><strong>Empresa pequeña (facturación inferior a 1 millón).</strong>
+      En este tamaño el negocio suele depender del dueño y el descuento de flujos a perpetuidad no es
+      fiable. La valoración se hace con múltiplos del beneficio disponible para el dueño
+      (${r.mMin}× – ${r.mMax}×), que es como se compran y venden estas empresas en la práctica.</div>` : ''}
+
+    ${r.sueloAplicado ? `<div class="alerta"><strong>Se ha aplicado el suelo del patrimonio.</strong>
+      Los métodos de beneficio dan un valor inferior a los ${euros(r.suelo)} de patrimonio contable
+      (más activos no afectos). Nadie vende por debajo de lo que suman sus activos, así que el rango
+      parte de ahí.</div>` : ''}
+
+    ${ajustes.length ? `<div class="aviso"><strong>Ajustes aplicados al beneficio:</strong>
+      <ul style="margin:8px 0 0;padding-left:18px">${ajustes.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''}
 
     <table>
       <tr><th>Método</th><th>Valor</th><th>Base</th></tr>
-      <tr><td>Descuento de flujos</td><td>${euros(r.capital)}</td>
-          <td>WACC ${r.wacc.toFixed(1)} %, crecimiento ${r.crecimiento} %, perpetuidad ${G_TERMINAL} %</td></tr>
-      <tr><td>Múltiplos del sector</td><td>${euros(r.multMin)} – ${euros(r.multMax)}</td>
-          <td>EV/EBITDA ${r.mMin}× – ${r.mMax}× sobre ${euros(r.ebitda)}</td></tr>
+      ${r.micro ? '' : `<tr><td>Descuento de flujos</td><td>${euros(r.capitalDCF)}</td>
+          <td>WACC ${r.wacc.toFixed(1)} %, crecimiento ${r.crecimiento} %, perpetuidad ${G_TERMINAL} %</td></tr>`}
+      <tr><td>Múltiplos ${r.micro ? 'de beneficio del dueño' : 'del sector'}</td>
+          <td>${euros(r.multMin)} – ${euros(r.multMax)}</td>
+          <td>${r.mMin}× – ${r.mMax}× sobre ${euros(r.ebitda)}</td></tr>
       <tr><td>Deuda neta</td><td>${euros(r.deudaNeta)}</td><td>Deuda menos caja</td></tr>
       <tr><td>Activos no afectos</td><td>${euros(r.activos)}</td><td>Se suman al valor</td></tr>
+      ${r.suelo ? `<tr><td>Suelo por patrimonio</td><td>${euros(r.suelo)}</td>
+          <td>Patrimonio neto más activos no afectos</td></tr>` : ''}
     </table>
 
-    <table>
+    ${r.micro ? '' : `<table>
       <tr><th>Año</th><th>Crecimiento</th><th>Flujo de caja</th><th>Descuento</th><th>Valor actual</th></tr>
       ${tablaFlujos}
       <tr><td>Valor terminal</td><td colspan="4">${euros(r.terminal)} (descontado: ${euros(r.pvTerminal)})</td></tr>
       <tr><td><strong>Valor de la empresa</strong></td><td colspan="4"><strong>${euros(r.ev)}</strong></td></tr>
-    </table>
+    </table>`}
 
     <h2 style="font-size:22px;margin-top:26px">Qué mueve tu valoración</h2>
-    <ul>
-      ${factores.map(([t, d]) => `<li style="margin-bottom:10px"><strong>${t}:</strong> ${d}</li>`).join('')}
-    </ul>
+    <ul>${factores.map(([t, d]) => `<li style="margin-bottom:10px"><strong>${t}:</strong> ${d}</li>`).join('')}</ul>
 
     <div class="aviso">
       <strong>Qué es y qué no es este cálculo.</strong> Es una estimación orientativa basada en las
       cifras que has introducido, con dos métodos contrastados. No sustituye a una valoración
-      pericial ni a una due diligence: para una operación real hay que revisar las cuentas
-      completas, los contratos y la situación del sector. El resultado depende por completo de la
-      calidad de los datos aportados.
+      pericial ni a una due diligence: para una operación real hay que revisar las cuentas completas,
+      los contratos y la situación del sector. El resultado depende por completo de la calidad de los
+      datos aportados.
     </div>
     <p class="nota">CriterioFinanciero · Sebastián Prat, titulado EFPA nº 35094 ·
       ${new Date().toLocaleDateString('es-ES')}</p>
@@ -312,8 +371,9 @@ function pintar() {
 
 function ejemplo() {
   const datos = {nombre:'Talleres Ejemplo, S.L.', sector:'industria', ventas:2500000, ebitda:350000,
-    amort:60000, capex:80000, deuda:400000, caja:150000, activos:0, crecimiento:3,
-    concentracion:'no', relevo:'si'};
+    amort:60000, capex:80000, deuda:400000, caja:150000, activos:0, patrimonio:900000,
+    crecimiento:3, concentracion:'no', relevo:'si',
+    gastosPersonales:30000, sueldoSocio:45000, sueldoMercado:60000};
   for (const [k, v] of Object.entries(datos)) {
     const campo = document.getElementById(k);
     if (campo) campo.value = v;
