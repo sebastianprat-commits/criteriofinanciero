@@ -400,11 +400,76 @@ function componenteComparador(contenedor, cfg) {
   pintar();
 }
 
+
+/* -------------------------------------------------------- normalizador */
+function componenteNormalizador(contenedor, cfg) {
+  const partidas = cfg.partidas;
+
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">${cfg.enunciado || ''}</p>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
+        <div style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">
+          EBITDA declarado</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">${euros(cfg.ebitda)}</div>
+      </div>
+      <div style="display:grid;gap:9px;margin:16px 0">
+        ${partidas.map((p, i) => `
+          <label class="par" data-i="${i}" style="align-items:flex-start">
+            <input type="checkbox" data-i="${i}" ${p.ajustar ? 'checked' : ''}>
+            <span class="nombre" style="flex:1">
+              ${p.concepto}
+              <div class="ayuda-campo" style="margin-top:4px">${p.explicacion}</div>
+            </span>
+            <span class="mult" style="min-width:110px">${euros(p.importe)}</span>
+          </label>`).join('')}
+      </div>
+      <div class="resultado">
+        <div class="cifra" id="n_valor">—</div>
+        <div class="nota" id="n_nota"></div>
+      </div>
+      <div id="n_detalle" style="margin-top:14px;font-size:13.5px;color:#3A4459"></div>
+    </div>`;
+
+  function pintar() {
+    const marcadas = [...contenedor.querySelectorAll('input[data-i]:checked')]
+      .map(c => partidas[Number(c.dataset.i)]);
+
+    const suma = marcadas.reduce((t, p) => t + p.signo * p.importe, 0);
+    const normalizado = cfg.ebitda + suma;
+
+    document.getElementById('n_valor').textContent = euros(normalizado);
+    document.getElementById('n_nota').textContent = suma === 0
+      ? 'sin ajustes: el beneficio que ves es el que hay'
+      : `${suma > 0 ? 'sumas' : 'restas'} ${euros(Math.abs(suma))} al declarado`;
+
+    const lineas = marcadas.map(p =>
+      `<div style="display:flex;justify-content:space-between;padding:5px 0;
+                   border-bottom:1px solid #F1ECE0">
+         <span>${p.concepto}</span>
+         <span style="color:${p.signo > 0 ? '#2F7D5C' : '#B4462F'}">
+           ${p.signo > 0 ? '+' : '−'}${euros(p.importe)}</span>
+       </div>`).join('');
+
+    const efecto = cfg.ebitda ? (normalizado - cfg.ebitda) / cfg.ebitda * 100 : 0;
+    document.getElementById('n_detalle').innerHTML = lineas +
+      `<div style="margin-top:10px;color:var(--muted)">
+         Un comprador pagaría por el beneficio normalizado, no por el declarado.
+         Aquí la diferencia es del ${efecto.toFixed(1).replace('.', ',')} %.
+       </div>`;
+  }
+
+  contenedor.querySelectorAll('input[data-i]').forEach(c =>
+    c.addEventListener('change', pintar));
+  pintar();
+}
+
 const COMPONENTES = {
   simulador: componenteSimulador,
   wacc: componenteWacc,
   diagnostico: componenteDiagnostico,
-  comparador: componenteComparador
+  comparador: componenteComparador,
+  normalizador: componenteNormalizador
 };
 
 /* --------------------------------------------------------------- página */

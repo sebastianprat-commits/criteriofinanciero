@@ -389,7 +389,119 @@ const CURSO = {
       }
     },
     { numero: 7, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Valor terminal' },
-    { numero: 8, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Normalizar el beneficio' },
+    {
+      numero: 8,
+      publicada: true,
+      modulo: 'Módulo 3 · Ajustes y trampas',
+      titulo: 'Lección 8 · Normalizar el beneficio',
+      tituloCorto: 'Normalizar el beneficio',
+      entradilla: 'El beneficio de las cuentas no es el que ve un comprador. Cuatro minutos de ' +
+        'vídeo, seis preguntas y un ejercicio en el que decides tú qué se ajusta y qué no.',
+      preguntas: [
+        {
+          enunciado: 'El dueño paga con la sociedad el colegio de sus hijos: 9.000 € al año. ' +
+                     '¿Cómo afecta a la valoración?',
+          opciones: [
+            'Se ignora: son gastos de la empresa',
+            'Se suma de vuelta al beneficio, porque no es un coste del negocio',
+            'Se resta del beneficio'
+          ],
+          correcta: 1,
+          explicacion: 'Ese gasto reduce el beneficio contable pero no es un coste de operar. Un ' +
+            'comprador no lo tendría, así que el beneficio real es 9.000 € mayor. Es el ajuste más ' +
+            'frecuente en las pymes españolas.'
+        },
+        {
+          enunciado: 'El dueño cobra 40.000 € y contratar a alguien para su puesto costaría ' +
+                     '60.000 €. ¿Qué haces?',
+          opciones: [
+            'Nada: es lo que cobra',
+            'Restar 20.000 € al beneficio, porque ese coste existirá con el nuevo dueño',
+            'Sumar 20.000 € porque ahorra en personal'
+          ],
+          correcta: 1,
+          explicacion: 'El negocio solo funciona porque el dueño trabaja por debajo de mercado. ' +
+            'Si lo sustituyes, el coste sube 20.000 €. Ese coste hay que reflejarlo: se resta del ' +
+            'beneficio antes de aplicar el múltiplo.'
+        },
+        {
+          enunciado: 'La empresa recibió una subvención de 50.000 € que no se repetirá. ¿Qué ' +
+                     'haces con ella?',
+          opciones: [
+            'Dejarla: está en el beneficio del año',
+            'Restarla, porque infla un beneficio que no se va a repetir',
+            'Sumarla otra vez, porque es dinero cobrado'
+          ],
+          correcta: 1,
+          explicacion: 'El comprador paga por el beneficio recurrente. Una subvención que no se ' +
+            'repite hace que este año parezca mejor de lo que será el que viene. Se saca del ' +
+            'cálculo y, si acaso, se menciona aparte.'
+        },
+        {
+          enunciado: 'La empresa paga 6.000 € al año de alquiler por un local que, a precio de ' +
+                     'mercado, costaría 18.000 €. El local es de los dueños.',
+          opciones: [
+            'No se toca: es lo que paga',
+            'Se restan 12.000 € al beneficio, porque ese coste existirá con el nuevo dueño',
+            'Se suman 12.000 € porque paga menos'
+          ],
+          correcta: 1,
+          explicacion: 'Es el caso espejo del sueldo. La empresa se beneficia de una relación con ' +
+            'los dueños que no se mantendrá. Con un propietario nuevo, el alquiler sería de ' +
+            'mercado y el beneficio 12.000 € menor.'
+        },
+        {
+          enunciado: '¿Por qué se piden tres años de cuentas y no uno?',
+          opciones: [
+            'Porque es obligatorio para valorar',
+            'Porque un solo año puede estar distorsionado por algo puntual',
+            'Para calcular la media de los múltiplos'
+          ],
+          correcta: 1,
+          explicacion: 'Un año puede incluir una obra, una multa o un pedido excepcional. Mirando ' +
+            'tres se distingue lo que se repite de lo que pasó una vez, que es justo lo que hay ' +
+            'que separar para normalizar.'
+        },
+        {
+          enunciado: 'Normalizas el beneficio y pasa de 300.000 a 240.000 €. Con un múltiplo de ' +
+                     '7x y sin deuda, ¿cuánto valor se ha perdido?',
+          opciones: ['60.000 €', '420.000 €', 'Nada, el múltiplo es el mismo'],
+          correcta: 1,
+          explicacion: '7 × 60.000 = 420.000 €. Normalizar no es un detalle contable: cada euro de ' +
+            'beneficio que se ajusta se multiplica por el múltiplo al llegar a la valoración. Por ' +
+            'eso es lo primero que se hace.'
+        }
+      ],
+      interaccion: {
+        tipo: 'normalizador',
+        titulo: 'Ajusta tú el beneficio',
+        intro: 'Esta empresa declara 350.000 € de EBITDA. En sus cuentas hay seis partidas ' +
+          'discutibles. Marca las que creas que hay que ajustar y mira dónde acaba el beneficio. ' +
+          'Piensa siempre lo mismo: ¿esto existiría con un dueño nuevo?',
+        enunciado: '',
+        ebitda: 350000,
+        partidas: [
+          {concepto: 'Coche y viajes personales del dueño pagados por la empresa',
+           explicacion: 'No es un coste de operar: alguien tendría que pagarlo de su bolsillo.',
+           importe: 12000, signo: 1, ajustar: true},
+          {concepto: 'Sueldo del socio por debajo del de mercado',
+           explicacion: 'El socio cobra 42.000 € y su sustituto costaría 60.000 €. Faltan 18.000.',
+           importe: 18000, signo: -1, ajustar: true},
+          {concepto: 'Multa de tráfico y sanción laboral puntual',
+           explicacion: 'No se repite y no forma parte del negocio normal.',
+           importe: 8000, signo: 1, ajustar: true},
+          {concepto: 'Subvención pública no recurrente',
+           explicacion: 'Entró este año y no volverá a entrar. Infla el beneficio.',
+           importe: 30000, signo: -1, ajustar: true},
+          {concepto: 'Alquiler del local pagado a un familiar, por debajo de mercado',
+           explicacion: 'Paga 9.000 y el precio de mercado es 21.000. Con otro dueño, costaría más.',
+           importe: 12000, signo: -1, ajustar: false},
+          {concepto: 'Compra de una furgoneta nueva',
+           explicacion: 'Es inversión, no gasto: ya se descuenta aparte como capex. No se ajusta aquí.',
+           importe: 32000, signo: 1, ajustar: false}
+        ]
+      }
+    },
     { numero: 9, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Deuda, caja y lo que no está en el balance' },
     { numero: 10, publicada: false, modulo: 'Módulo 3 · Ajustes y trampas', tituloCorto: 'Los cinco errores que inflan una valoración' },
     { numero: 11, publicada: false, modulo: 'Módulo 4 · Casos prácticos', tituloCorto: 'Una empresa cotizada, paso a paso' },
