@@ -998,7 +998,222 @@ const CURSO = {
         ]
       }
     },
-    { numero: 11, publicada: false, modulo: 'Módulo 4 · Casos prácticos', tituloCorto: 'Una empresa cotizada, paso a paso' },
-    { numero: 12, publicada: false, modulo: 'Módulo 4 · Casos prácticos', tituloCorto: 'Una pyme, paso a paso' }
+    {
+      numero: 11,
+      publicada: true,
+      modulo: 'Módulo 4 · Casos prácticos',
+      titulo: 'Lección 11 · Una cotizada, paso a paso',
+      tituloCorto: 'Una cotizada, paso a paso',
+      entradilla: 'El caso de Indra, del principio al final. Tres minutos de vídeo, seis preguntas ' +
+        'y un recorrido guiado por los cinco pasos de un informe real.',
+      preguntas: [
+        {
+          enunciado: '¿Por qué el hecho de que el Estado sea el principal cliente cambia el riesgo?',
+          opciones: [
+            'Porque el Estado paga siempre puntual',
+            'Porque añade dependencia de presupuestos y ciclos políticos',
+            'Porque reduce los impuestos de la empresa'
+          ],
+          correcta: 1,
+          explicacion: 'Un cliente que pesa mucho reduce la incertidumbre de ventas, pero añade ' +
+            'dependencia: si cambia el presupuesto o el gobierno, cambia el negocio. Ese riesgo ' +
+            'debe reflejarse en la tasa de descuento, no solo mencionarse.'
+        },
+        {
+          enunciado: 'Indra tiene un margen sobre ventas del 7 %, y sus comparables europeos, ' +
+                     'más alto. ¿Qué indica?',
+          opciones: [
+            'Que es una mala empresa',
+            'Que el mercado la penaliza por rentabilidad, y hay que explicar si es estructural',
+            'Que sus comparables están sobrevalorados'
+          ],
+          correcta: 1,
+          explicacion: 'Un margen más bajo que el del sector puede ser estructural —negocio con ' +
+            'más contratos de menor valor añadido— o coyuntural. La valoración cambia mucho según ' +
+            'cuál de las dos sea, así que es la primera cosa que hay que averiguar.'
+        },
+        {
+          enunciado: 'El sector de defensa cotiza al alza por el aumento del gasto militar. ¿Cómo ' +
+                     'afecta a tu valoración por múltiplos?',
+          opciones: [
+            'No afecta, los múltiplos son objetivos',
+            'Recoge un momento de mercado alto, y conviene señalarlo',
+            'Hay que usar los múltiplos más altos posibles'
+          ],
+          correcta: 1,
+          explicacion: 'Los múltiplos son lo que el mercado paga hoy, no una verdad permanente. Si ' +
+            'el sector está en un pico, tu valoración por múltiplos lo refleja. Eso no la invalida, ' +
+            'pero hay que decirlo: quien compre esperando esos múltiplos dentro de cinco años puede ' +
+            'llevarse una sorpresa.'
+        },
+        {
+          enunciado: 'Descuento de flujos da 35 € y múltiplos dan 48 €. ¿Qué haces?',
+          opciones: [
+            'Presento la media: 41,50 €',
+            'Explico por qué difieren antes de dar un rango',
+            'Me quedo con el más alto'
+          ],
+          correcta: 1,
+          explicacion: 'Una diferencia del 37 % no se promedia. En este caso, el mercado paga una ' +
+            'prima de defensa que el flujo de caja todavía no justifica. Explicarlo es la ' +
+            'valoración; esconderlo detrás de una media es no tener valoración.'
+        },
+        {
+          enunciado: '¿Cuál es el primer paso al valorar una cotizada?',
+          opciones: [
+            'Mirar la cotización',
+            'Entender a qué se dedica y de dónde vienen las ventas',
+            'Calcular el WACC'
+          ],
+          correcta: 1,
+          explicacion: 'Antes de cualquier número hay que saber qué hace la empresa, quién le paga ' +
+            'y qué la puede hundir. Empezar por la cotización es empezar por la respuesta, y ' +
+            'empezar por el WACC es calcular sin saber qué estás calculando.'
+        },
+        {
+          enunciado: 'La deuda neta es 1 vez el EBITDA. ¿Cómo se interpreta?',
+          opciones: [
+            'Es un problema serio de solvencia',
+            'Es un nivel moderado, que deja margen salvo que haya una adquisición grande',
+            'No se puede saber sin el sector'
+          ],
+          correcta: 1,
+          explicacion: 'Una vez el beneficio es un nivel cómodo: la empresa puede pagarla con un ' +
+            'año de caja. El riesgo aparece si hay un proyecto grande, una adquisición o una caída ' +
+            'del beneficio. Por eso se mira junto a los vencimientos.'
+        }
+      ],
+      interaccion: {
+        tipo: 'pasos',
+        titulo: 'Recorre el informe paso a paso',
+        intro: 'Los cinco pasos con los que se lee una valoración, en orden. Cada uno con lo que ' +
+          'hay que buscar y el detalle que cambia el resultado.',
+        enunciado: '',
+        pasos: [
+          {titulo: 'Qué empresa es',
+           texto: 'A qué se dedica, quién le paga y de dónde vienen las ventas. Sin esto, los ' +
+             'números no significan nada.',
+           dato: 'Indra: tecnología y defensa. Su principal cliente es el Estado español, lo que ' +
+             'da estabilidad y añade dependencia política.'},
+          {titulo: 'Cuánto gana',
+           texto: 'Ventas, margen sobre ventas y EBITDA, comparados con su histórico y con el ' +
+             'sector.',
+           dato: 'Margen del 7 %, por debajo de Thales o Leonardo. La pregunta clave: ¿es ' +
+             'estructural o es un año flojo?'},
+          {titulo: 'Cuánto debe',
+           texto: 'Deuda neta sobre EBITDA, vencimientos y si financia crecimiento o agujeros.',
+           dato: 'Alrededor de 1 vez el EBITDA: nivel cómodo, con margen salvo adquisición grande.'},
+          {titulo: 'Los comparables',
+           texto: 'Mismo sector, tamaño y mercado. Y comprobar si el sector está en un momento ' +
+             'alto o bajo.',
+           dato: 'Thales, Leonardo y Rheinmetall. La defensa cotiza al alza por el gasto militar: ' +
+             'el múltiplo recoge un momento, no una media histórica.'},
+          {titulo: 'El rango',
+           texto: 'Flujos y múltiplos. Si coinciden, rango estrecho. Si difieren, se explica.',
+           dato: 'Cuando el mercado paga una prima que el flujo de caja no justifica, la ' +
+             'diferencia es la información más valiosa del informe.'}
+        ]
+      }
+    },
+    {
+      numero: 12,
+      publicada: true,
+      modulo: 'Módulo 4 · Casos prácticos',
+      titulo: 'Lección 12 · Ahora valoras tú',
+      tituloCorto: 'Ahora valoras tú',
+      entradilla: 'El examen final, con corrección. Tres minutos de vídeo, seis preguntas y un ' +
+        'reto: valoras una pyme con tus propios supuestos y te digo qué revisar.',
+      preguntas: [
+        {
+          enunciado: 'Una pyme creció un 3 % de media. Supones un 10 % en la proyección. ¿Qué ' +
+                     'necesitas para defenderlo?',
+          opciones: [
+            'Nada, es una proyección',
+            'Un motivo concreto: un contrato nuevo, un mercado nuevo, capacidad ociosa',
+            'Que el dueño lo crea así'
+          ],
+          correcta: 1,
+          explicacion: 'Triplicar el crecimiento histórico exige una razón verificable. Sin ella, ' +
+            'no es un supuesto: es un deseo. Y como se compone, el efecto sobre el valor es enorme.'
+        },
+        {
+          enunciado: 'Para una pyme sin cotizar con un cliente que pesa el 40 %, ¿qué tasa es más ' +
+                     'defendible?',
+          opciones: ['6 %', '10-12 %', '18 %'],
+          correcta: 1,
+          explicacion: 'Bono (3,3 %) más prima de mercado (5,5 %) ya son 8,8 % sin contar nada ' +
+            'más. Añadiendo tamaño y concentración de clientes, se llega al 10-12 %. Por debajo ' +
+            'del 9 % no se compensa el riesgo; por encima del 15 % hay que justificar mucho.'
+        },
+        {
+          enunciado: 'Tu valoración sale un 40 % por encima de la referencia. ¿Cuál es la causa ' +
+                     'más probable?',
+          opciones: [
+            'Un error de suma',
+            'Un crecimiento o una perpetuidad demasiado altos',
+            'Que la referencia está mal'
+          ],
+          correcta: 1,
+          explicacion: 'Los errores de suma son raros; los de supuestos, constantes. Y el efecto ' +
+            'se amplifica porque el valor terminal pesa dos tercios: un punto de perpetuidad o dos ' +
+            'de crecimiento bastan para desviar el resultado un 20-30 %.'
+        },
+        {
+          enunciado: '¿Qué significa que tu valoración esté dentro del rango de referencia?',
+          opciones: [
+            'Que has acertado el precio exacto',
+            'Que tus supuestos son razonables y defendibles',
+            'Que la empresa vale eso con seguridad'
+          ],
+          correcta: 1,
+          explicacion: 'No hay precio exacto. Estar dentro del rango significa que tus hipótesis ' +
+            'se mueven en el terreno de lo defendible. Eso es todo lo que puede dar una valoración: ' +
+            'una opinión argumentada, no una certeza.'
+        },
+        {
+          enunciado: 'Vas a presentar tu valoración a un cliente. ¿Qué pones primero?',
+          opciones: [
+            'El resultado',
+            'Los supuestos y qué los justifica',
+            'La metodología completa'
+          ],
+          correcta: 1,
+          explicacion: 'El resultado sin supuestos es un número que no se puede discutir ni ' +
+            'defender. Empezar por los supuestos hace la conversación honesta: se discute el ' +
+            'crecimiento, no el resultado de una fórmula.'
+        },
+        {
+          enunciado: '¿Cuál es la señal de que una valoración es sólida?',
+          opciones: [
+            'Que da un número redondo',
+            'Que los dos métodos llegan a un rango parecido y los supuestos se pueden explicar',
+            'Que coincide con lo que pide el vendedor'
+          ],
+          correcta: 1,
+          explicacion: 'Dos caminos distintos que llegan al mismo sitio, con supuestos que se ' +
+            'pueden explicar uno a uno. Eso es defendible. Que coincida con lo que pide el ' +
+            'vendedor es, más bien, una señal de alarma.'
+        }
+      ],
+      interaccion: {
+        tipo: 'reto',
+        titulo: 'Tu valoración, corregida',
+        intro: 'Estos son los datos de la empresa. Elige crecimiento, tasa y perpetuidad, y pulsa ' +
+          'comprobar. No hay una respuesta única: hay un rango defendible y un diagnóstico de tus ' +
+          'supuestos.',
+        enunciado: '',
+        ebitda: 350000,
+        deudaNeta: 250000,
+        referencia: [2106629, 2900000],
+        datos: [
+          {etiqueta: 'Ventas', valor: '2.500.000 €'},
+          {etiqueta: 'EBITDA (ya normalizado)', valor: '350.000 €'},
+          {etiqueta: 'Deuda financiera', valor: '400.000 €'},
+          {etiqueta: 'Caja', valor: '150.000 €'},
+          {etiqueta: 'Crecimiento histórico (3 años)', valor: '3,0 %'},
+          {etiqueta: 'Concentración de clientes', valor: 'Un cliente pesa el 40 %'}
+        ]
+      }
+    }
   ]
 };

@@ -819,6 +819,163 @@ function componenteDetector(contenedor, cfg) {
   });
 }
 
+
+/* -------------------------------------------------------------- pasos */
+function componentePasos(contenedor, cfg) {
+  let actual = 0;
+
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">${cfg.enunciado || ''}</p>
+      <div id="paso_caja"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;
+                  padding-top:14px;border-top:1px solid var(--linea)">
+        <div style="font-size:12.5px;color:var(--muted)" id="paso_num"></div>
+        <div style="display:flex;gap:10px">
+          <button class="accion sec" id="paso_atras" style="background:transparent;color:#8A6420;
+                  border:1px solid var(--linea)">Anterior</button>
+          <button class="accion" id="paso_siguiente">Siguiente</button>
+        </div>
+      </div>
+    </div>`;
+
+  function pintar() {
+    const p = cfg.pasos[actual];
+    document.getElementById('paso_caja').innerHTML = `
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px">
+        ${actual + 1}. ${p.titulo}</div>
+      <p style="font-size:14.5px;color:#3A4459;margin-bottom:14px">${p.texto}</p>
+      ${p.dato ? `<div style="background:#FBF7EC;border-left:3px solid var(--gold);padding:12px 16px;
+        font-size:13.5px;color:#5A4A22">${p.dato}</div>` : ''}`;
+    document.getElementById('paso_num').textContent =
+      `Paso ${actual + 1} de ${cfg.pasos.length}`;
+    document.getElementById('paso_atras').disabled = actual === 0;
+    document.getElementById('paso_siguiente').textContent =
+      actual === cfg.pasos.length - 1 ? 'Volver al principio' : 'Siguiente';
+  }
+
+  document.getElementById('paso_atras').addEventListener('click', () => {
+    if (actual > 0) { actual--; pintar(); }
+  });
+  document.getElementById('paso_siguiente').addEventListener('click', () => {
+    actual = (actual + 1) % cfg.pasos.length;
+    pintar();
+  });
+  pintar();
+}
+
+
+/* --------------------------------------------------------------- reto */
+function componenteReto(contenedor, cfg) {
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:16px">${cfg.enunciado || ''}</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px">
+        ${cfg.datos.map(d => `
+          <tr>
+            <td style="padding:8px 10px;border-bottom:1px solid var(--linea)">${d.etiqueta}</td>
+            <td style="padding:8px 10px;border-bottom:1px solid var(--linea);text-align:right;
+                       font-weight:500">${d.valor}</td>
+          </tr>`).join('')}
+      </table>
+
+      <div class="sliders">
+        <div class="slider">
+          <label for="r_crec">Crecimiento que vas a suponer</label>
+          <input id="r_crec" type="range" min="0" max="12" step="0.5" value="3">
+          <div class="valor" id="r_vcrec"></div>
+          <div class="ayuda-campo">La empresa creció un 3 % de media en los últimos tres años.</div>
+        </div>
+        <div class="slider">
+          <label for="r_wacc">Tasa de descuento</label>
+          <input id="r_wacc" type="range" min="6" max="18" step="0.1" value="10.3">
+          <div class="valor" id="r_vwacc"></div>
+          <div class="ayuda-campo">Es una empresa pequeña, sin cotizar, con un cliente que pesa
+            mucho. Piensa qué prima merece.</div>
+        </div>
+        <div class="slider">
+          <label for="r_g">Crecimiento perpetuo</label>
+          <input id="r_g" type="range" min="0" max="3.5" step="0.1" value="1.5">
+          <div class="valor" id="r_vg"></div>
+          <div class="ayuda-campo">Recuerda: por encima del 2 % hay que justificarlo.</div>
+        </div>
+      </div>
+
+      <button class="accion" id="r_comprobar" style="width:100%;margin-top:14px">
+        Comprobar mi valoración</button>
+      <div id="r_resultado" style="margin-top:20px"></div>
+    </div>`;
+
+  function calcular(crec, wacc, g) {
+    const ebitda = cfg.ebitda;
+    let flujo = ebitda * 0.75, pv = 0;
+    for (let a = 1; a <= 5; a++) {
+      const tasa = crec / 100 + (g / 100 - crec / 100) * (a - 1) / 4;
+      flujo *= (1 + tasa);
+      pv += flujo / Math.pow(1 + wacc / 100, a);
+    }
+    const terminal = flujo * (1 + g / 100) / (wacc / 100 - g / 100);
+    const ev = pv + terminal / Math.pow(1 + wacc / 100, 5);
+    return ev - cfg.deudaNeta;
+  }
+
+  function pintarEtiquetas() {
+    document.getElementById('r_vcrec').textContent =
+      pct(Number(document.getElementById('r_crec').value));
+    document.getElementById('r_vwacc').textContent =
+      pct(Number(document.getElementById('r_wacc').value));
+    document.getElementById('r_vg').textContent =
+      pct(Number(document.getElementById('r_g').value));
+  }
+
+  document.getElementById('r_comprobar').addEventListener('click', () => {
+    const crec = Number(document.getElementById('r_crec').value);
+    const wacc = Number(document.getElementById('r_wacc').value);
+    const g = Number(document.getElementById('r_g').value);
+    const valor = calcular(crec, wacc, g);
+    const [min, max] = cfg.referencia;
+
+    const dentro = valor >= min && valor <= max;
+    const desvio = valor > max
+      ? (valor - max) / max * 100
+      : valor < min ? (min - valor) / min * 100 : 0;
+
+    const avisos = [];
+    if (g > 2.0) avisos.push('Has puesto un crecimiento perpetuo por encima del 2 %: es el ' +
+      'atajo más común para inflar el resultado.');
+    if (wacc < 9.0) avisos.push('Una tasa por debajo del 9 % para esta empresa no compensa el ' +
+      'riesgo de tamaño ni la concentración de clientes.');
+    if (crec > 6.0) avisos.push('Estás suponiendo un crecimiento muy superior al histórico: ' +
+      'tendrías que explicar de dónde salen los clientes.');
+    if (wacc > 14.0) avisos.push('Una tasa por encima del 14 % es muy dura para una empresa con ' +
+      'beneficios estables: conviene revisar si estás contando dos veces el mismo riesgo.');
+
+    document.getElementById('r_resultado').innerHTML = `
+      <div class="resultado" style="border-top:none;padding-top:0">
+        <div class="cifra" style="color:${dentro ? '#2F7D5C' : '#B4462F'}">${euros(valor)}</div>
+        <div class="nota">${dentro ? 'dentro del rango defendible' : `fuera del rango por un ${desvio.toFixed(0)} %`}</div>
+      </div>
+      <div style="margin-top:14px;font-size:14px;color:#3A4459">
+        <strong>Rango de referencia:</strong> ${euros(min)} – ${euros(max)}.
+        ${dentro
+          ? 'Tu valoración es defendible con estos supuestos. Compara con la mía y mira si los ' +
+            'dos habéis supuesto lo mismo.'
+          : 'Revisa los parámetros: el resultado depende de ellos, no de la fórmula.'}
+      </div>
+      ${avisos.length ? `<div class="aviso" style="background:#FDF2E9;border-left:3px solid #C06B2E;
+        color:#7A4415;margin-top:14px"><strong>Qué revisar:</strong>
+        <ul style="margin:8px 0 0;padding-left:18px">${avisos.map(a => `<li>${a}</li>`).join('')}</ul></div>` : ''}
+      <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+        Mi valoración: crecimiento del 3 %, tasa del 10,3 % y perpetuidad del 1,5 %.
+      </div>`;
+  });
+
+  ['r_crec', 'r_wacc', 'r_g'].forEach(id =>
+    document.getElementById(id).addEventListener('input', pintarEtiquetas));
+  pintarEtiquetas();
+}
+
 const COMPONENTES = {
   simulador: componenteSimulador,
   wacc: componenteWacc,
@@ -828,7 +985,9 @@ const COMPONENTES = {
   proyeccion: componenteProyeccion,
   puente: componentePuente,
   balance: componenteBalance,
-  detector: componenteDetector
+  detector: componenteDetector,
+  pasos: componentePasos,
+  reto: componenteReto
 };
 
 /* --------------------------------------------------------------- página */
