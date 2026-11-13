@@ -464,12 +464,142 @@ function componenteNormalizador(contenedor, cfg) {
   pintar();
 }
 
+
+/* --------------------------------------------------------- proyección */
+function componenteProyeccion(contenedor, cfg) {
+  const ebitda = cfg.ebitda || 350000;
+
+  contenedor.innerHTML = `
+    <div class="panel">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:18px">${cfg.enunciado || ''}</p>
+
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
+        ${[1, 2, 3, 4, 5].map(a => `
+          <div>
+            <label style="font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+                          color:var(--muted)">Año ${a}</label>
+            <input id="p_a${a}" type="number" step="0.5" value="${cfg.crecimientos[a - 1]}"
+                   style="width:100%;padding:8px 10px;border:1px solid #D9DEE6;border-radius:6px;
+                          font-family:inherit;font-size:14px">
+            <div style="font-size:11px;color:var(--muted)">% crecimiento</div>
+          </div>`).join('')}
+      </div>
+
+      <div class="sliders" style="margin-bottom:16px">
+        <div class="slider">
+          <label for="p_wacc">Tasa de descuento</label>
+          <input id="p_wacc" type="range" min="6" max="18" step="0.1" value="${cfg.wacc || 10.3}">
+          <div class="valor" id="p_vwacc"></div>
+        </div>
+        <div class="slider">
+          <label for="p_g">Crecimiento perpetuo</label>
+          <input id="p_g" type="range" min="0" max="3.5" step="0.1" value="${cfg.g || 1.5}">
+          <div class="valor" id="p_vg"></div>
+          <div class="ayuda-campo">Lo que crece la empresa para siempre después del año 5.
+            Por encima del 2 % hay que justificarlo muy bien.</div>
+        </div>
+      </div>
+
+      <div class="resultado">
+        <div class="cifra" id="p_valor">—</div>
+        <div class="nota" id="p_nota"></div>
+      </div>
+
+      <div style="margin-top:18px" id="p_split"></div>
+      <div id="p_tabla" style="margin-top:16px"></div>
+      <div class="aviso" id="p_aviso"></div>
+    </div>`;
+
+  function pintar() {
+    const crecimientos = [1, 2, 3, 4, 5].map(a =>
+      Number(document.getElementById('p_a' + a).value) || 0);
+    const wacc = Number(document.getElementById('p_wacc').value);
+    const g = Number(document.getElementById('p_g').value);
+    document.getElementById('p_vwacc').textContent = pct(wacc);
+    document.getElementById('p_vg').textContent = pct(g);
+
+    const impuesto = ebitda * 0.25;
+    let flujo = ebitda - impuesto;
+    let pv = 0;
+    const filas = [];
+    crecimientos.forEach((c, i) => {
+      flujo = flujo * (1 + c / 100);
+      const actual = flujo / Math.pow(1 + wacc / 100, i + 1);
+      pv += actual;
+      filas.push({anio: i + 1, crec: c, flujo, actual});
+    });
+
+    const terminal = flujo * (1 + g / 100) / (wacc / 100 - g / 100);
+    const pvTerminal = terminal / Math.pow(1 + wacc / 100, 5);
+    const total = pv + pvTerminal;
+    const pesoTerminal = total ? pvTerminal / total * 100 : 0;
+
+    document.getElementById('p_valor').textContent = euros(total);
+    document.getElementById('p_nota').textContent =
+      `de los cuales ${euros(pvTerminal)} (${pesoTerminal.toFixed(0)} %) están en el valor terminal`;
+
+    document.getElementById('p_split').innerHTML = `
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:6px">
+        Reparto del valor</div>
+      <div style="display:flex;height:30px;border-radius:5px;overflow:hidden;font-size:12px">
+        <div style="width:${100 - pesoTerminal}%;background:#0A1628;color:#fff;
+                    display:flex;align-items:center;justify-content:center">
+          ${euros(pv)}</div>
+        <div style="width:${pesoTerminal}%;background:#C9963A;color:#0A1628;
+                    display:flex;align-items:center;justify-content:center;font-weight:600">
+          ${euros(pvTerminal)}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11.5px;
+                  color:var(--muted);margin-top:4px">
+        <span>■ flujos de los años 1 a 5</span><span>■ valor terminal (año 6 en adelante)</span>
+      </div>`;
+
+    document.getElementById('p_tabla').innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <tr style="background:#EFE7D7">
+          <th style="text-align:left;padding:8px 10px;border:1px solid var(--linea)">Año</th>
+          <th style="padding:8px 10px;border:1px solid var(--linea)">Crecimiento</th>
+          <th style="padding:8px 10px;border:1px solid var(--linea)">Flujo</th>
+          <th style="padding:8px 10px;border:1px solid var(--linea)">Valor actual</th>
+        </tr>
+        ${filas.map(f => `
+          <tr>
+            <td style="padding:7px 10px;border:1px solid var(--linea)">${f.anio}</td>
+            <td style="padding:7px 10px;border:1px solid var(--linea);text-align:right">${pct(f.crec)}</td>
+            <td style="padding:7px 10px;border:1px solid var(--linea);text-align:right">${euros(f.flujo)}</td>
+            <td style="padding:7px 10px;border:1px solid var(--linea);text-align:right">${euros(f.actual)}</td>
+          </tr>`).join('')}
+        <tr style="background:#FBF7EC">
+          <td colspan="3" style="padding:8px 10px;border:1px solid var(--linea)">
+            Valor terminal (a perpetuidad al ${pct(g)})</td>
+          <td style="padding:8px 10px;border:1px solid var(--linea);text-align:right;font-weight:600">
+            ${euros(pvTerminal)}</td>
+        </tr>
+      </table>`;
+
+    document.getElementById('p_aviso').textContent = pesoTerminal > 75
+      ? `El ${pesoTerminal.toFixed(0)} % del valor está en el valor terminal. Cuando pasa del 75 %, ` +
+        'la valoración depende casi por completo de supuestos que nadie puede comprobar. ' +
+        'Baja el crecimiento perpetuo y mira cuánto se cae.'
+      : pesoTerminal < 45
+      ? `Solo el ${pesoTerminal.toFixed(0)} % está en el valor terminal: el valor se apoya en los ` +
+        'cinco primeros años, que son más verificables. Es una valoración más robusta.'
+      : `El ${pesoTerminal.toFixed(0)} % del valor está en el valor terminal. Es lo habitual: ` +
+        'entre el 55 % y el 70 % en una empresa que crece. Saberlo es la mitad del análisis.';
+  }
+
+  ['p_a1', 'p_a2', 'p_a3', 'p_a4', 'p_a5', 'p_wacc', 'p_g'].forEach(id =>
+    document.getElementById(id).addEventListener('input', pintar));
+  pintar();
+}
+
 const COMPONENTES = {
   simulador: componenteSimulador,
   wacc: componenteWacc,
   diagnostico: componenteDiagnostico,
   comparador: componenteComparador,
-  normalizador: componenteNormalizador
+  normalizador: componenteNormalizador,
+  proyeccion: componenteProyeccion
 };
 
 /* --------------------------------------------------------------- página */

@@ -388,7 +388,100 @@ const CURSO = {
         tamano: 2.0
       }
     },
-    { numero: 7, publicada: false, modulo: 'Módulo 2 · Los métodos', tituloCorto: 'Valor terminal' },
+    {
+      numero: 7,
+      publicada: true,
+      modulo: 'Módulo 2 · Los métodos',
+      titulo: 'Lección 7 · El valor terminal',
+      tituloCorto: 'El valor terminal',
+      entradilla: 'Dos tercios del resultado se juegan después del año cinco. Tres minutos de ' +
+        'vídeo, seis preguntas y una proyección en la que cambias cada año y ves cómo se mueve el ' +
+        'valor terminal.',
+      preguntas: [
+        {
+          enunciado: '¿Qué es el valor terminal?',
+          opciones: [
+            'El valor de la empresa al final del año cinco',
+            'El valor de todo lo que la empresa generará a partir del año seis',
+            'El precio de venta que se pone en el contrato'
+          ],
+          correcta: 1,
+          explicacion: 'Resume, en un solo número, todos los flujos desde el año seis hasta el ' +
+            'infinito, descontados a hoy. Es una simplificación enorme y por eso hay que mirarla ' +
+            'con lupa: dos tercios del valor suelen estar ahí.'
+        },
+        {
+          enunciado: 'Tasa de descuento 10 %, crecimiento perpetuo 1,5 %. ¿Cuántas veces el ' +
+                     'flujo del año 5 supone el valor terminal?',
+          opciones: ['Cerca de 6 veces', 'Cerca de 12 veces', 'Cerca de 25 veces'],
+          correcta: 1,
+          explicacion: 'El denominador es 10 − 1,5 = 8,5 %. El valor terminal es el flujo del año ' +
+            '5 por 1,015 dividido entre 0,085: unas doce veces. Cuanto menor sea el denominador ' +
+            '(tasa baja o crecimiento alto), más grande se hace el valor terminal.'
+        },
+        {
+          enunciado: '¿Por qué no se usa un crecimiento perpetuo del 5 %?',
+          opciones: [
+            'Porque los bancos no lo permiten',
+            'Porque ninguna empresa puede crecer por encima de su economía para siempre',
+            'Porque la inflación se lo comería'
+          ],
+          correcta: 1,
+          explicacion: 'Un 5 % anual durante cincuenta años son casi once veces el tamaño actual. ' +
+            'Si el conjunto de la economía crece al 1,5 %, esa empresa acabaría siendo más grande ' +
+            'que su país. Es aritmética, no prudencia: es imposible.'
+        },
+        {
+          enunciado: 'El valor terminal multiplica por 1,015 el flujo del año 5, que ya creció ' +
+                     'ese año. ¿Qué pasa si además aplicas el crecimiento al año 5 otra vez?',
+          opciones: [
+            'Se cuenta dos veces el mismo crecimiento y la valoración sube de más',
+            'Es indiferente',
+            'Baja la valoración'
+          ],
+          correcta: 0,
+          explicacion: 'Es el error técnico más frecuente. El flujo del año 5 ya incorpora su ' +
+            'crecimiento; el 1,015 lleva el flujo al año 6. Aplicarlo dos veces infla el valor ' +
+            'terminal sin que se note.'
+        },
+        {
+          enunciado: 'El valor terminal pesa el 78 % de la valoración. ¿Qué significa?',
+          opciones: [
+            'Que la valoración es muy fiable',
+            'Que depende sobre todo de supuestos que no se pueden comprobar',
+            'Que hay un error en el cálculo'
+          ],
+          correcta: 1,
+          explicacion: 'No es un error, es una debilidad. Cuando el peso pasa de tres cuartos, el ' +
+            'resultado depende casi por completo del crecimiento perpetuo y de la tasa, que son ' +
+            'elecciones, no datos. Conviene decirlo al presentar la valoración.'
+        },
+        {
+          enunciado: 'Subes el crecimiento perpetuo del 1,5 % al 2,5 %. ¿Qué le pasa al valor?',
+          opciones: [
+            'Sube algo menos del 1 %',
+            'Sube en torno a un 15 %',
+            'No cambia, si los cinco años siguen igual'
+          ],
+          correcta: 1,
+          explicacion: 'El denominador pasa de 8,5 % a 7,5 %, y eso multiplica el valor terminal ' +
+            'un 13 %. Como el terminal pesa dos tercios, el valor total sube alrededor de un 10-15 %. ' +
+            'Mover un punto de perpetuidad no es un retoque: es otra valoración.'
+        }
+      ],
+      interaccion: {
+        tipo: 'proyeccion',
+        titulo: 'Cambia un año y mira el valor terminal',
+        intro: 'Esta es la proyección de una empresa con 350.000 € de beneficio. Cambia el ' +
+          'crecimiento de cualquier año, o mueve la tasa y la perpetuidad, y fíjate en la barra: ' +
+          'la parte dorada es valor terminal, es decir, futuro que te estás inventando.',
+        enunciado: '',
+        ebitda: 350000,
+        crecimientos: [6, 5, 4, 3, 2],
+        wacc: 10.3,
+        g: 1.5
+      }
+    },
     {
       numero: 8,
       publicada: true,
