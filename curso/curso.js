@@ -1041,7 +1041,7 @@ function cargarLeccion(numero) {
         ${siguiente.numero} · ${siguiente.tituloCorto}</div></div>
       <button class="accion" disabled>En preparación</button>`;
   } else {
-    caja.innerHTML = '<a class="accion" href="index.html">Volver al índice del curso</a>';
+    caja.innerHTML = '<a class="accion" href="lecciones.html">Volver al índice del curso</a>';
   }
 
   let previo = null;

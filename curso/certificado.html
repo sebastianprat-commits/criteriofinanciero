@@ -130,7 +130,7 @@ const estado = document.getElementById('estado');
 if (hechas.length < TOTAL) {
   estado.innerHTML = `Has completado <strong>${hechas.length} de ${TOTAL}</strong> lecciones. ` +
     `El certificado se genera al terminar las doce, con sus preguntas respondidas. ` +
-    `<a href="index.html" style="color:#8A6420">Volver al curso</a>`;
+    `<a href="lecciones.html" style="color:#8A6420">Volver al curso</a>`;
 } else {
   estado.textContent = 'Has completado las doce lecciones. Escribe tu nombre y genera el certificado.';
   document.getElementById('formulario').style.display = 'block';

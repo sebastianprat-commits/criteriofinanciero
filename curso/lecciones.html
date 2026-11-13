@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso: cómo valorar una empresa · CriterioFinanciero</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="curso.css">
+</head>
+<body>
+<header>
+  <a class="marca" href="/">CriterioFinanciero</a>
+  <div class="progreso" id="progreso">Curso</div>
+</header>
+
+<main>
+  <div class="insignia">Curso · 12 lecciones</div>
+  <h1>Cómo valorar una empresa</h1>
+  <p class="sub">Doce lecciones cortas, con preguntas y ejercicios interactivos. No enseña a
+    adivinar el precio: enseña a construir un rango defendible y a saber cuándo no fiarse de él.</p>
+
+  <div id="modulos"></div>
+
+  <div class="siguiente">
+    <div>
+      <div style="font-size:13px;color:var(--muted)">Empieza por aquí</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px">1 · Qué es valorar una empresa</div>
+    </div>
+    <a class="accion" href="leccion.html?l=1">Abrir la lección 1</a>
+  </div>
+
+  <div class="siguiente" id="certificado">
+    <div>
+      <div style="font-size:13px;color:var(--muted)">Al terminar las doce</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px">Tu certificado</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px" id="cert_texto"></div>
+    </div>
+    <a class="accion sec" href="certificado.html" id="cert_boton">Ver el certificado</a>
+  </div>
+
+</main>
+
+<script src="datos.js"></script>
+<script>
+  const modulos = {};
+  CURSO.lecciones.forEach(l => {
+    (modulos[l.modulo] = modulos[l.modulo] || []).push(l);
+  });
+
+  let hechas = 0;
+  const html = Object.entries(modulos).map(([nombre, lecciones]) => {
+    const items = lecciones.map(l => {
+      let previo = null;
+      try { previo = JSON.parse(localStorage.getItem('curso_l' + l.numero) || 'null'); } catch (e) {}
+      if (previo) hechas++;
+      const estado = previo ? `hecha · ${previo.nota}/${previo.total}`
+        : l.publicada ? 'disponible' : 'en preparación';
+      const clase = `item${previo ? ' hecho' : ''}${l.publicada ? '' : ' bloqueado'}`;
+      const destino = l.publicada ? `leccion.html?l=${l.numero}` : '#';
+      return `<a class="${clase}" href="${destino}">
+        <div class="num">${String(l.numero).padStart(2, '0')}</div>
+        <div class="tit">${l.tituloCorto}</div>
+        <div class="estado">${estado}</div>
+      </a>`;
+    }).join('');
+    return `<div class="modulo"><h3>${nombre}</h3><div class="lista">${items}</div></div>`;
+  }).join('');
+
+  document.getElementById('modulos').innerHTML = html;
+  
+  const total = CURSO.lecciones.length;
+  let completas = 0;
+  for (let i = 1; i <= total; i++) {
+    try { if (localStorage.getItem('curso_l' + i)) completas++; } catch (e) {}
+  }
+  document.getElementById('cert_texto').textContent =
+    completas === total ? 'Completado: ya puedes descargarlo' :
+    completas + ' de ' + total + ' lecciones hechas';
+  if (completas < total) {
+    document.getElementById('cert_boton').textContent = 'Te faltan ' + (total - completas);
+    document.getElementById('cert_boton').style.opacity = '.6';
+  }
+  document.getElementById('progreso').textContent =
+    `Curso · ${hechas} de ${CURSO.lecciones.length} lecciones hechas`;
+</script>
+</body>
+</html>
